@@ -1,0 +1,23 @@
+eureka:
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+    nonSecurePort: ${server.port}
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+management:
+  health:
+    rabbit:
+      enabled: false
+logging:
+  level:
+     io:
+        pivotal: DEBUG
+     com:
+        netflix: INFO
+     org:
+        springframework:
+           web: INFO
+           cloud: WARN

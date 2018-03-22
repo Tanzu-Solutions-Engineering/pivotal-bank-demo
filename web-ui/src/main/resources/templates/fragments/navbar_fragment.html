@@ -1,0 +1,92 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<th:block th:fragment="navbar">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#trader-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://pivotal.io">
+                <img alt="Pivotal" src="../images/pivotal-square-logo.svg" width="22px;"/>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="trader-navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a id="nb-dashboard" th:href="@{/}">
+                    <i class="fa fa-home"></i>&nbsp;&nbsp;Home
+                </a></li>
+                <li><a id="nb-accounts" th:href="@{/accounts}">
+                    <i class="fa fa-university"></i>&nbsp;&nbsp;Accounts
+                </a></li>
+				<li><a id="nb-portfolio" th:href="@{/portfolio}">
+                    <i class="fa fa-book"></i>&nbsp;&nbsp;Portfolio
+                </a></li>
+				<li><a id="nb-trade" th:href="@{/trade}">
+                    <i class="fa fa-line-chart"></i>&nbsp;&nbsp;Trade
+                </a></li>
+			</ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="navbar-brand" href="#">
+                        <img alt="Spring Trader" src="../images/logo.png" width="120px;"/>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">
+                        <i class="fa fa-user"></i>&nbsp;&nbsp;
+                        <span id="nb-username" sec:authentication="name">Username</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!--<li class="disabled"><a id="profile" href="/">Profile</a></li>-->
+                        <!--<li class="disabled"><a id="help" href="/">Help</a></li>-->
+                        <!--<li role="separator" class="divider"></li>-->
+                        <li><a id="logout" href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form id="logoutform" th:action="@{/logout}" method="post">
+            </form>
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                $('#logout').click( function() {
+                    $('#logoutform').submit();
+                });
+                /*]]>*/
+            </script>
+		</div>
+	</div>
+</th:block>
+
+<th:block th:fragment="navbar-empty">
+	<div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#empty-navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://pivotal.io">
+                <img alt="Pivotal" src="../images/pivotal-square-logo.svg" width="22px;"/>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="empty-navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="navbar-brand" href="#">
+                        <img alt="Spring Trader" src="../images/logo.png" width="120px;"/>
+                    </a>
+                </li>
+            </ul>
+		</div>
+	</div>
+</th:block>
+
+
+</html>

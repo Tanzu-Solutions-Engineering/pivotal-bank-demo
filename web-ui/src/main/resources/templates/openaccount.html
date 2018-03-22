@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Spring Trader - Open Account</title>
+<div th:include="fragments/header_fragment :: header-includes" th:remove="tag"></div>
+</head>
+<body>
+	<div sec:authorize="isAuthenticated()" th:include="fragments/navbar_fragment :: navbar"
+		class="navbar navbar-inverse navbar-fixed-top"></div>
+	<div class="container well well-lg">
+		<div sec:authorize="hasAnyAuthority('USER')" th:remove="tag">
+			<div th:include="fragments/accounts_fragment :: account-create"></div>
+		</div>
+	</div>
+
+</body>
+</html>

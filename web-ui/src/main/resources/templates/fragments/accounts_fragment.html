@@ -1,0 +1,123 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:if="${accounts != null}" th:fragment="accounts-summary">
+	<div>
+		<div class="panel panel-default">
+			<div class="panel-heading clearfix">
+				<h3 class="panel-title pull-left">Accounts Summary</h3>
+				<div class="panel-title pull-right"><a class="btn btn-primary btn-sm" href="/openaccount">Create Account</a></div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tr>
+						<td>Account Name</td>
+						<td>Account Number</td>
+						<td>Account Currency</td>
+						<td>Balance</td>
+					</tr>
+					<tbody>
+						<tr th:each="account : ${accounts}">
+							<td th:text="${account.name}">Name</td>
+							<td th:text="${account.id}">Number</td>
+							<td th:text="${account.currency}">Currency</td>
+							<td th:text="${account.balance} ? ${#numbers.formatDecimal(account.balance, 0, 'COMMA', 2, 'POINT')}">Balance</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+<div th:if="${newaccount != null}" th:fragment="account-create" class="row clearfix"
+	th:remove="tag">
+		<div class="col-md-8 panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Open Account&nbsp;&nbsp;&nbsp;<small>Please enter test data for creating the account</small>
+            </h3>
+        </div>
+        <div class="panel-body">
+		<form action="#" th:action="@{/openaccount}" method="post" class="form-horizontal" th:object="${newaccount}">
+            <div id="registration-error" class="hide col-md-8 alert alert-block alert-error fade in">
+				<a data-dismiss="alert" class="close">x</a>
+				<h4 class="alert-heading"></h4>
+				<p></p>
+			</div>
+			<div class="col-md-6">
+				<div id="name-control" class="form-group">
+                    <div class="col-sm-3">
+					    <label for="name-input" class="control-label">Account Name:</label>
+                    </div>
+					<div class="col-sm-9">
+						<input type="text" value="" id="name-input" class="form-control" th:field="*{name}" />
+						<br/>
+						<span id="nameError" class="help-inline hide">Name error</span>
+					</div>
+				</div>
+				<div id="type-control" class="form-group">
+                    <div class="col-sm-3">
+                        <label for="type-input" class="control-label">Type:</label>
+                    </div>
+					<div class="col-sm-9">
+						<select id="type-input" class="form-control focused" th:field="*{type}">
+							<option th:value="CURRENT" th:text="CURRENT">CURRENT</option>
+							<option th:value="SAVINGS" th:text="SAVINGS">SAVINGS</option>
+						</select>
+                        <br/> <span id="typeError" class="help-inline hide">Type Error</span>
+					</div>
+				</div>
+				<div id="currency-control" class="form-group">
+                    <div class="col-sm-3">
+                        <label for="currency-input" class="control-label">Currency:</label>
+                    </div>
+					<div class="col-sm-9">
+						<select id="currency-input" class="form-control focused" th:field="*{currency}">
+							<option th:value="USD" th:text="USD">USD</option>
+						</select>
+                        <br/> <span id="currencyError" class="help-inline hide">Currency Error</span>
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-md-6">
+				<div id="balance-control" class="form-group">
+                    <div class="col-sm-3">
+					    <label for="balance-input" class="control-label">Balance:</label>
+                    </div>
+					<div class="col-sm-9">
+						<input type="text" value="" id="balance-input" class="form-control" th:field="*{openbalance}" />
+						<br/>
+						<span id="balanceError" class="help-inline hide">Name error</span>
+					</div>
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="form-actions col-md-offset-4 col-md-4">
+					<button id="accountCreateBtn" class="btn btn-success">Create Account</button>
+				</div>
+			</div>
+		</form>
+        </div>
+	</div>
+</div>
+
+<th:block th:if="accountsRetrievalError != null}" th:fragment="accounts-error">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Accounts Retrieval error</h3>
+		</div>
+		<div class="panel-body">
+			<table class="table">
+				<tbody>
+					<tr class="error">
+						<td th:text="${accountsRetrievalError}">ERROR</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</th:block>
+
+</html>

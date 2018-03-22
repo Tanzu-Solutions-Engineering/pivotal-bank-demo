@@ -1,0 +1,63 @@
+a {
+    cursor: pointer;
+}
+body {
+    background-color: #ecefef;
+    padding-top:110px;
+}
+#nc-loading .logo, #nc-loading .loading {
+    margin: auto;
+}
+#nc-loading .loading {
+    margin-top: 20px;
+}
+.loading {
+    background:url(../images/loading.gif) no-repeat;
+    width: 32px;
+    height: 32px;
+}
+
+.btn-success {
+    background-color: #138078;
+    border-color: #333333;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active {
+    background-color: #0F635D;
+    border-color: #333333;
+}
+.container-with-min-width {
+    min-width: 1000px;
+}
+.panel-with-min-width {
+    min-width: 800px;
+}
+.panel-default>.panel-heading {
+    background-color: #138078;
+}
+.panel-title {
+    color: white;
+}
+
+.completed {
+    padding:2px 5px;
+    background:#5daf1b;
+    color:#ffffff;
+    border-radius:3px;
+}
+.uncompleted {
+    padding:2px 5px;
+    background:#a09f9f;
+    color:#ffffff;
+    border-radius:3px;
+}
+
+#market-carousel {
+    height: 300px;
+}
+
+.carousel-indicators li {
+    background-color: #000;
+}
+.carousel-indicators .active {
+    background-color: #138078;
+}

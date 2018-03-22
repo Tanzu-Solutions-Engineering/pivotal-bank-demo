@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Spring Trader</title>
+<div th:include="fragments/header_fragment :: header-includes" th:remove="tag"></div>
+</head>
+<body>
+	<div sec:authorize="hasAnyAuthority('USER')" th:remove="tag">
+		<div th:include="fragments/navbar_fragment :: navbar" class="navbar navbar-inverse navbar-fixed-top"></div>
+		<div class="container well well-lg container-with-min-width">
+			<div th:include="fragments/trade_fragment :: saved_order" th:remove="tag"></div>
+			<div th:include="fragments/trade_fragment :: company_input" th:remove="tag"></div>
+			<div th:include="fragments/trade_fragment :: quote_list" th:remove="tag"></div>
+			<div th:if="${portfolio!= null}" th:include="fragments/portfolio_fragment :: portfolio-listing" th:remove="tag"></div>
+			<div th:if="${portfolioRetrievalError != null}" th:include="fragments/portfolio_fragment :: portfolio-error" th:remove="tag"></div>
+		</div>
+	</div>
+</body>
+</html>

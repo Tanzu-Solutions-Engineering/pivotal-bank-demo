@@ -1,0 +1,9 @@
+spring:
+  application:
+     name: accounts-service
+  jpa:
+     hibernate:
+        ddl-auto: update
+security:
+  basic:
+    enabled: false

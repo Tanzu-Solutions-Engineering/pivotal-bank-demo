@@ -1,0 +1,34 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:if="${user != null}" th:fragment="user-stats">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">User Statistics</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <td>Full Name</td>
+                    <td th:text="${user.fullname}">user</td>
+                </tr>
+                <tr>
+                    <td>User ID / Email</td>
+                    <td th:text=" ${user.userid + ' / ' + user.email}">user</td>
+                </tr>
+                <tr>
+                    <td>Creation Date</td>
+                    <td th:text="${user.creationdate}">today</td>
+                </tr>
+                <tr>
+                    <td>Total Logins</td>
+                    <td th:text="${user.logincount}">0</td>
+                </tr>
+                <tr>
+                    <td>Session Creation Date</td>
+                    <td th:text="${user.lastlogin}">today</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</th:block>
+</html>

@@ -1,0 +1,120 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.6.RELEASE'
+		springCloudStarterParentTrain = 'Dalston.SR1'
+		scsVersion = '1.4.1.RELEASE'
+		junitVersion = '4.12'
+		thymeleafExtras = '3.0.2.RELEASE'
+	}
+
+	repositories {
+		mavenCentral()
+		maven { url "http://repo.spring.io/milestone" }
+		maven { url "http://repo.spring.io/snapshot" }
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+
+	dependencies {
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.7"
+	}
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+
+// Apply versioning to all projects from versioning script.
+	apply plugin: 'java'
+	apply plugin: 'jacoco'
+	apply from: "$projectDir/gradle/versioning.gradle"
+	apply plugin: 'eclipse'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: "io.spring.dependency-management"
+	apply plugin: "com.gorylenko.gradle-git-properties"
+
+	println version
+
+	test { finalizedBy jacocoTestReport }
+
+	task manifestFilter(type: Copy) {
+		from 'manifest-unversioned.yml'
+		into "${buildDir}/"
+		rename { String fileName ->
+			fileName.replace('-unversioned', '')
+		}
+		expand(version: "${version}")
+	}
+
+	assemble { finalizedBy manifestFilter }
+
+	jacocoTestReport {
+		group = "Reporting"
+		description = "Generate Jacoco coverage reports after running tests."
+		reports {
+
+			csv.enabled false
+
+			html{
+				enabled true
+				destination "${buildDir}/reports/jacoco"
+			}
+
+			xml.enabled false
+		}
+
+		additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
+	}
+
+
+	jacoco { toolVersion = "0.7.5+" //	reportsDir = file("$buildDir/customJacocoReportDir")
+	}
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	repositories {
+		mavenCentral()
+		maven { url "http://repo.spring.io/release" }
+		maven { url "http://repo.spring.io/milestone" }
+		maven { url "http://repo.spring.io/snapshot" }
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudStarterParentTrain}"
+            mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${scsVersion}"
+		}
+	}
+	dependencies {
+
+		// shared dependencies for all services
+		compile "org.springframework.boot:spring-boot-starter-web"
+		compile "org.springframework.boot:spring-boot-starter-actuator"
+		compile "org.springframework.cloud:spring-cloud-starter-sleuth"
+		//compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+		compile "org.springframework.cloud:spring-cloud-sleuth-zipkin-stream"
+		compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
+
+		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
+		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
+		compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+		compile "org.springframework.boot:spring-boot-starter-security"
+		compile "org.thymeleaf.extras:thymeleaf-extras-springsecurity4"
+
+		//test packages
+		testCompile "org.springframework.boot:spring-boot-starter-test"
+		testCompile "junit:junit:$junitVersion"
+
+	}
+	// process substitutions in yml files.
+	processResources {
+		filesMatching("**/*.yml") { expand(project.properties) }
+	}
+
+	jar { baseName = 'web' }
+	description = "Web interface to the springboot set of services"
+
+task wrapper(type: Wrapper) { gradleVersion = '2.12' }

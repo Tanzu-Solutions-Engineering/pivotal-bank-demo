@@ -1,0 +1,68 @@
+buildscript {
+	ext {
+		springBootVersion = '1.3.0.RELEASE'
+		springCloudStarterParentTrain = 'Brixton.M3'
+		scsVersion = '1.0.0.RELEASE'
+		junitVersion = '4.12'
+		thymeleafExtras = '2.1.2.RELEASE'
+		dependencyPlugin = '0.5.3.RELEASE'
+	}
+
+	repositories {
+		mavenCentral()
+		maven { url "http://repo.spring.io/milestone" }
+		maven { url "http://repo.spring.io/snapshot" }
+		maven { url "https://plugins.gradle.org/m2/" }
+	}
+
+	dependencies {
+		//classpath "io.spring.gradle:dependency-management-plugin:${dependencyPlugin}"
+		//classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		//classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:1.4.7"
+	}
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+}
+apply plugin: 'jacoco'
+apply plugin: 'java'
+
+subprojects {
+  apply plugin: 'java'
+  //apply plugin: 'jacoco'
+	task hello << {println "$projectDir"}
+}
+
+project(':accounts-service') {
+	task hello2 << {println "$projectDir"}
+}
+
+
+//create a joint code coverage report from subprojects
+task codeCoverageReport(type: JacocoReport) {
+
+	// Gather execution data from all subprojects
+	// (change this if you e.g. want to calculate unit test/integration test coverage separately)
+	executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+	// Add all relevant sourcesets from the subprojects
+	subprojects.each { sourceSets it.sourceSets.main }
+
+	reports {
+		xml.enabled false
+		html.enabled true
+		html.destination "${buildDir}/reports/jacoco"
+		csv.enabled false
+	}
+	jacoco { toolVersion = "0.7.5+" //	reportsDir = file("$buildDir/customJacocoReportDir")
+	}
+}
+
+// always run the tests before generating the report
+codeCoverageReport.dependsOn { subprojects*.test }
+//run full report after test
+test.finalizedBy(codeCoverageReport)
+
+task wrapper(type: Wrapper) { gradleVersion = '4.6' }
