@@ -70,7 +70,8 @@ dependencies {
 		//compile "org.springframework.cloud:spring-cloud-starter-zipkin"
 		compile "org.springframework.cloud:spring-cloud-sleuth-zipkin-stream"
 		compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
-
+		compileOnly('org.projectlombok:lombok')
+		compile "org.slf4j:slf4j-api"
 
 		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
 		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
