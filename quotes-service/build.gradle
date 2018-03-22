@@ -1,8 +1,6 @@
 buildscript {
 	ext {
 		springBootVersion = '1.5.5.RELEASE'
-//		springCloudStarterParentTrain = 'Dalston.SR1'
-//		scsVersion = '1.4.1.RELEASE'
 	}
 
 	repositories {
@@ -17,9 +15,6 @@ buildscript {
 repositories {
 	mavenCentral()
 }
-
-
-// Apply versioning to all projects from versioning script.
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
