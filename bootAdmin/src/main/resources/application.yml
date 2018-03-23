@@ -1,0 +1,11 @@
+info:
+  component: Admin Server
+spring:
+  application:
+    name: adminServer
+  profiles.active: local  
+---
+spring:
+  profiles: local
+server:
+  port: 8078

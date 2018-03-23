@@ -1,0 +1,21 @@
+info:
+  component: Turbine Server
+spring:
+  application:
+    name: turbineserver
+  profiles.active: local
+turbine:
+  clusterNameExpression: new String("default")
+  appConfig: quotes-service,accounts-service,portfolio-service,web-service             
+---
+spring:
+  profiles: local
+server:
+  port: 8079
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+  instance:
+    nonSecurePort: ${server.port}
+

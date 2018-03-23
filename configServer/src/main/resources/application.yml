@@ -1,0 +1,21 @@
+info:
+  component: Config Server
+spring:
+  application:
+    name: configserver
+  profiles.active: local  
+  jmx:
+    default_domain: cloud.config.server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://${user.home}/workspace/pivotal-bank/
+          searchPaths: cf-SpringBootTrader-config
+management:
+  context_path: /admin              
+---
+spring:
+  profiles: local
+server:
+  port: 8888

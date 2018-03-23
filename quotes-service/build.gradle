@@ -1,19 +1,19 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.5.RELEASE'
-	}
+    ext {
+        springBootVersion = '1.5.5.RELEASE'
+    }
 
-	repositories {
-		mavenCentral()
-	}
+    repositories {
+        mavenCentral()
+    }
 
-	dependencies {
-		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-	}
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 apply plugin: 'java'
@@ -25,25 +25,26 @@ apply plugin: "io.spring.dependency-management"
 test { finalizedBy jacocoTestReport }
 
 jacocoTestReport {
-		group = "Reporting"
-		description = "Generate Jacoco coverage reports after running tests."
-		reports {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
 
-			csv.enabled false
+        csv.enabled false
 
-			html{
-				enabled true
-				destination "${buildDir}/reports/jacoco"
-			}
+        html {
+            enabled true
+            destination "${buildDir}/reports/jacoco"
+        }
 
-			xml.enabled false
-		}
+        xml.enabled false
+    }
 
-		additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
+    additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
 }
 
 
-jacoco { toolVersion = "0.7.5+" //	reportsDir = file("$buildDir/customJacocoReportDir")
+jacoco {
+    toolVersion = "0.7.5+" //	reportsDir = file("$buildDir/customJacocoReportDir")
 }
 
 sourceCompatibility = 1.8
@@ -51,37 +52,37 @@ targetCompatibility = 1.8
 
 
 dependencyManagement {
-		imports {
-			mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2"
-        	mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.1.RELEASE"
-		}
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2"
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.1.RELEASE"
+    }
 }
 dependencies {
 
-		// shared dependencies for all services
-		compile "org.springframework.boot:spring-boot-starter-web"
-		compile "org.springframework.boot:spring-boot-starter-actuator"
-		compile "org.springframework.cloud:spring-cloud-starter-sleuth"
-		//compile "org.springframework.cloud:spring-cloud-starter-zipkin"
-		compile "org.springframework.cloud:spring-cloud-sleuth-zipkin-stream"
-		compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
-		compileOnly('org.projectlombok:lombok')
-		compile "org.slf4j:slf4j-api"
+    // shared dependencies for all services
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
+    //compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+    compile "org.springframework.cloud:spring-cloud-sleuth-zipkin-stream"
+    compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
+    compileOnly('org.projectlombok:lombok')
+    compile "org.slf4j:slf4j-api"
 
-		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
-		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
-		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
+    compile "org.springframework.cloud:spring-cloud-starter-config"
+    compile "org.springframework.cloud:spring-cloud-starter-eureka"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-hystrix"
 
-		//test packages
-		testCompile "org.springframework.boot:spring-boot-starter-test"
-		testCompile "junit:junit"
-		testRuntime "com.jayway.jsonpath:json-path"
+    //test packages
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "junit:junit"
+    testRuntime "com.jayway.jsonpath:json-path"
 
 }
 
 jar {
-	baseName = 'quotes'
-	version = "" // omit the version from the war file name
+    baseName = 'quotes'
+    version = "" // omit the version from the war file name
 }
 description = "Micro-service to retrieve up to date quotes"
 

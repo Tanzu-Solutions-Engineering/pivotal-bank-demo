@@ -1,0 +1,12 @@
+---
+timeout: 180
+instances: 1
+memory: 512M
+env:
+    SPRING_PROFILES_ACTIVE: cloud
+    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+applications:
+- name: bootAdmin
+  random-route: true
+  path: build/libs/bootAdmin-0.0.1.jar
+  services: [ discovery-service ]
