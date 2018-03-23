@@ -66,7 +66,7 @@ repositories {
 		compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
 
 		compile "org.springframework.cloud:spring-cloud-starter-config"
-		compile "org.springframework.cloud:spring-cloud-starter-eureka"
+		compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
 		compile "org.springframework.cloud:spring-cloud-starter-netflix-hystrix"
 
 		compile "org.springframework.boot:spring-boot-starter-thymeleaf"
