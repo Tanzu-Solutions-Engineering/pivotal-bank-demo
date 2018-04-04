@@ -3,10 +3,10 @@ timeout: 180
 instances: 1
 memory: 1G
 env:
-    SPRING_PROFILES_ACTIVE: cloud
+#    SPRING_PROFILES_ACTIVE: cloud
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
     JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: { memory_sizes: { metaspace: 200m }}]'
 applications:
-- name: zipkin-diphthongous-unchasteness
+- name: zipkin
   path: build/libs/zipkin-collector-0.0.1-SNAPSHOT.jar
   services: [ config-server, discovery-service, zipkinRabbit, zipkinDB ]
