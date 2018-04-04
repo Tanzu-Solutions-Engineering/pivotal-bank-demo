@@ -74,6 +74,9 @@ dependencies {
     compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     compile "org.springframework.cloud:spring-cloud-starter-netflix-hystrix"
 
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
+
     //test packages
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "junit:junit"

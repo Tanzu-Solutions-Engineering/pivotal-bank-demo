@@ -52,6 +52,7 @@ targetCompatibility = 1.8
 dependencyManagement {
 		imports {
 			mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2"
+			mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.1.RELEASE"
 		}
 }
 dependencies {
@@ -68,6 +69,9 @@ dependencies {
 	compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
 	compile "org.springframework.cloud:spring-cloud-starter-netflix-hystrix"
 	compile "org.springframework.boot:spring-boot-starter-data-jpa"
+
+	compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+	compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
 
 	//test packages
 	testCompile "org.springframework.boot:spring-boot-starter-test"

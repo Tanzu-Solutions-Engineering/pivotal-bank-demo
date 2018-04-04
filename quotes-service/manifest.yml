@@ -9,6 +9,7 @@ memory: 1G
 applications:
 - name: quotes
 #  random-route: true
-  path: libs/quotes-${version}.jar
-  services: [ discovery-service, circuit-breaker-dashboard, config-server]
-# services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  path: build/libs/quotes.jar
+  services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  env:
+    TRUST_CERTS: api.sys.gcp.winterfell.live

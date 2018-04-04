@@ -28,9 +28,6 @@ public class QuoteService {
 	@Value("${pivotal.quotes.quotes_url}")
 	protected String quote_url;
 
-	@Value("${pivotal.quotes.quotes_url2}")
-	protected String quote_url2;
-
 	@Value("${pivotal.quotes.companies_url}")
 	protected String company_url;
 

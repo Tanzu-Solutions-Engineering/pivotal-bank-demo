@@ -10,7 +10,7 @@ spring:
     config:
       server:
         git:
-          uri: file://${user.home}/workspace/pivotal-bank/
+          uri: https://github.com/mid-atlantic-pa/pivotal-bank/
           searchPaths: cf-SpringBootTrader-config
 management:
   context_path: /admin              

@@ -53,6 +53,7 @@ repositories {
 	dependencyManagement {
 		imports {
 			mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2"
+			mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.1.RELEASE"
 		}
 	}
 	dependencies {
@@ -72,6 +73,9 @@ repositories {
 		compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 		compile "org.springframework.boot:spring-boot-starter-security"
 		compile "org.thymeleaf.extras:thymeleaf-extras-springsecurity4"
+
+		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+		compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
 
 		//test packages
 		testCompile "org.springframework.boot:spring-boot-starter-test"

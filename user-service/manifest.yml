@@ -8,6 +8,7 @@ memory: 512M
 #    JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: { memory_sizes: { metaspace: 100m }}]'
 applications:
 - name: users
-  path: libs/user.jar
-#  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
-  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server ]
+  path: build/libs/user.jar
+  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  env:
+    TRUST_CERTS: api.sys.gcp.winterfell.live

@@ -8,7 +8,8 @@ memory: 1G
 #    JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: { memory_sizes: { metaspace: 200m }}]'
 applications:
 - name: webtrader
-  random-route: true
-  path: libs/web.jar
-#  services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
-  services: [ discovery-service, circuit-breaker-dashboard, config-server ]
+#  random-route: true
+  path: build/libs/web.jar
+  services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  env:
+    TRUST_CERTS: api.sys.gcp.winterfell.live

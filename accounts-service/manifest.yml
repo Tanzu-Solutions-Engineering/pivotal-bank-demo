@@ -9,6 +9,7 @@ memory: 1G
 applications:
 - name: accounts
 #  random-route: true
-  path: libs/accounts.jar
-#  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
-  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server ]
+  path: build/libs/accounts.jar
+  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  env:
+    TRUST_CERTS: api.sys.gcp.winterfell.live

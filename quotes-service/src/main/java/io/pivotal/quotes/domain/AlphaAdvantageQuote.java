@@ -51,7 +51,7 @@ public class AlphaAdvantageQuote {
 	private BigDecimal price;
 
 	@JsonProperty("3. volume")
-	private Integer volume;
+	private String volume;
 
 	@JsonProperty("4. timestamp")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", locale = "ENGLISH")

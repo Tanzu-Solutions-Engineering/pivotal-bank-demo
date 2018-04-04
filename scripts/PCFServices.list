@@ -3,5 +3,6 @@ p-config-server standard config-server
 p-circuit-breaker-dashboard standard circuit-breaker-dashboard
 ######## MySQL - the plan seems to be called differently sometimes ...
 p.mysql db-small traderdb
+p.rabbitmq single-node zipkinRabbit
 # Uncomment if usng PWS
 #cleardb spark traderdb

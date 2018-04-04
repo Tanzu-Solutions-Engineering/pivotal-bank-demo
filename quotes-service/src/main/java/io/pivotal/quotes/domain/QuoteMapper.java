@@ -28,7 +28,11 @@ public class QuoteMapper {
 		mappedQuote.setStatus("SUCCESS");
 		mappedQuote.setSymbol(aaQuote.getSymbol());
 		mappedQuote.setTimestamp(aaQuote.getTimestamp());
-		mappedQuote.setVolume(aaQuote.getVolume());
+		if(!aaQuote.getVolume().equals("--")) {
+			mappedQuote.setVolume(Integer.parseInt(aaQuote.getVolume()));
+		} else {
+			mappedQuote.setVolume(0);
+		}
 
 		return mappedQuote;
 	}

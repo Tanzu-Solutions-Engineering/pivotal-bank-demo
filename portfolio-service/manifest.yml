@@ -7,8 +7,9 @@ memory: 512M
 #    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
 #    JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: { memory_sizes: { metaspace: 100m }, memory_heuristics: {metaspace: 10, heap: 65, native: 20, permgen: 10, stack: 5}  }]'
 applications:
-- name: portfolio
-  random-route: true
+- name: portfolio-service
+#  random-route: true
   path: libs/portfolio.jar
-#  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
-  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server ]
+  services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  env:
+    TRUST_CERTS: api.sys.gcp.winterfell.live
