@@ -7,6 +7,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import io.pivotal.portfolio.config.ServiceTestConfiguration;
 import io.pivotal.portfolio.domain.Order;
@@ -20,6 +21,8 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.cloud.sleuth.Span;
+import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
@@ -40,7 +43,13 @@ public class PortfolioServiceTest {
 	
 	@Mock
 	QuoteRemoteCallService quoteService;
-	
+
+	@Mock
+	PortfolioRepositoryService portfolioRepositoryService;
+
+	@Mock
+	Tracer tracer;
+
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -54,6 +63,9 @@ public class PortfolioServiceTest {
 		when(repo.findByUserId(ServiceTestConfiguration.USER_ID)).thenReturn(ServiceTestConfiguration.orders());
 		//when(quoteService.getUri()).thenReturn(uri);
 		when(quoteService.getQuote(ServiceTestConfiguration.quote().getSymbol())).thenReturn(ServiceTestConfiguration.quote());
+		when(tracer.createSpan(any(String.class))).thenReturn(Span.builder().build());
+		when(tracer.close(any(Span.class))).thenReturn(Span.builder().build());
+		when(portfolioRepositoryService.getOrders(ServiceTestConfiguration.USER_ID)).thenReturn(new ArrayList<>());
 		//when(restTemplate.getForObject("http://" + service.quotesService +"/quote/{symbol}", Quote.class, ServiceTestConfiguration.quote().getSymbol())).thenReturn(ServiceTestConfiguration.quote());
 		Portfolio folio = service.getPortfolio(ServiceTestConfiguration.USER_ID);
 	}

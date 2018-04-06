@@ -1,8 +1,10 @@
 package io.pivotal.web.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import io.pivotal.web.domain.Account;
 
 import org.slf4j.Logger;
@@ -35,6 +37,8 @@ public class AccountService {
 	}
 
 	
+	// The below is commented out to demonstrate impact of lack of hystrix, and can be uncommented during presentation
+//	 @HystrixCommand(fallbackMethod = "getAccountsFallback")
 	public List<Account> getAccounts(String user) {
 		logger.debug("Looking for account with userId: " + user);
 		
@@ -42,7 +46,12 @@ public class AccountService {
 	    
 	    return Arrays.asList(accounts);
 	}
-	
+
+	public List<Account> getAccountsFallback(String user) {
+		logger.warn("Invoking fallback for getAccount");
+		return new ArrayList<>();
+	}
+
 	public List<Account> getAccountsByType(String user, String type) {
 		logger.debug("Looking for account with userId: " + user + " and type: " + type);
 		
