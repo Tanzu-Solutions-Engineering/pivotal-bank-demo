@@ -1,38 +1,24 @@
 package io.pivotal.portfolio.service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.aspectj.lang.annotation.control.CodeGenerationHint;
+import io.pivotal.portfolio.domain.*;
+import io.pivotal.portfolio.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.sleuth.Span;
-import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-
-import io.pivotal.portfolio.domain.Holding;
-import io.pivotal.portfolio.domain.Order;
-import io.pivotal.portfolio.domain.OrderType;
-import io.pivotal.portfolio.domain.Portfolio;
-import io.pivotal.portfolio.domain.Quote;
-import io.pivotal.portfolio.domain.Transaction;
-import io.pivotal.portfolio.domain.TransactionType;
-import io.pivotal.portfolio.repository.OrderRepository;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Manages a portfolio of holdings of stock/shares.
@@ -63,7 +49,7 @@ public class PortfolioService {
 	private RestTemplate restTemplate;
 
 	@Autowired
-	private Tracer tracer;
+	private PortfolioRepositoryService portfolioRepositoryService;
 
 	@Value("${pivotal.accountsService.name}")
 	protected String accountsService;
@@ -81,23 +67,10 @@ public class PortfolioService {
 		 * order create holding. - for each holding find current price.
 		 */
 		logger.debug("Getting portfolio for accountId: " + userId);
-		List<Order> orders = getOrders(userId);
+		List<Order> orders = portfolioRepositoryService.getOrders(userId);
 		Portfolio folio = new Portfolio();
 		folio.setUserName(userId);
 		return createPortfolio(folio, orders);
-	}
-
-	@HystrixCommand(threadPoolKey = "getOrdersFromDb")
-	List<Order> getOrders(String userId) {
-
-		Span newSpan = tracer.createSpan("retrieveUserId");
-		List<Order> orders = repository.findByUserId(userId);
-		try{
-			return repository.findByUserId(userId);
-		} finally {
-			newSpan.logEvent(Span.CLIENT_RECV);
-			tracer.close(newSpan);
-		}
 	}
 
 	/**
