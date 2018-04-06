@@ -7,6 +7,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import io.pivotal.portfolio.config.ServiceTestConfiguration;
 import io.pivotal.portfolio.domain.Order;
@@ -44,6 +45,9 @@ public class PortfolioServiceTest {
 	QuoteRemoteCallService quoteService;
 
 	@Mock
+	PortfolioRepositoryService portfolioRepositoryService;
+
+	@Mock
 	Tracer tracer;
 
 	@Before
@@ -61,6 +65,7 @@ public class PortfolioServiceTest {
 		when(quoteService.getQuote(ServiceTestConfiguration.quote().getSymbol())).thenReturn(ServiceTestConfiguration.quote());
 		when(tracer.createSpan(any(String.class))).thenReturn(Span.builder().build());
 		when(tracer.close(any(Span.class))).thenReturn(Span.builder().build());
+		when(portfolioRepositoryService.getOrders(ServiceTestConfiguration.USER_ID)).thenReturn(new ArrayList<>());
 		//when(restTemplate.getForObject("http://" + service.quotesService +"/quote/{symbol}", Quote.class, ServiceTestConfiguration.quote().getSymbol())).thenReturn(ServiceTestConfiguration.quote());
 		Portfolio folio = service.getPortfolio(ServiceTestConfiguration.USER_ID);
 	}
