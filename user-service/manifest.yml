@@ -11,4 +11,4 @@ applications:
   path: build/libs/user.jar
   services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
   env:
-    TRUST_CERTS: api.sys.gcp.winterfell.live
+    TRUST_CERTS: api.sys.gcp.winterfell.live, cfapps.haas-131.pez.pivotal.io
