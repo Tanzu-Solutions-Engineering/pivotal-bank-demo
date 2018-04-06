@@ -38,7 +38,7 @@ public class AccountService {
 
 	
 	// The below is commented out to demonstrate impact of lack of hystrix, and can be uncommented during presentation
-	// @HystrixCommand(fallbackMethod = "getAccountsFallback")
+//	 @HystrixCommand(fallbackMethod = "getAccountsFallback")
 	public List<Account> getAccounts(String user) {
 		logger.debug("Looking for account with userId: " + user);
 		
