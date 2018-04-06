@@ -1,6 +1,6 @@
 ---
 timeout: 180
-instances: 1
+instances: 2
 memory: 1G
 #env:
 #    SPRING_PROFILES_ACTIVE: cloud

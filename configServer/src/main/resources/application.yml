@@ -13,7 +13,7 @@ spring:
           uri: https://github.com/mid-atlantic-pa/pivotal-bank/
           searchPaths: cf-SpringBootTrader-config
 management:
-  context_path: /admin              
+  context_path: /admin
 ---
 spring:
   profiles: local
