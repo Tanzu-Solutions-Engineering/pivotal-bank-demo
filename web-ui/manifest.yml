@@ -12,4 +12,4 @@ applications:
   path: build/libs/web.jar
   services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
   env:
-    TRUST_CERTS: api.sys.gcp.winterfell.live, cfapps.haas-131.pez.pivotal.io
+    TRUST_CERTS: api.sys.gcp.winterfell.live, cfapps.haas-126.pez.pivotal.io

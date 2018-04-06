@@ -7,4 +7,4 @@ applications:
   path: build/libs/zipkin-collector-0.0.1-SNAPSHOT.jar
   services: [ config-server, discovery-service, zipkinRabbit, traderdb ]
   env:
-    TRUST_CERTS: api.sys.gcp.winterfell.live, cfapps.haas-131.pez.pivotal.io
+    TRUST_CERTS: api.sys.gcp.winterfell.live, cfapps.haas-126.pez.pivotal.io
