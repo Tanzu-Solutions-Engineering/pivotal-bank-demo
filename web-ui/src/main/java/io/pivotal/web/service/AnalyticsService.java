@@ -34,10 +34,13 @@ public class AnalyticsService {
 		logger.debug("Fetching trades: " + symbol);
 		Trade[] tradesArr = restTemplate.getForObject("http://" + analyticsService + "/analytics/trades/{symbol}", Trade[].class, symbol);
 		List<Trade> trades = Arrays.asList(tradesArr);
+		logger.debug("Found " + trades.size() + " trades");
 		return trades;
 	}
 	
 	private List<Trade> getAnalyticsFallback(String symbol) {
+		logger.warn("Falling back due to error.");
+
 		return new ArrayList<Trade>();
 	}
 

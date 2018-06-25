@@ -2,13 +2,10 @@
 timeout: 180
 instances: 1
 memory: 1G
-#env:
-#    SPRING_PROFILES_ACTIVE: cloud
-#    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
-#    JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: { memory_sizes: { metaspace: 200m }}]'
 applications:
 - name: webtrader
-#  random-route: true
+  buildpack: java_buildpack_offline
   path: build/libs/web.jar
   services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
-    TRUST_CERTS: api.sys.gcp.winterfell.live, api.run.haas-83.pez.pivotal.io
+  env:
+   TRUST_CERTS: api.sys.gcp.winterfell.live, api.run.haas-83.pez.pivotal.io

@@ -11,7 +11,7 @@
 		<div th:include="fragments/navbar_fragment :: navbar" class="navbar navbar-inverse navbar-fixed-top"></div>
 		<div class="container well well-lg container-with-min-width">
 			<div th:include="fragments/analytics_fragment :: company_input" th:remove="tag"></div>
-			<div th:include="fragments/analytics_fragment :: trade_listing" th:remove="tag"></div>
+			<div th:if="${trades!= null}" th:include="fragments/analytics_fragment :: trade_listing" th:remove="tag"></div>
 		</div>
 	</div>
 </body>

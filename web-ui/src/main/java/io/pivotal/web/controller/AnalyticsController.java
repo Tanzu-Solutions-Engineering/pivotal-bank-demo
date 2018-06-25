@@ -33,7 +33,7 @@ public class AnalyticsController {
 	
 	@RequestMapping(value = "/analytics", method = RequestMethod.GET)
 	public String showTrade(Model model) {
-		logger.debug("/trade.GET");
+		logger.debug("/analytics.GET");
 		//model.addAttribute("marketSummary", marketService.getMarketSummary());
 		
 		model.addAttribute("search", new Search());
@@ -46,9 +46,9 @@ public class AnalyticsController {
 		
 		return "analytics";
 	}
-	@RequestMapping(value = "/analytics/trade", method = RequestMethod.POST)
+	@RequestMapping(value = "/analytics", method = RequestMethod.POST)
 	public String showTrade(Model model, @ModelAttribute("search") Search search) {
-		logger.debug("/trade.POST - symbol: " + search.getName());
+		logger.debug("/analytics.POST - symbol: " + search.getName());
 		
 		model.addAttribute("search", search);
 		

@@ -4,39 +4,49 @@
 	<div th:if="${search != null}" class="col-md-12">
 		<div id="quote-control" class="panel panel-default">
 			<div class="panel-body">
-				<form class="form-inline" action="#" th:action="@{/analytics/trades}" method="post"
+				<form class="form-inline" action="#" th:action="@{/analytics}" method="post"
 					th:object="${search}">
 					<div class="form-group">
 						<input id="quote-input" type="text" maxlength="20" th:field="*{name}"
-							style="width: 300px;" placeholder="Enter Company Name or Symbol" />
+							style="width: 300px;" placeholder="EnterSymbol" />
 					</div>
 					&nbsp;
-					<button type="submit" class="btn btn-success">Get Quotes</button>
+					<button type="submit" class="btn btn-success">Get Trades Matching Symbol</button>
 				</form>
 			</div>
 		</div>
 	</div>
 </th:block>
 
-<div th:if="${trades.count != null}" th:fragment="trade-listing" class="row clearfix"
-	 th:remove="tag">
+<div th:if="${trades != null}" th:fragment="trade_listing" class="row clearfix" th:remove="tag">
 	<div class="col-md-12">
 		<div class="panel panel-default panel-with-min-width">
 			<div class="panel-heading">
-				<h3 class="panel-title">List of Holdings</h3>
+				<h3 class="panel-title">List of Trades Matching Symbol</h3>
 			</div>
 			<div class="panel-body">
 				<table id="list-of-holdings"
 					   class="table table-striped table-bordered table-condensed text-center">
 					<thead>
 					<tr>
+						<th class="text-center">Order Id</th>
 						<th class="text-center">Symbol</th>
+						<th class="text-center">Quantity</th>
+						<th class="text-center">Price</th>
+						<th class="text-center">Completion Date</th>
+						<th class="text-center">User Id</th>
+						<th class="text-center">Account Id</th>
 					</tr>
 					</thead>
 					<tbody>
-					<tr th:each="entry : ${trades}" th:if="${entry.value.quantity &gt; 0}">
-						<td th:text="${entry.value.symbol}">symbol</td>
-						</form>
+					<tr th:each="entry : ${trades}">
+						<td th:text="${entry.orderid}">orderid</td>
+						<td th:text="${entry.symbol}">symbol</td>
+						<td th:text="${entry.quantity}">quantity</td>
+						<td th:text="${entry.price}">price</td>
+						<td th:text="${entry.completiondate}">completiondate</td>
+						<td th:text="${entry.userid}">userid</td>
+						<td th:text="${entry.accountid}">accountid</td>
 					</tr>
 					</tbody>
 				</table>
@@ -45,5 +55,6 @@
 		</div>
 	</div>
 </div>
+
 
 </html>
