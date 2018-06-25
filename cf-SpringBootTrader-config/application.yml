@@ -9,6 +9,8 @@ pivotal:
     name: accounts-service
   portfolioService:
     name: portfolio-service
+  analyticsService:
+    name: analytics-service
 logging:
   level:
      io:

@@ -1,0 +1,10 @@
+spring:
+  application:
+     name: analytics-service
+security:
+  basic:
+    enabled: false
+elasticsearch:
+  clustername: elasticsearch
+  host: 10.193.152.238
+  port: 32231

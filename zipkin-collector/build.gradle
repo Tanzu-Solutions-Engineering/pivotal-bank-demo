@@ -32,7 +32,9 @@ dependencies {
 	compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
 	compile "org.springframework.cloud:spring-cloud-sleuth-zipkin-stream"
 	compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
-        compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+
 	runtime('io.zipkin.java:zipkin-autoconfigure-ui')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -41,6 +43,6 @@ dependencies {
 dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2"
-                mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.1.RELEASE"
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.1.RELEASE"
 	}
 }

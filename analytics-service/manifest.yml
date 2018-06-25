@@ -1,0 +1,10 @@
+---
+timeout: 180
+instances: 1
+memory: 1G
+applications:
+- name: analytics
+  path: build/libs/analytics.jar
+  services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  env:
+    TRUST_CERTS: api.sys.gcp.winterfell.live, api.run.haas-83.pez.pivotal.io

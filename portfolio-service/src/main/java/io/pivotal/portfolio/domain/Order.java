@@ -47,6 +47,17 @@ public class Order {
 	@Column(name = "orderfee", precision = 14, scale = 2)
 	private BigDecimal orderFee;
 
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	@Column(name = "tag")
+	private String tag;
+
 	@Column(name = "completiondate")
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "LL")

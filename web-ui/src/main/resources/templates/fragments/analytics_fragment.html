@@ -1,0 +1,49 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="company_input">
+	<div th:if="${search != null}" class="col-md-12">
+		<div id="quote-control" class="panel panel-default">
+			<div class="panel-body">
+				<form class="form-inline" action="#" th:action="@{/analytics/trades}" method="post"
+					th:object="${search}">
+					<div class="form-group">
+						<input id="quote-input" type="text" maxlength="20" th:field="*{name}"
+							style="width: 300px;" placeholder="Enter Company Name or Symbol" />
+					</div>
+					&nbsp;
+					<button type="submit" class="btn btn-success">Get Quotes</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+<div th:if="${trades.count != null}" th:fragment="trade-listing" class="row clearfix"
+	 th:remove="tag">
+	<div class="col-md-12">
+		<div class="panel panel-default panel-with-min-width">
+			<div class="panel-heading">
+				<h3 class="panel-title">List of Holdings</h3>
+			</div>
+			<div class="panel-body">
+				<table id="list-of-holdings"
+					   class="table table-striped table-bordered table-condensed text-center">
+					<thead>
+					<tr>
+						<th class="text-center">Symbol</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="entry : ${trades}" th:if="${entry.value.quantity &gt; 0}">
+						<td th:text="${entry.value.symbol}">symbol</td>
+						</form>
+					</tr>
+					</tbody>
+				</table>
+				<div id="no-holdings"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</html>

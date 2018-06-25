@@ -1,6 +1,6 @@
 ---
 timeout: 180
-instances: 2
+instances: 1
 memory: 1G
 #env:
 #    SPRING_PROFILES_ACTIVE: cloud
@@ -11,4 +11,4 @@ applications:
   path: build/libs/user.jar
   services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
   env:
-    TRUST_CERTS: api.sys.gcp.winterfell.live, cfapps.haas-126.pez.pivotal.io
+    TRUST_CERTS: api.sys.gcp.winterfell.live, api.run.haas-83.pez.pivotal.io
