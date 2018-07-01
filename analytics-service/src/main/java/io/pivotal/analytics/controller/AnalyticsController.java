@@ -2,7 +2,6 @@ package io.pivotal.analytics.controller;
 
 import io.pivotal.analytics.entity.Trade;
 import io.pivotal.analytics.service.AnalyticsService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

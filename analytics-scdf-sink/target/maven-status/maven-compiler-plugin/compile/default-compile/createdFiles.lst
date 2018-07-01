@@ -1,5 +1,0 @@
-io/pivotal/analytics/entity/Trade.class
-io/pivotal/analytics/configuration/EsConfig.class
-io/pivotal/analytics/repository/TradeRepository.class
-io/pivotal/analytics/configuration/SinkConfiguration.class
-io/pivotal/analytics/Application.class

@@ -5,6 +5,6 @@ security:
   basic:
     enabled: false
 elasticsearch:
-  clustername: elasticsearch
-  host: 10.193.152.238
-  port: 32231
+  clusterName: elasticsearch
+  host: 10.193.152.236
+  port: 30141

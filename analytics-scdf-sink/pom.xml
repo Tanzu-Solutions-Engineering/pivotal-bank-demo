@@ -7,7 +7,7 @@
     <groupId>io.pivotal.analtics</groupId>
     <artifactId>analytics-scdf-sink</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.6</version>
+    <version>1.0.15</version>
 
     <parent>
         <groupId>org.springframework.cloud.stream.app</groupId>
@@ -22,7 +22,6 @@
     <distributionManagement>
         <repository>
             <id>bintray</id>
-            <name>dpfeffer-analytics-scdf-sink</name>
             <url>https://api.bintray.com/maven/dpfeffer/maven-repo/analytics-scdf-sink</url>
         </repository>
     </distributionManagement>
@@ -42,6 +41,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
@@ -54,6 +58,23 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-app-starter-metadata-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>aggregate-metadata</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>aggregate-metadata</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-app-starter-doc-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

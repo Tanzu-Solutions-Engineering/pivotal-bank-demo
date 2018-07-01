@@ -1,5 +1,18 @@
 pivotal:
-   quotesService:
-     name: quotes-service
-   accountsService:
-     name: accounts-service
+  quotesService:
+    name: quotes-service
+  accountsService:
+    name: accounts-service
+vcap:
+  services:
+    es:
+      credentials:
+        cluster-name: elasticsearch
+        host: 10.193.152.236
+        port: 30141
+eureka:
+  client:
+    enabled: false
+hystrix:
+  metrics:
+    enabled: false
