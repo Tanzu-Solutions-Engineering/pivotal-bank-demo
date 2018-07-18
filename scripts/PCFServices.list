@@ -1,9 +1,7 @@
-p-service-registry standard discovery-service
-p-config-server standard config-server
-p-circuit-breaker-dashboard standard circuit-breaker-dashboard
-######## MySQL - the plan seems to be called differently sometimes ...
-p.mysql db-small traderdb
-p.rabbitmq single-node zipkinRabbit
-p.mysql db-small zipkinDB
-# Uncomment if usng PWS
-#cleardb spark traderdb
+######## Need to confirm service name and plan based upon your cloud foundry instances
+p-service-registry trial discovery-service
+p-config-server trial config-server
+p-circuit-breaker-dashboard trial circuit-breaker-dashboard
+p-mysql 100mb traderdb
+p-rabbitmq standard zipkinRabbit
+p-mysql 100mb zipkinDB

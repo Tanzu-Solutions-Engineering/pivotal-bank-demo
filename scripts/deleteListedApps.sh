@@ -15,12 +15,9 @@ do
   if [ ! "${app:0:1}" == "#" ]
   then
     app=`echo $app | cut -d "-" -f1`
-    delete $app &
+    delete $app -f -r&
   fi
 done < "$file"
-
-#Annoying hack
-delete webtrader &
 
 wait
 

@@ -33,7 +33,7 @@ jacocoTestReport {
 
         html {
             enabled true
-            destination "${buildDir}/reports/jacoco"
+            destination file("${buildDir}/reports/jacoco")
         }
 
         xml.enabled false

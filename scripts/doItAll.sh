@@ -26,7 +26,7 @@ wait
 sh ./1_createServices.sh
 sh ./2_build.sh
 sh ./3_deploy.sh
-sh ./4_addTarget.sh
+sh ./4_addTrustCerts.sh
 
 echo "Executed $SCRIPTNAME in $SECONDS seconds."
 exit 0

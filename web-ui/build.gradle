@@ -33,7 +33,7 @@ repositories {
 
 			html{
 				enabled true
-				destination "${buildDir}/reports/jacoco"
+				destination file("${buildDir}/reports/jacoco")
 			}
 
 			xml.enabled false
@@ -91,3 +91,7 @@ repositories {
 	description = "Web interface to the springboot set of services"
 
 task wrapper(type: Wrapper) { gradleVersion = '4.6' }
+tasks.withType(JavaCompile) {
+	options.compilerArgs << '-Xlint:unchecked'
+	options.deprecation = true
+}

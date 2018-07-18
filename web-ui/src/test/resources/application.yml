@@ -7,3 +7,9 @@ pivotal:
     name: quote-service
   userService:
     name: user-service
+  analyticsService:
+    name: analytics-service
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false

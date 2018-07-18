@@ -11,7 +11,7 @@ deploy()
 {
   echo_msg "Deploying $1"
   cd $BASE_DIR/$1
-  cf push -f manifest.yml
+  cf push -f manifest.yml  --random-route
   if [ $? -eq 0 ]
   then
     echo "Successfully deployed $1"

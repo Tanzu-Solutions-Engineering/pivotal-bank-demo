@@ -24,7 +24,7 @@ jobs:
     resource: cf-env
     params:
       command: delete
-      app_name: webtrader
+      app_name: web
       delete_mapped_routes: true
   - aggregate:
     - put: cf-delete-service

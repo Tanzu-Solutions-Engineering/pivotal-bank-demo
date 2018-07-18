@@ -2,14 +2,12 @@
 timeout: 180
 instances: 1
 memory: 1G
-#env:
-#    SPRING_PROFILES_ACTIVE: cloud
-#    JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
-#    JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: { memory_sizes: { metaspace: 100m }, memory_heuristics: {metaspace: 10, heap: 65, native: 20, permgen: 10, stack: 5}  }]'
 applications:
 - name: portfolio
-#  random-route: true
   path: build/libs/portfolio.jar
   services: [ traderdb, discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
-  env:
-    TRUST_CERTS: api.sys.gcp.winterfell.live, api.run.haas-83.pez.pivotal.io
+# When deployed to environments with self-signed certs, you have to reference your api here.  See
+# http://docs.pivotal.io/spring-cloud-services/1-5/common/service-registry/writing-client-applications.html
+# Running /scripts/doItAll.sh or 4_addTrustCerts.sh will take care of this
+#  env:
+#    TRUST_CERTS: api.your-system-domain.com

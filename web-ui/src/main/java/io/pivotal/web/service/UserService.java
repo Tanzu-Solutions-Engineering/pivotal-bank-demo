@@ -2,7 +2,6 @@ package io.pivotal.web.service;
 
 import java.util.Map;
 
-import io.pivotal.web.domain.Account;
 import io.pivotal.web.domain.AuthenticationRequest;
 import io.pivotal.web.domain.User;
 
@@ -37,6 +36,7 @@ public class UserService {
 	
 	public Map<String,Object> login(AuthenticationRequest request){
 		logger.debug("logging in with userId:" + request.getUsername());
+		@SuppressWarnings("unchecked")
 		Map<String,Object> result = (Map<String, Object>) restTemplate.postForObject("http://" + userService + "/login/".toString(), request, Map.class);
 		return result;
 	}

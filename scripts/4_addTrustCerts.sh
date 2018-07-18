@@ -1,14 +1,14 @@
 #!/bin/sh
 # This script
 #   1) Reads microservices.list
-#   2) Adds the CF target env variable
+#   2) Adds the TRUST_CERTS env variable for unsigned cert environments (http://docs.pivotal.io/spring-cloud-services/1-5/common/service-registry/writing-client-applications.html)
 #   3) restages the apps
 source ./commons.sh
 
-addTarget()
+addTrustCerts()
 {
-  CF_TARGET=`cf target | grep "API" | cut -d" " -f5| xargs`
-  cf set-env $1 CF_TARGET $CF_TARGET
+  TRUST_CERTS=`cf target | grep "api endpoint" | cut -d" " -f5| xargs`
+  cf set-env $1 TRUST_CERTS TRUST_CERTS
   cf restage $1 &
 }
 
@@ -20,13 +20,11 @@ do
   if [ ! "${app:0:1}" == "#" ]
   then
     app=`echo $app | cut -d "-" -f1`
-    addTarget $app
-    sleep 4
+        addTrustCerts $app
+        sleep 4
   fi
 done < "$file"
 
-#Annoying hack
-addTarget webtrader
 wait
 
 summaryOfApps
