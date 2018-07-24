@@ -8,6 +8,10 @@ pushd accounts-service/accounts-service
 #
 #    VERSION=`cat version-number`
 popd
+ls -ltr accounts-service
+ls -ltr accounts-service/accounts-service
+ls -ltr accounts-service/accounts-service/build
+ls -ltr accounts-service/accounts-service/build/libs
 
 #./accounts-service/accounts-service/gradlew clean assemble
 
