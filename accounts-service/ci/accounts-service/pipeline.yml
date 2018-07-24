@@ -32,26 +32,31 @@ jobs:
       params:
         command: delete-service
         service_instance: {{cf-db-service-name}}
+        wait_for_service: true
     - put: cf-delete-service
       resource: cf-env
       params:
         command: delete-service
         service_instance: config-server
+        wait_for_service: true
     - put: cf-delete-service
       resource: cf-env
       params:
         command: delete-service
         service_instance: discovery-service
+        wait_for_service: true
     - put: cf-delete-service
       resource: cf-env
       params:
         command: delete-service
         service_instance: circuit-breaker-dashboard
+        wait_for_service: true
     - put: cf-delete-service
       resource: cf-env
       params:
         command: delete-service
         service_instance: zipkinRabbit
+        wait_for_service: true
 
 - name: build-accounts
   public: true
@@ -61,7 +66,7 @@ jobs:
     passed: [ prepare-cf-env ]
     trigger: true
   - task: build
-    file: accounts-service/ci/tasks/build-account-service/task.yml
+    file: accounts-service/accounts-service/ci/tasks/build-account-service/task.yml
     params:
       ARTIFACT_ID: accounts
   - put: cf-zero-downtime-push
@@ -69,9 +74,9 @@ jobs:
     params:
       command: zero-downtime-push
       manifest: build-output/manifest.yml
+      path: build-output/libs/accounts.jar
       environment_variables:
         TRUST_CERTS: {{cf-api-uri}}
-        CF_TARGET: {{cf-target-url}}
 
 - name: prepare-cf-env
   public: true
@@ -94,17 +99,17 @@ jobs:
       params:
         command: create-service
         service: p-config-server
-        plan: standard
+        plan: {{cf-config-server-plan}}
         service_instance: config-server
         timeout: 300
         wait_for_service: true
-        configuration: '{ "count": 2, "git": { "uri": "https://github.com/pivotal-bank/cf-SpringBootTrader-config", "cloneOnStart": "true" } }'
+        configuration: '{ "count": 1, "git": { "uri": {{cf-config-server-uri}}, "searchPaths":{{cf-config-server-search-paths}},"label":{{cf-config-server-label}} } }'
     - put: cf-create-service
       resource: cf-env
       params:
         command: create-service
         service: p-service-registry
-        plan: standard
+        plan: {{cf-service-registry-plan}}
         service_instance: discovery-service
         timeout: 300
         wait_for_service: true
@@ -113,7 +118,7 @@ jobs:
       params:
         command: create-service
         service: p-circuit-breaker-dashboard
-        plan: standard
+        plan: {{cf-circuit-breaker-dashboard-plan}}
         service_instance: circuit-breaker-dashboard
         timeout: 300
         wait_for_service: true
