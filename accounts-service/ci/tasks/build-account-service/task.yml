@@ -17,4 +17,4 @@ params:
   TERM: dumb
 
 run:
-  path: accounts-service/ci/tasks/build-account-service/task.sh
+  path: accounts-service/accounts-service/ci/tasks/build-account-service/task.sh
