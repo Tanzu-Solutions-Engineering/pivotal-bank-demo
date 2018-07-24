@@ -21,3 +21,7 @@ logging:
         springframework:
            web: WARN
            cloud: WARN
+spring:
+  slueth:
+    sampler:
+      percentage: 1.0
