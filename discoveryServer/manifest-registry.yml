@@ -1,7 +1,4 @@
 ---
-timeout: 180
-instances: 1
-memory: 512M
 env:
     SPRING_PROFILES_DEFAULT: cloud
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
@@ -10,6 +7,9 @@ env:
 applications:
 - name: eureka-server1
   path: build/libs/registry-0.0.1.jar
+  timeout: 180
+  instances: 1
+  memory: 512M
   hosts:
     - eureka-server1
     - eureka

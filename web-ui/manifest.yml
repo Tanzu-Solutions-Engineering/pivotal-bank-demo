@@ -1,11 +1,11 @@
 ---
-timeout: 180
-instances: 1
-memory: 1G
 applications:
 - name: web
   path: build/libs/web.jar
   services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit ]
+  timeout: 180
+  instances: 1
+  memory: 1G
 # When deployed to environments with self-signed certs, you have to reference your api here.  See
 # http://docs.pivotal.io/spring-cloud-services/1-5/common/service-registry/writing-client-applications.html
 # Running /scripts/doItAll.sh or 4_addTrustCerts.sh will take care of this
