@@ -64,12 +64,22 @@ create_all_services()
 
   if [ $scs_service_created -eq 1 ]
   then
-    # Sleep for service registry
-    max=50
-  for ((i=1; i<=$max; ++i )) ; do
-     echo "Pausing to allow Spring Cloud Services to Initialise.....$i/$max"
-     sleep 5
+
+
+    # Wait until services are ready
+    while cf services | grep 'create in progress'
+    do
+     sleep 20
+     echo "Waiting for services to initialize..."
     done
+
+    # Check to see if any services failed to create
+    if cf services | grep 'create failed'; then
+     echo "Service initialization - failed. Exiting."
+     return 1
+    fi
+    echo "Service initialization - successful"
+
   fi
 }
 

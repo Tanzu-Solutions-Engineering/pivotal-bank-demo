@@ -18,5 +18,12 @@ do
 done < "$file"
 wait
 
+# Wait until services are ready
+while cf services | grep 'delete in progress'
+do
+ sleep 20
+ echo "Waiting for services to delete..."
+done
+
 summaryOfServices
 exit 0

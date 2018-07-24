@@ -4,3 +4,4 @@ portfolio-service
 # The app when deployed is called webtrader but lives in folder web-ui. Leave this line as is and the scripts has some "hacks" to cope :(
 web-ui
 user-service
+zipkin-collector

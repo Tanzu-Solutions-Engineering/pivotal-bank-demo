@@ -3,3 +3,16 @@ pivotal:
      name: quotes-service
    accountsService:
      name: accounts-service
+hystrix:
+  metrics:
+    enabled: false
+spring:
+  sleuth:
+    stream:
+      enabled: false
+  cloud:
+    discovery:
+      enabled: false
+    service-registry:
+      auto-registration:
+        enabled: false

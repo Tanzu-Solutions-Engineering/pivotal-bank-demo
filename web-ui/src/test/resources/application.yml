@@ -9,7 +9,17 @@ pivotal:
     name: user-service
   analyticsService:
     name: analytics-service
-eureka:
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
+hystrix:
+  metrics:
+    enabled: false
+spring:
+  sleuth:
+    stream:
+      enabled: false
+  cloud:
+    discovery:
+      enabled: false
+    service-registry:
+      auto-registration:
+        enabled: false
+

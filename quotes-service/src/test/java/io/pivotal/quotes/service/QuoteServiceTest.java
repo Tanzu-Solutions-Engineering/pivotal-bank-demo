@@ -30,18 +30,8 @@ import static org.junit.Assert.*;
  *
  * @author David Ferreira Pinto
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@TestPropertySource(properties = { "pivotal.quotes.quotes_url:http://dev.markitondemand.com/Api/v2/Quote/json?symbol={symbol}","pivotal.quotes.companies_url:http://dev.markitondemand.com/Api/v2/Lookup/json?input={name}" })
-//@PropertySource("classpath:application.yml")
-//@ContextConfiguration(loader = SpringApplicationContextLoader.class)
-//@SpringApplicationConfiguration(classes = TestContextConfiguration.class)
-//@WebAppConfiguration
-//@ContextConfiguration(initializers=ConfigFileApplicationContextInitializer.class)
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = QuotesApplication.class)
-@TestPropertySource(locations = "classpath:application-test.yml")
-@ActiveProfiles("test")
 public class QuoteServiceTest {
     MockMvc mockMvc;
 
