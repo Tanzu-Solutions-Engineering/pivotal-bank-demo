@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-pushd accounts-service
+pushd accounts-service/account-service
     ./gradlew clean assemble
 #
 #    VERSION=`cat version-number`
