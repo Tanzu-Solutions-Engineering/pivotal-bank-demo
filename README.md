@@ -77,41 +77,13 @@ At Pivotal we love education, not just educating ourselves, but also educating o
 1. [Setting up the environment](docs/lab_setup.md)
 2. [Creating a discovery service](docs/lab_registryserver.md)
 3. [Creating a circuit breaker dashboard](docs/lab_circuitbreaker.md)
-4. [creating the configuration service](docs/lab_configserver.md)
+4. [Creating the configuration service](docs/lab_configserver.md)
 5. [Pushing the Quote service](docs/lab_pushquote.md)
 6. [Pushing all the services](docs/lab_pushall.md)
 7. [Scaling the services](docs/lab_scale.md)
 8. Auto Scaling - TODO: use autoscaler service!
 9. [Blue/Green deployments](docs/lab_bluegreen.md)
 10. Monitor workshop - TODO: show how to monitor microservices using springbootadmin, ELK tile and Zipkin.
-
-# Demos
-
-### 1. Deploying to **Pivotal Cloud Foundry**.
-TODO: document a walk through of this demo. This is a walkthough of the workshop above.
-- Deploying microservices to Cloud Foundry.
-- Creating and binding services to applications.
-
-### 2. Service discovery.
-TODO: document a walk through of this demo.
-
-### 3. Scalability
-TODO: document a walk through of this demo.
-- provide a load generator to mimic users.
-- scale instances.
-
-### 4. Configuration Management.
-TODO: document a walk through of this demo.
-
-### 5. Traceability across all services.
-TODO: document a walk through of this demo using Zipkin and Kibana.
-
-### 6. Continuous Integration/Continuous Delivery.
-TODO: document a walk through of this demo.
-
-### 7. Operations Demo
-TODO: document how to operate/monitor several microservices, using Spring Boot Admin and ELK tile
-
 
 # Features
 
@@ -143,21 +115,20 @@ The roadmap for this project is constantly evolving. Please feel free to reach o
 # Contributing
 Everyone is encouraged to help improved this project.
 
-The master branch has the latest stable release. development happens in the development branch (or feature branches that get merged into development branch). So please check if want you to develop is already in the development branch.
+The master branch has the latest release.
 
 Here are some ways you can contribute:
 
-- by using alpha, beta, and prerelease versions (ie from the development branch)
 - by reporting bugs
 - by suggesting new features
 - by writing or editing documentation
 - by writing code (no patch is too small: fix typos, add comments, clean up inconsistent whitespace)
 - by refactoring code
-- by closing [issues](https://github.com/dpinto-pivotal/cf-SpringBootTrader/issues)
+- by closing [issues](https://github.com/mid-atlantic-pa/pivotal-bank/issues)
 
 ## Submitting an Issue
 
-We use the [GitHub issue tracker](https://github.com/dpinto-pivotal/cf-SpringBootTrader/issues) to track bugs and features. Before submitting a bug report or feature request, check to make sure it hasn't already been submitted. When submitting a bug report, please include any relevant information. Ideally, a bug report should include a pull request with failing specs, and maybe even a fix!
+We use the [GitHub issue tracker](https://github.com/mid-atlantic-pa/pivotal-bank/issues) to track bugs and features. Before submitting a bug report or feature request, check to make sure it hasn't already been submitted. When submitting a bug report, please include any relevant information. Ideally, a bug report should include a pull request with failing specs, and maybe even a fix!
 
 ## Submitting a Pull Request
 
@@ -165,4 +136,4 @@ We use the [GitHub issue tracker](https://github.com/dpinto-pivotal/cf-SpringBoo
 2. Create a topic branch.
 3. Implement your feature or bug fix.
 4. Commit and push your changes.
-5. Submit a pull request (to the development branch).
+5. Submit a pull request.
