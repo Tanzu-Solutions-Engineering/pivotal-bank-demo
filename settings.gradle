@@ -1,1 +1,1 @@
-include "accounts-service", "quotes-service", "web-ui", "portfolio-service"
+include "accounts-service", "quotes-service", "web-ui", "portfolio-service", "user-service"

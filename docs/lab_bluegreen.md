@@ -6,10 +6,13 @@ In this lab, you will be mimicking upgrading the quote service.
 
 ### Exercise
 
-1. Create a new manifest file to deploy the quote service. Give the application a different name and a different route.
+1. Rename the existing application.
+```
+cf rename quotes quotes-venerable
+```
 
-2. Push the application.
-  > What happens in the registry service UI after you pushed the application?
+2. Push the updated application.
+> What happens in the registry service UI after you pushed the application?
 
 3. Use the CLI or UI to delete the old version of the quote service whilst making requests on the UI of the application.
 

@@ -18,43 +18,8 @@ repositories {
     mavenLocal()
     mavenCentral()
 }
+
 apply plugin: 'jacoco'
 apply plugin: 'java'
-
-subprojects {
-    apply plugin: 'java'
-    //apply plugin: 'jacoco'
-    task hello { doLast {println "$projectDir" }}
-}
-
-project(':accounts-service') {
-    task hello2 { doLast {println "$projectDir" }}
-}
-
-//create a joint code coverage report from subprojects
-task codeCoverageReport(type: JacocoReport) {
-
-    // Gather execution data from all subprojects
-    // (change this if you e.g. want to calculate unit test/integration test coverage separately)
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    // Add all relevant sourcesets from the subprojects
-    subprojects.each { sourceSets it.sourceSets.main }
-
-    reports {
-        xml.enabled false
-        html.enabled true
-        html.destination file("${buildDir}/reports/jacoco")
-        csv.enabled false
-    }
-    jacoco {
-        toolVersion = "0.7.5+" //	reportsDir = file("$buildDir/customJacocoReportDir")
-    }
-}
-
-// always run the tests before generating the report
-codeCoverageReport.dependsOn { subprojects*.test }
-//run full report after test
-test.finalizedBy(codeCoverageReport)
 
 task wrapper(type: Wrapper) { gradleVersion = '4.6' }

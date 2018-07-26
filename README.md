@@ -31,9 +31,9 @@ The system is composed of 4 microservices. The relationship between the microser
 
 ## 1. Quote Microservice
 This service is a spring boot application responsible for providing up to date company and ticker/quote information. It does this by providing a REST api with 2 calls:
-* ``/quotes?q={symbol1,symbol2,etc}``
+* ``/v1/quotes?q={symbol1,symbol2,etc}``
 Returns as up to date quote for the given symbol(s).
-* ``/company/{search}``
+* ``/v1/company/{search}``
 Returns a list of companies that have the search parameter in their names or symbols.
 
 This application has no dependencies apart from an external service - [markitondemand](http://dev.markitondemand.com/) - to retrieve the real time data.
@@ -74,26 +74,16 @@ The following guides describe how to setup the environment and deploy the micros
 
 At Pivotal we love education, not just educating ourselves, but also educating others. As such, these guides follow the *"teaching you how to fish"* principle - Rather than giving you line by line/command by command instructions, we provide guidelines and links to documentation where you can read and learn more.
 
-1. [Setting up the environment] [setup]
-2. [Creating a discovery service] [registry]
-3. [Creating a circuit breaker dashboard] [circuitbreaker]
-4. [creating the configuration service][configserver]
-5. [Pushing the Quote service] [pushquote]
-6. [Pushing all the services] [pushall]
-7. [Scaling the services] [scale]
+1. [Setting up the environment](docs/lab_setup.md)
+2. [Creating a discovery service](docs/lab_registryserver.md)
+3. [Creating a circuit breaker dashboard](docs/lab_circuitbreaker.md)
+4. [creating the configuration service](docs/lab_configserver.md)
+5. [Pushing the Quote service](docs/lab_pushquote.md)
+6. [Pushing all the services](docs/lab_pushall.md)
+7. [Scaling the services](docs/lab_scale.md)
 8. Auto Scaling - TODO: use autoscaler service!
-9. [Blue/Green deployments] [bluegreen]
+9. [Blue/Green deployments](docs/lab_bluegreen.md)
 10. Monitor workshop - TODO: show how to monitor microservices using springbootadmin, ELK tile and Zipkin.
-
-
-[setup]: docs/lab_setup.md
-[registry]: docs/lab_registryserver.md
-[circuitbreaker]: docs/lab_circuitbreaker.md
-[configserver]: docs/lab_configserver.md
-[pushquote]: docs/lab_pushquote.md
-[pushall]: docs/lab_pushall.md
-[scale]: docs/lab_scale.md
-[bluegreen]: docs/lab_bluegreen.md
 
 # Demos
 

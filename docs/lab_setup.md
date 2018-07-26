@@ -1,4 +1,5 @@
-#Setting up the environment.
+# Setting up the environment.
+
 In this exercise, we will be setting up the environment and all the tools required.
 
 It assumes you are running Linux or MacOS, although it is possible to configure on Windows too.
@@ -37,7 +38,7 @@ You can obtain the CLI for multiple OS [here](https://github.com/cloudfoundry/cl
 
 Clone the GIT repository to your local machine. On the command line issue the following command:
 
-```git clone --recursive https://github.com/pivotal-bank/cf-SpringBootTrader.git```
+```git clone --recursive https://github.com/mid-atlantic-pa/pivotal-bank.git```
 
 This command will copy the code in the repository to your local machine, creating a directory named `cf-SpringBootTrader`. All actions will now be done inside this directory.
 
@@ -57,7 +58,7 @@ You can also build individual services by naming them, for example:
 
 ## 7. Login to Cloud Foundry
 
-Login to your instance of **Cloud Foundry**. Instructions on how to do this can be found at http://docs.pivotal.io/pivotalcf/devguide/installcf/whats-new-v6.html#login
+Login to your instance of **Cloud Foundry**. Instructions on how to do this can be found at https://docs.cloudfoundry.org/cf-cli/getting-started.html#login
 
 # Summary
 

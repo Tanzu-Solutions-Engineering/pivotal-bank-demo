@@ -20,15 +20,11 @@ Luckily, Pivotal Cloud Foundry allows us to assign a [`random-route`](http://doc
 
 1. *Push* the **quote service** to the cloud by [specifying the specific manifest file](http://docs.pivotal.io/pivotalcf/devguide/deploy-apps/manifest.html#find-manifest) to the `cf push` command.
 
-  > HINT: user the -f option to the push command.
-
-  > Manifest files are generated as part of the build. They are placed in `<service-name>/build`, i.e. `quotes-service/build`
-
-2. When the script has finished, set the `CF_TARGET` environment variable in both applications to the API endpoint of your Elastic Runtime instance (as in `https://api.example.com`), then restage the applications so that the changes will take effect.
+2. (Optional if you are using cloud foundry with self-signed certificates) When the script has finished, set the `TRUST_CERTS` environment variable in the application to the API endpoint of your Pivotal Application Services instance (as in `api.example.com`), then restage the applications so that the changes will take effect.
 
   ```
-  $ cf set-env quotes CF_TARGET https://api.cloudfoundry.com
-  Setting env variable 'CF_TARGET' to 'https://api.cloudfoundry.com' for app quotes in org myorg / space outer as user...
+  $ cf set-env quotes TRUST_CERTS api.cloudfoundry.com
+  Setting env variable 'TRUST_CERTS' to 'api.cloudfoundry.com' for app quotes in org myorg / space outer as user...
   OK
   TIP: Use 'cf restage' to ensure your env variable changes take effect
   $ cf restage quotes
@@ -37,11 +33,11 @@ Luckily, Pivotal Cloud Foundry allows us to assign a [`random-route`](http://doc
 
   > IMPORTANT: The Starters for Spring Cloud Services has a dependency on Spring Security, and by default, this will cause all client application endpoints to be protected by HTTP Basic authentication. You can disable this; see ["Disable HTTP Basic Authentication"](http://docs.pivotal.io/spring-cloud-services/service-registry/registering-a-service.html#disable-http-basic-auth) in the [Spring Cloud Services documentation for Service Registry](http://docs.pivotal.io/spring-cloud-services/service-registry/).
 
-##Deploying without Spring Cloud Services
+## Deploying without Spring Cloud Services
 
   If Spring Cloud Services are not available, you should have pushed an instance of the [discovery service](https://github.com/dpinto-pivotal/cf-SpringBootTrader-extras) to the cloud. Now, you'll have to create a [*User-provided service*](http://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html) and bind it to the quote service.
 
-  ### Exercise
+### Exercise
   1. Create a *user provided service* using the CLI.
 
     Name this service **circuit-breaker-dashboard** and specify the URI of your instance of the registry service. For example:
@@ -55,7 +51,7 @@ Luckily, Pivotal Cloud Foundry allows us to assign a [`random-route`](http://doc
 
     2. push the application
 
-##Running it locally
+## Running it locally
   To run the quote service locally, you can use the gradle wrapper script as such:
 
   ```
@@ -67,7 +63,7 @@ Luckily, Pivotal Cloud Foundry allows us to assign a [`random-route`](http://doc
 
 Ensure you have a working quote service application by sending HTTP requests to it, for example:
 
-`curl http://<ROUTE_TO_QUOTE_SERVICE>/v1/quotes?q=EMC`
+`curl http://<ROUTE_TO_QUOTE_SERVICE>/v1/quotes?q=PVTL`
 
 > You can also put the above URL in your browser.
 

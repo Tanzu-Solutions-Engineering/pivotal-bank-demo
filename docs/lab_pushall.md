@@ -8,7 +8,7 @@ We have already deployed the quote service in the [previous lab](lab_pushquote.m
 ### 2. Accounts service
 The accounts service has a dependency on a RDBMS database.
 
-**Cloud Foundry** provides a marketplace where administrators can enable certain services to be available to developers/operators. These services are called [*Managed services*](http://docs.pivotal.io/pivotalcf/devguide/services/#managed-services), in contrast to [*User-provided services*](http://docs.pivotal.io/pivotalcf/devguide/services/#user-provided-services).
+**Cloud Foundry** provides a marketplace where administrators can enable certain services to be available to developers/operators. These services are called [*Managed services*](http://docs.pivotal.io/pivotalcf/devguide/services/#instances), in contrast to [*User-provided services*](http://docs.pivotal.io/pivotalcf/devguide/services/#user-provided-services).
 
 There are a couple of ways to create a service in **Cloud Foundry**. For this service we will explore using the UI to create the service, but you can also create it using the CLI.
 
@@ -51,36 +51,37 @@ Now that we have all the required services created, let's push all the services.
 > How could you push all the services in one go?
 > The **Cloud Foundry** manifest file allows us to [define multiple applications in a single file](http://docs.pivotal.io/pivotalcf/devguide/deploy-apps/manifest.html#multi-apps)
 
-2. When the script has finished, set the `CF_TARGET` environment variable in both applications to the API endpoint of your Elastic Runtime instance (as in `https://api.example.com`), then restage the applications so that the changes will take effect.
+2. (Optional if you are using cloud foundry with self-signed certificates) When the script has finished, set the `TRUST_CERTS` environment variable in each application to the API endpoint of your Pivotal Application Services instance (as in `api.example.com`), then restage the applications so that the changes will take effect.
 
-  ```
-  $ cf set-env accounts CF_TARGET https://api.cloudfoundry.com
-  Setting env variable 'CF_TARGET' to 'https://api.cloudfoundry.com' for app accounts in org myorg / space outer as user...
-  OK
-  TIP: Use 'cf restage' to ensure your env variable changes take effect
-  $ cf restage accounts
-  ```
-  > You only need to do this once per application.
+```
+$ cf set-env quotes TRUST_CERTS api.cloudfoundry.com
+Setting env variable 'TRUST_CERTS' to 'api.cloudfoundry.com' for app accounts in org myorg / space outer as user...
+OK
+TIP: Use 'cf restage' to ensure your env variable changes take effect
+$ cf restage accounts
+```
+> You only need to do this once per application.
 
 Once completed, go to the URL of the Web service in your browser.
 
-##Deploying without Spring Cloud Services
+## Deploying without Spring Cloud Services
 
-  If Spring Cloud Services are not available, you should have pushed an instance of the [discovery service](https://github.com/dpinto-pivotal/cf-SpringBootTrader-extras) to the cloud and you should already have a [*User-provided service*](http://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html).
+If Spring Cloud Services are not available, you should have pushed an instance of the [discovery service](https://github.com/dpinto-pivotal/cf-SpringBootTrader-extras) to the cloud and you should already have a [*User-provided service*](http://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html).
 
-  Thus all you'll need to do is push the applications as above. Ensure you create the **traderdb** RDBMS service.
+Thus all you'll need to do is push the applications as above. Ensure you create the **traderdb** RDBMS service.
 
-  ### Exercise
-    1. push the applications
+### Exercise
 
-##Running it locally
-  To run the service locally, you can use the gradle wrapper script as such:
+1. push the applications
 
-  ```
-  gradlew :<servicename>-service:bootRun
-  ```
-  The services should start up and bind to the discovery service running locally.
+## Running it locally
 
+To run the service locally, you can use the gradle wrapper script as such:
+
+```
+gradlew :<servicename>-service:bootRun
+```
+The services should start up and bind to the discovery service running locally.
 
 # Summary
 Congratulations! You have now deployed a set of microservices to the cloud that interact with each other.
