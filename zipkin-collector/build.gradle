@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.10.RELEASE'
+		springBootVersion = '2.0.3.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -22,27 +22,35 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	springCloudServicesVersion = '2.0.1.RELEASE'
+	springCloudVersion = 'Finchley.RELEASE'
+	zipkinVersion = '2.10.4'
+}
 
 dependencies {
 
-	compile('org.springframework.boot:spring-boot-starter-actuator')
-	compile("org.springframework.boot:spring-boot-starter-jdbc")
+	compile "org.springframework.boot:spring-boot-starter-actuator"
+	compile "org.springframework.boot:spring-boot-starter-jdbc"
 
-	compile "org.springframework.cloud:spring-cloud-starter-config"
-	compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
-	compile "org.springframework.cloud:spring-cloud-sleuth-zipkin-stream"
-	compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
+//	compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+	compile "org.springframework.cloud:spring-cloud-starter-sleuth"
+	compile "org.springframework.cloud:spring-cloud-sleuth-zipkin"
+	compile "org.springframework.amqp:spring-rabbit"
 
-    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+	compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
+	compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
 
-	runtime('io.zipkin.java:zipkin-autoconfigure-ui')
+	compile "io.zipkin.java:zipkin-server:${zipkinVersion}"
+	runtime "io.zipkin.java:zipkin-autoconfigure-ui:${zipkinVersion}"
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }
 
 dependencyManagement {
 	imports {
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2"
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:1.6.1.RELEASE"
+		mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
 }

@@ -17,6 +17,3 @@ management:
 eureka:
   instance:
      nonSecurePort: 80
-security:
-  basic:
-    enabled: false

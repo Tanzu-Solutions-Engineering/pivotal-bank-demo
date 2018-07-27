@@ -1,8 +1,0 @@
----
-management:
-  security:
-    enabled: true
-security:
-  user:
-    name: admin
-    password: admin
