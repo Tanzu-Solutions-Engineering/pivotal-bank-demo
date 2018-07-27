@@ -22,7 +22,7 @@ logging:
            web: WARN
            cloud: WARN
 spring:
-  slueth:
+  sleuth:
     sampler:
       probability: 1.0
 management:
