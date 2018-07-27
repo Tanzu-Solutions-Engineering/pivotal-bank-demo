@@ -1,0 +1,3 @@
+spring:
+  rabbitmq:
+    addresses: ${vcap.services.zipkinRabbit.credentials.uri}

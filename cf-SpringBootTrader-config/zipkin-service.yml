@@ -1,6 +1,3 @@
 spring:
   application:
      name: zipkin-service
-security:
-  basic:
-    enabled: false
