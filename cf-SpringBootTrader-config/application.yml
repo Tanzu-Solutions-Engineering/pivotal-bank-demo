@@ -24,4 +24,9 @@ logging:
 spring:
   slueth:
     sampler:
-      percentage: 1.0
+      probability: 1.0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
