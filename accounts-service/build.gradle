@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.13.RELEASE'
+        springBootVersion = '2.0.3.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -15,10 +15,11 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-jar {
+bootJar {
     baseName = 'accounts'
     version = "" // omit the version from the war file name
 }
+
 description = "Micro-service to deal with accounts and user logins"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -28,8 +29,8 @@ repositories {
 }
 
 ext {
-    springCloudServicesVersion = '1.6.1.RELEASE'
-    springCloudVersion = 'Edgware.SR3'
+    springCloudServicesVersion = '2.0.1.RELEASE'
+    springCloudVersion = 'Finchley.RELEASE'
 }
 
 dependencies {
@@ -38,9 +39,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
 
-    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
-    compile "org.springframework.cloud:spring-cloud-sleuth-stream"
-    compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
+    compile "org.springframework.cloud:spring-cloud-starter-zipkin"
 
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"

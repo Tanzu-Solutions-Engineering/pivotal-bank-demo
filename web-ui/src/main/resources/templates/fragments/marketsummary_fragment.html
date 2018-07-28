@@ -9,10 +9,10 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-            <div class="item active">
+            <div class="item active" th:if="${marketSummary != null}">
                 <div th:include="fragments/marketsummary_fragment :: summary-quote(${marketSummary.topGainers},'Information Technology')" th:remove="tag"></div>
             </div>
-            <div class="item">
+            <div class="item" th:if="${marketSummary != null}">
                 <div th:include="fragments/marketsummary_fragment :: summary-quote(${marketSummary.topLosers},'Financial Services')" th:remove="tag"></div>
             </div>
         </div>

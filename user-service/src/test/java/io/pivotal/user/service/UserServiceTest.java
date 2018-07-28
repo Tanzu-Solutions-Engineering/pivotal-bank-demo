@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Matchers.isA;
 
 import java.util.Map;
+import java.util.Optional;
 
 import io.pivotal.user.configuration.ServiceTestConfiguration;
 import io.pivotal.user.domain.User;
@@ -49,7 +50,7 @@ public class UserServiceTest {
 	 */
 	@Test
 	public void doFindUser() {
-		when(repo.findOne(ServiceTestConfiguration.PROFILE_ID)).thenReturn(ServiceTestConfiguration.user());
+		when(repo.findById(ServiceTestConfiguration.PROFILE_ID)).thenReturn(Optional.of(ServiceTestConfiguration.user()));
 		assertEquals(service.findUser(ServiceTestConfiguration.PROFILE_ID).toString(),ServiceTestConfiguration.user().toString());
 	}
 	/**
@@ -73,7 +74,7 @@ public class UserServiceTest {
 	 */
 	@Test(expected=NoRecordsFoundException.class)
 	public void doFindNullAccount() {
-		when(repo.findOne(999)).thenReturn(null);
+		when(repo.findById(999)).thenReturn(Optional.empty());
 		service.findUser(999);
 	}
 	

@@ -6,7 +6,7 @@ applications:
   memory: 1G
   path: zipkin.jar
   random-route: true
-  services: [ zipkinRabbit, zipkinDB ]
+#  services: [ zipkinRabbit, zipkinDB ]
 # When deployed to environments with self-signed certs, you have to reference your api here.  See
 # http://docs.pivotal.io/spring-cloud-services/1-5/common/service-registry/writing-client-applications.html
 # Running /scripts/doItAll.sh or 4_addTrustCerts.sh will take care of this

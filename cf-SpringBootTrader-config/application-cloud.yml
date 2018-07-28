@@ -5,3 +5,8 @@ spring:
 eureka:
   instance:
      nonSecurePort: 80
+spring:
+  zipkin:
+    baseUrl: http://zipkin-unexpected-rabbit.cfapps.haas-69.pez.pivotal.io/
+    sender:
+      type: web

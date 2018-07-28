@@ -21,11 +21,11 @@
 			</div>
             <div class="col-md-6" th:include="fragments/marketsummary_fragment :: summary"></div>
 
-			<div class="row">
-				<div th:if="${portfolio != null}" th:include="fragments/accounts_fragment :: portfolio-listing" th:remove="tag"></div>
+			<div class="row" th:if="${portfolio != null}">
+				<div th:include="fragments/accounts_fragment :: portfolio-listing" th:remove="tag"></div>
 			</div>
-			<div class="row">
-				<div th:if="${portfolio != null}" th:include="fragments/accounts_fragment :: order-listing" th:remove="tag"></div>
+			<div class="row" th:if="${portfolio != null}">
+				<div th:include="fragments/accounts_fragment :: order-listing" th:remove="tag"></div>
 			</div>
 		</div>
 

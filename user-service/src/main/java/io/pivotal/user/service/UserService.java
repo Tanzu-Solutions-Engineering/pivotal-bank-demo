@@ -1,9 +1,6 @@
 package io.pivotal.user.service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import io.pivotal.user.domain.User;
 import io.pivotal.user.exception.AuthenticationException;
@@ -46,8 +43,8 @@ public class UserService {
 
 		logger.debug("user.findAccount: id=" + id);
 
-		User account = user.findOne(id);
-		if (account == null) {
+		Optional<User> account = user.findById(id);
+		if (!account.isPresent()) {
 			logger.warn("UserService.findAccount: could not find account with id: "
 					+ id);
 			throw new NoRecordsFoundException();
@@ -55,9 +52,9 @@ public class UserService {
 
 		logger.info(String
 				.format("UserService.findAccount - retrieved account with id: %s. Payload is: %s",
-						id, account));
+						id, account.get()));
 
-		return account;
+		return account.get();
 	}
 
 	/**

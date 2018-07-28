@@ -38,14 +38,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-actuator"
 
-    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
-    compile "org.springframework.cloud:spring-cloud-sleuth-zipkin"
-    compile "org.springframework.cloud:spring-cloud-stream-binder-rabbit:2.0.1.RELEASE"
-
-//    compile "org.springframework.cloud:spring-cloud-starter-sleuth"
-//    compile "org.springframework.cloud:spring-cloud-sleuth-stream"
-    compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
-
+    compile "org.springframework.cloud:spring-cloud-starter-zipkin"
 
     compileOnly "org.projectlombok:lombok"
     compile "org.slf4j:slf4j-api"
@@ -54,7 +47,6 @@ dependencies {
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
 
-    //test packages
     testCompile "org.springframework.boot:spring-boot-starter-test"
     testCompile "junit:junit"
     testRuntime "com.jayway.jsonpath:json-path"

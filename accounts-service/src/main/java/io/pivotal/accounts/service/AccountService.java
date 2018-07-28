@@ -1,6 +1,7 @@
 package io.pivotal.accounts.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import io.pivotal.accounts.domain.Account;
 import io.pivotal.accounts.domain.AccountType;
@@ -41,15 +42,15 @@ public class AccountService {
 
 		logger.debug("AccountService.findAccount: id=" + id);
 
-		Account account = accounts.findOne(id);
-		if (account == null) {
+		Optional<Account> account = accounts.findById(id);
+		if (!account.isPresent()) {
 			logger.warn("AccountService.findAccount: could not find account with id: " + id);
 			throw new NoRecordsFoundException();
 		}
 
-		logger.info(String.format("AccountService.findAccount - retrieved account with id: %s. Payload is: %s", id, account));
+		logger.info(String.format("AccountService.findAccount - retrieved account with id: %s. Payload is: %s", id, account.get()));
 
-		return account;
+		return account.get();
 	}
 
 	/**

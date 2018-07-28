@@ -37,14 +37,14 @@ public class User {
     private String authtoken;
 
 	@JsonProperty("creationdate")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
     private Date creationdate;
     
 	@JsonProperty("logoutcount")
     private Integer logoutcount;
     
 	@JsonProperty("lastlogin")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss")
     private Date lastlogin;
 	
 	@JsonProperty("logincount")

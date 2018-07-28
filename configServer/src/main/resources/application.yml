@@ -3,19 +3,16 @@ info:
 spring:
   application:
     name: configserver
-  profiles.active: local  
+  profiles:
+    active: native
   jmx:
     default_domain: cloud.config.server
   cloud:
     config:
       server:
-        git:
-          uri: https://github.com/mid-atlantic-pa/pivotal-bank/
-          searchPaths: cf-SpringBootTrader-config
+        native:
+          searchLocations: file:${user.dir}/../cf-SpringBootTrader-config
 management:
   context_path: /admin
----
-spring:
-  profiles: local
 server:
   port: 8888

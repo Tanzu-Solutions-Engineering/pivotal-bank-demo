@@ -114,11 +114,27 @@ public class QuoteService {
 		AlphaAdvantageResponse response = restTemplate.getForObject(alpha_advantage_url, AlphaAdvantageResponse.class, symbols);
 		AlphaAdvantageQuote n = new AlphaAdvantageQuote();
 		log.debug("Got response: " + response);
-		List<Quote> quotes = response
-				.getQuotes()
-				.stream()
-				.map(aaQuote -> QuoteMapper.INSTANCE.mapFromAlphaAdvantageQuote(aaQuote))
-				.collect(Collectors.toList());
+		final List<Quote> quotes = new ArrayList<>();
+
+		if(response.getQuotes() != null) {
+			quotes.addAll(response
+					.getQuotes()
+					.stream()
+					.map(aaQuote -> QuoteMapper.INSTANCE.mapFromAlphaAdvantageQuote(aaQuote))
+					.collect(Collectors.toList()));
+		} else {
+			log.warn("Quote lookup returned a null array of quotes");
+			String[] parts = symbols.split(",");
+			Arrays.stream(parts).forEach(
+					symbol -> {
+						Quote quote = new Quote();
+						quote.setSymbol(symbol);
+						quote.setStatus("FAILED");
+						quotes.add(quote);
+					}
+			);
+		}
+
 		return quotes;
 	}
 

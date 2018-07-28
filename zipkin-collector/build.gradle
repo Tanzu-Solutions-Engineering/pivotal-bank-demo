@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.3.RELEASE'
+		springBootVersion = '1.5.10.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -13,7 +13,6 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
-apply plugin: "io.spring.dependency-management"
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -22,35 +21,24 @@ repositories {
 	mavenCentral()
 }
 
-ext {
-	springCloudServicesVersion = '2.0.1.RELEASE'
-	springCloudVersion = 'Finchley.RELEASE'
-	zipkinVersion = '2.10.4'
-}
 
 dependencies {
 
-	compile "org.springframework.boot:spring-boot-starter-actuator"
-	compile "org.springframework.boot:spring-boot-starter-jdbc"
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+//	compile("org.springframework.boot:spring-boot-starter-jdbc")
 
-//	compile "org.springframework.cloud:spring-cloud-starter-zipkin"
-	compile "org.springframework.cloud:spring-cloud-starter-sleuth"
-	compile "org.springframework.cloud:spring-cloud-sleuth-zipkin"
-	compile "org.springframework.amqp:spring-rabbit"
+//	compile "org.springframework.cloud:spring-cloud-starter-config"
+	compile "org.springframework.cloud:spring-cloud-sleuth-zipkin-stream"
+	compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
 
-	compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
-	compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
-
-	compile "io.zipkin.java:zipkin-server:${zipkinVersion}"
-	runtime "io.zipkin.java:zipkin-autoconfigure-ui:${zipkinVersion}"
+	runtime('io.zipkin.java:zipkin-autoconfigure-ui')
+//	runtime "com.h2database:h2"
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
 }
 
 dependencyManagement {
 	imports {
-		mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
-		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Edgware.SR2"
 	}
 }

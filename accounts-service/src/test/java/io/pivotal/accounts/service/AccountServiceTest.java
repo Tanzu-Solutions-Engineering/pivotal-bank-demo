@@ -9,6 +9,7 @@ import static org.mockito.Matchers.isA;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import io.pivotal.accounts.configuration.ServiceTestConfiguration;
 import io.pivotal.accounts.domain.Account;
@@ -51,7 +52,7 @@ public class AccountServiceTest {
 	 */
 	@Test
 	public void doFindAccount() {
-		when(repo.findOne(ServiceTestConfiguration.PROFILE_ID)).thenReturn(ServiceTestConfiguration.account());
+		when(repo.findById(ServiceTestConfiguration.PROFILE_ID)).thenReturn(Optional.of(ServiceTestConfiguration.account()));
 		assertEquals(service.findAccount(ServiceTestConfiguration.PROFILE_ID).toString(),ServiceTestConfiguration.account().toString());
 	}
 	/**
@@ -90,7 +91,7 @@ public class AccountServiceTest {
 	 */
 	@Test(expected=NoRecordsFoundException.class)
 	public void doFindNullAccount() {
-		when(repo.findOne(999)).thenReturn(null);
+		when(repo.findById(999)).thenReturn(Optional.empty());
 		service.findAccount(999);
 	}
 	
