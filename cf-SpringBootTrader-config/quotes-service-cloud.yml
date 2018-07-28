@@ -1,3 +1,5 @@
 spring:
-  rabbitmq:
-    addresses: ${vcap.services.zipkinRabbit.credentials.uri}
+  zipkin:
+    baseUrl: http://zipkin-responsible-bongo.cfapps.io/
+    sender:
+      type: web
