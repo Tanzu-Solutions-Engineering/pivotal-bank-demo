@@ -1,5 +1,5 @@
 spring:
   zipkin:
-    baseUrl: http://zipkin-responsible-bongo.cfapps.io/
+    baseUrl: http://zipkin-unexpected-rabbit.cfapps.haas-69.pez.pivotal.io/
     sender:
       type: web
