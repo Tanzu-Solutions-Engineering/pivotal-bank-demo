@@ -1,11 +1,10 @@
-spring:
-  cloud:
-    services:
-      registrationMethod: route
 eureka:
   instance:
      nonSecurePort: 80
 spring:
+  cloud:
+    services:
+      registrationMethod: route
   zipkin:
     baseUrl: http://zipkin-unexpected-rabbit.cfapps.haas-69.pez.pivotal.io/
     sender:
