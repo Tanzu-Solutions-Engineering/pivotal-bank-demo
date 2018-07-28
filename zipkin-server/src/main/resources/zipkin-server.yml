@@ -1,1 +1,4 @@
 spring.profiles.include: shared
+spring:
+  application:
+    name: zipkin-server

@@ -1,3 +1,9 @@
+# WARNING
+> This is a fork of the zipkin-server from https://github.com/openzipkin/zipkin/tree/master/zipkin-server.
+I've added spring cloud service registry, so that other services could target it.
+
+# The following is original content...
+
 # zipkin-server
 zipkin-server is a [Spring Boot](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) application, packaged as an executable jar. You need JRE 8+ to start zipkin-server.
 

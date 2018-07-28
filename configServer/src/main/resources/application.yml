@@ -12,6 +12,12 @@ spring:
       server:
         native:
           searchLocations: file:${user.dir}/../cf-SpringBootTrader-config
+# If you want to point to the main git,
+#  then comment out spring.profiles.active and spring.cloud.config.server.native
+#  and uncomment spring.cloud.config.server.git
+#        git:
+#          uri: https://github.com/mid-atlantic-pa/pivotal-bank.git
+#          searchPaths: cf-SpringBootTrader-config
 management:
   context_path: /admin
 server:
