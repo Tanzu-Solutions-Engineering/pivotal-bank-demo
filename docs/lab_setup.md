@@ -38,9 +38,9 @@ You can obtain the CLI for multiple OS [here](https://github.com/cloudfoundry/cl
 
 Clone the GIT repository to your local machine. On the command line issue the following command:
 
-```git clone --recursive https://github.com/mid-atlantic-pa/pivotal-bank.git```
+```git clone https://github.com/mid-atlantic-pa/pivotal-bank.git```
 
-This command will copy the code in the repository to your local machine, creating a directory named `cf-SpringBootTrader`. All actions will now be done inside this directory.
+This command will copy the code in the repository to your local machine, creating a directory named `pivotal-bank`. All actions will now be done inside this directory.
 
 Once you have cloned the repository, it is important to build it to create the application artifacts.
 

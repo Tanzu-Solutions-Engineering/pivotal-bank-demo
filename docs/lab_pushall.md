@@ -39,6 +39,8 @@ The Web service is the UI front-end and also acts as an API aggregator. As such,
 
 Similarly to above, we will be using the registry service to retrieve information about these microservices.
 
+## 5. User service
+The User service is the provides a user repository and authorization api
 
 ## 5. Push all the applications.
 
@@ -63,25 +65,6 @@ $ cf restage accounts
 > You only need to do this once per application.
 
 Once completed, go to the URL of the Web service in your browser.
-
-## Deploying without Spring Cloud Services
-
-If Spring Cloud Services are not available, you should have pushed an instance of the [discovery service](https://github.com/dpinto-pivotal/cf-SpringBootTrader-extras) to the cloud and you should already have a [*User-provided service*](http://docs.pivotal.io/pivotalcf/devguide/services/user-provided.html).
-
-Thus all you'll need to do is push the applications as above. Ensure you create the **traderdb** RDBMS service.
-
-### Exercise
-
-1. push the applications
-
-## Running it locally
-
-To run the service locally, you can use the gradle wrapper script as such:
-
-```
-gradlew :<servicename>-service:bootRun
-```
-The services should start up and bind to the discovery service running locally.
 
 # Summary
 Congratulations! You have now deployed a set of microservices to the cloud that interact with each other.

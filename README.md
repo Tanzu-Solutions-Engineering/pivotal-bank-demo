@@ -25,9 +25,9 @@ The workshops follow a series of exercises, or labs, and you can find links to t
 
 
 # Architecture
-The system is composed of 4 microservices. The relationship between the microservices is illustrated below.
+The system is composed of 5 microservices. The relationship between the microservices is illustrated below.
 
-![architecture](/docs/microservices_relationship.png)
+![architecture](/docs/base-architecture-diagram.png)
 
 ## 1. Quote Microservice
 This service is a spring boot application responsible for providing up to date company and ticker/quote information. It does this by providing a REST api with 2 calls:
@@ -58,15 +58,18 @@ The web interface is built using bootstrap and Thymeleaf and uses a Spring contr
 * Quote service
 * Portfolio service
 
+## 5. User Microservice
+This service is a spring boot application providing the user repository and authorization services.
+
+It stores the accounts in a RDBMS store and uses a spring JPA respository to accomplish this. It provides several REST api calls for other services to consume its services. 
+
 # Deployment
 
-To deploy the microservices please follow the guides of the [workshop below](#workshops).
+To deploy the microservices manually please follow the guides of the [workshop below](#workshops)
 
-Each guide includes instructions on how to deploy and run to:
-  - Pivotal Cloud Foundry with [Spring Cloud Services for PCF](https://network.pivotal.io/products/p-spring-cloud-services) installed.
-  - Cloud Foundry without Spring Cloud Services.
-  - [Pivotal Web Services](http://run.pivotal.io)
-  - local machine.
+Or if you want to quickly deploy all services to Pivotal Cloud Foundry with [Spring Cloud Services for PCF](https://network.pivotal.io/products/p-spring-cloud-services) follow the [scripted instructions](scripts/README.md)
+
+Alternative, you can run most of the functionality locally, by following the [local instructions](docs/lab_local.md)
 
 # Workshops:
 
@@ -81,9 +84,17 @@ At Pivotal we love education, not just educating ourselves, but also educating o
 5. [Pushing the Quote service](docs/lab_pushquote.md)
 6. [Pushing all the services](docs/lab_pushall.md)
 7. [Scaling the services](docs/lab_scale.md)
-8. Auto Scaling - TODO: use autoscaler service!
-9. [Blue/Green deployments](docs/lab_bluegreen.md)
-10. Monitor workshop - TODO: show how to monitor microservices using springbootadmin, ELK tile and Zipkin.
+8. [Blue/Green deployments](docs/lab_bluegreen.md)
+
+# User Acceptance Test
+In order to get familiar with Pivotal Bank, follow the [user acceptance test](docs/lab_manual_test.md) to go through basic functionality.
+
+# Bonus Workshops
+
+You can go further with the following bonus workshops.
+
+1. [Zipkin Tracing](docs/lab_zipkin.md)
+2. [Analytics](docs/lab_analytics.md)
 
 # Features
 
@@ -102,15 +113,7 @@ The roadmap for this project is constantly evolving. Please feel free to reach o
 - **Security:**
   Secure microservices with OAUTH2.
 - **Monitoring/Operations:**
-  Show how to monitor a distributed system comprising of multiple microservices.
-  This will comprise of:
-   - Spring Boot Admin
-   - ELK tile
-   - Zipkin
-- **Stock analysis system:**
-   A microservice, or set of microservices, to analyse stock and provide recommendations. Also, to show polyglot persistence as well as more sophisticated data workloads.
-- **Mobile UI:**
-  Mobile interface to expose the services on an iOS device and/or Android device natively, making use of the [Pivotal Cloud Foundry Mobile Services](http://docs.pivotal.io/mobile/index.html).
+  Show how to monitor a distributed system comprising of multiple microservices.  Zipkin or [PCF Metrics](http://docs.pivotal.io/pcf-metrics)
 
 # Contributing
 Everyone is encouraged to help improved this project.
