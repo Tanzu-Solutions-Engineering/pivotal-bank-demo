@@ -6,6 +6,6 @@ spring:
     services:
       registrationMethod: route
   zipkin:
-    baseUrl: http://zipkin-unexpected-rabbit.cfapps.haas-69.pez.pivotal.io/
+    baseUrl: http://zipkin-server/
     sender:
       type: web
