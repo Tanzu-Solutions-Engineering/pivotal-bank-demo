@@ -13,7 +13,7 @@ http <URI>/porfolio/<user_name>
 
 ## Accounts
 ```
-http <URI>/accounts/<user_name>
+http <URI>/accounts/<account_id>
 ```
 
 ## Users
