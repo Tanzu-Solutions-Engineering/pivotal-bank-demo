@@ -25,7 +25,6 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
-#      percentage: 1.0
 management:
   endpoints:
     web:
