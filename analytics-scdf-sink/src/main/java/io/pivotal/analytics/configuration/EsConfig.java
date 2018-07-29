@@ -4,8 +4,8 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +24,7 @@ public class EsConfig {
     @Autowired
     private EsSinkProperties properties;
 
+
     @Bean
     public Client client() throws Exception {
 
@@ -31,11 +32,11 @@ public class EsConfig {
                 .put("cluster.name", properties.getClusterName())
                 .build();
 
-        //https://www.elastic.co/guide/en/elasticsearch/guide/current/_transport_client_versus_node_client.html
-        return TransportClient.builder()
-                .settings(esSettings)
-                .build()
+        TransportClient client = new PreBuiltTransportClient(esSettings)
                 .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(properties.getHost()), Integer.parseInt(properties.getPort())));
+
+        return client;
+
     }
 
     @Bean

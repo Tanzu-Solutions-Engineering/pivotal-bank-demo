@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
@@ -55,11 +56,11 @@ public class EsConfig {
                 .put("cluster.name", clusterName)
                 .build();
 
-        //https://www.elastic.co/guide/en/elasticsearch/guide/current/_transport_client_versus_node_client.html
-        return TransportClient.builder()
-                .settings(esSettings)
-                .build()
+        TransportClient client = new PreBuiltTransportClient(esSettings)
                 .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host), port));
+
+        return client;
+
     }
 
     @Bean

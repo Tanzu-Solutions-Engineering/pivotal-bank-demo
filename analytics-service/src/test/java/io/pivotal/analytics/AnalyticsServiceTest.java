@@ -3,6 +3,7 @@ package io.pivotal.analytics;
 import io.pivotal.analytics.entity.Trade;
 import io.pivotal.analytics.repository.TradeRepository;
 import io.pivotal.analytics.service.AnalyticsService;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,19 +34,24 @@ public class AnalyticsServiceTest {
 
 	@Before
 	public void before() {
-//		esTemplate.deleteIndex(Trade.class);
-//		esTemplate.createIndex(Trade.class);
-//		esTemplate.putMapping(Trade.class);
-//		esTemplate.refresh(Trade.class);
-//
-//        Trade trade = new Trade();
-//        trade.setUserid("nfoles");
-//        trade.setSymbol("PVTL");
-//        trade.setQuantity(100);
-//        trade.setPrice(BigDecimal.valueOf(24.78));
-//        trade.setCompletiondate(new Date());
-//        repository.save(trade);
+		esTemplate.deleteIndex(Trade.class);
+		esTemplate.createIndex(Trade.class);
+		esTemplate.putMapping(Trade.class);
+		esTemplate.refresh(Trade.class);
 
+        Trade trade = new Trade();
+        trade.setUserid("nfoles");
+        trade.setSymbol("PVTL");
+        trade.setQuantity(100);
+        trade.setPrice(BigDecimal.valueOf(24.78));
+        trade.setCompletiondate(new Date());
+        repository.save(trade);
+
+	}
+
+	@After
+	public void teardown() {
+		esTemplate.deleteIndex(Trade.class);
 	}
 
 	@Test

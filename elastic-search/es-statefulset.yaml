@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet                # Type of resource that we are creating
+metadata:                        # Holds metadata for this resource
+  name: es                       # Name of this resource
+  labels:                        # Extra metadata goes inside labels. It is for stateful resource
+    component: elasticsearch     # Just a metadata we are adding
+spec:                            # Holds specification of this resource
+  selector:
+    matchLabels:
+      component: elasticsearch
+  replicas: 1                    # Responsible for maintaining the given number of replicas
+  serviceName: elasticsearch     # Name of service, required by statefulset
+  template:                      # Template holds the spec of the pod that will be created and maintained by statefulset
+    metadata:                    # Holds metadata for the pod
+      labels:                    # Extra metadata goes inside labels. It is for the pod
+        component: elasticsearch # Just a metadata for the pod
+    spec:                        # Holds the spec of the pod
+      initContainers:            # will always initialize before other containers in the pod
+      - name: init-sysctl        # Name of the init-container
+        image: busybox           # Image that will be deployed in this container
+        imagePullPolicy: IfNotPresent              # Sets the policy that only pull image from registry if it is not available locally
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]  # Sets the system varibale in the container, this value is required by ES
+        securityContext:         # Security context holds any special permission given to this container
+          privileged: true       # This container gets the right to run in privilaged mode
+      containers:                # Holds the list and configs of normal containers in the pod
+      - name: es                 # Name of the first container
+        securityContext:         # Security context holds any special permission given to this container
+          capabilities:          # Container will have the capability to IPC Lock , can lock on memory so that it is not swapped out.
+            add:
+              - IPC_LOCK
+        image: quay.io/pires/docker-elasticsearch-kubernetes:5.6.4 # Original, commented out to work with spring data
+        # image: quay.io/manhos/pires-docker-elasticsearch-kubernetes:2.4.0 # specifies the image of elasticsearch to be installed
+        env:                     # array of environment variables with values are passed to this image
+        - name: KUBERNETES_CA_CERTIFICATE_FILE
+          value: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: "CLUSTER_NAME"
+          value: "elasticsearch"
+        - name: "DISCOVERY_SERVICE"
+          value: "elasticsearch"
+        - name: NETWORK_HOST
+          value: "_eth0_"
+        - name: ES_JAVA_OPTS           #Specify the Heap Size
+          value: -Xms256m -Xmx256m
+        ports:                         # Ports that this pod will open
+        - containerPort: 9200
+          name: http
+          protocol: TCP
+        - containerPort: 9300
+          name: transport
+          protocol: TCP
+        volumeMounts:                 # The path where volume will be mounted.
+        - mountPath: /data
+          name: storage               # Name given to this mount
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:               # It  provides stable storage using PersistentVolumes provisioned by a PersistentVolume Provisioner
+  - metadata:                         # Metadata given to this resource (Persistant Volume Claim)
+      name: storage                   # Name of this resource
+    spec:                             # Specification of this PVC (Persistant Volume Claim)
+      accessModes: ["ReadWriteOnce"]  # Access mode of the volume
+      resources:                      # Holds the list of resources
+        requests:                     # Requests sent to the storage class
+          storage: 1Gi                # Request to provision a volume of 1 GB

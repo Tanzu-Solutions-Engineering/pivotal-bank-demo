@@ -8,8 +8,8 @@ vcap:
     es:
       credentials:
         cluster-name: elasticsearch
-        host: 10.193.152.236
-        port: 30141
+        host: 10.193.138.120
+        port: 30432
 hystrix:
   metrics:
     enabled: false

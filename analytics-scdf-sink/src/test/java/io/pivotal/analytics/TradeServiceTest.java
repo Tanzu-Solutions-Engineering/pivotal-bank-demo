@@ -2,6 +2,7 @@ package io.pivotal.analytics;
 
 import io.pivotal.analytics.Application;
 import io.pivotal.analytics.entity.Trade;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,11 @@ public class TradeServiceTest {
         esTemplate.createIndex(Trade.class);
         esTemplate.putMapping(Trade.class);
         esTemplate.refresh(Trade.class);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        esTemplate.deleteIndex(Trade.class);
     }
 
     @Test

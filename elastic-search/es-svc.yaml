@@ -1,0 +1,17 @@
+apiVersion: v1               #API Version of the resource
+kind: Service                #Type of resource
+metadata:                    #Contains metadata of this resource.
+  name: elasticsearch        #Name of this resource
+  labels:                    #Additional identifier to put on pods
+    component: elasticsearch #puts component = elasticsearch
+spec:                        #Specifications of this resource
+  type: NodePort         #type of service
+  selector:                  #will distribute load on pods which
+    component: elasticsearch #have label `component = elasticsearch`
+  ports:                     #Port on which LoadBalancer will listen
+  - name: http               #Name given to port
+    port: 9200               #Port number
+    protocol: TCP            #Protocol supported
+  - name: transport          #Name given to port
+    port: 9300               #Port number
+    protocol: TCP            #Protocol supported

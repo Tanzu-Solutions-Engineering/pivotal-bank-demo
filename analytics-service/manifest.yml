@@ -2,7 +2,7 @@
 applications:
 - name: analytics
   path: build/libs/analytics.jar
-  services: [ discovery-service, circuit-breaker-dashboard, config-server, zipkinRabbit, es ]
+  services: [ discovery-service, circuit-breaker-dashboard, config-server ]
   timeout: 180
   instances: 1
   memory: 1G
