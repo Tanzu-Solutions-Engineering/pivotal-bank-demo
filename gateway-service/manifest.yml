@@ -1,0 +1,15 @@
+---
+applications:
+- name: gateway
+  path: build/libs/gateway.jar
+  services: [ discovery-service, circuit-breaker-dashboard, config-server ]
+  timeout: 180
+  instances: 1
+  memory: 1G
+  random-route: true
+# When deployed to environments with self-signed certs, you have to reference your api here.  See
+# http://docs.pivotal.io/spring-cloud-services/1-5/common/service-registry/writing-client-applications.html
+# Running /scripts/doItAll.sh or 4_addTrustCerts.sh will take care of this
+#  env:
+#    TRUST_CERTS: api.your-system-domain.com
+

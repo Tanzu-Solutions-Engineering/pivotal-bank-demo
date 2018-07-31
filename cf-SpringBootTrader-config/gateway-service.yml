@@ -1,0 +1,37 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: quotes-service
+        uri: lb://quotes-service
+        predicates:
+        - Path=/quotes/**
+        filters:
+        - RewritePath=/quotes/(?<path>.*), /$\{path}
+      - id: accounts-service
+        uri: lb://accounts-service
+        predicates:
+        - Path=/accounts/**
+        filters:
+        - RewritePath=/accounts/(?<path>.*), /$\{path}
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+        filters:
+        - RewritePath=/user/(?<path>.*), /$\{path}
+      - id: portfolio-service
+        uri: lb://portfolio-service
+        predicates:
+        - Path=/portfolio/**
+        filters:
+        - RewritePath=/portfolio/(?<path>.*), /$\{path}
+      - id: analytics-service
+        uri: lb://analytics-service
+        predicates:
+        - Path=/analytics/**
+        filters:
+        - RewritePath=/analytics/(?<path>.*), /$\{path}
