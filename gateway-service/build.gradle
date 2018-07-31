@@ -4,6 +4,8 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -24,6 +26,8 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
 }
 
 ext {
@@ -34,7 +38,12 @@ ext {
 dependencies {
 
 	compile "org.springframework.boot:spring-boot-starter-actuator"
-	compile('org.springframework.cloud:spring-cloud-starter-gateway')
+
+	// 2.0.1 has not been released yet and has a fix to be able handle processing downstream responses that don't set content type
+	compile('org.springframework.cloud:spring-cloud-starter-gateway') {
+		exclude group: "org.springframework.cloud", module: "spring-cloud-gateway-core"
+	}
+	compile('org.springframework.cloud:spring-cloud-gateway-core:2.0.1.BUILD-SNAPSHOT')
 
 	compile "org.springframework.cloud:spring-cloud-starter-zipkin"
 
