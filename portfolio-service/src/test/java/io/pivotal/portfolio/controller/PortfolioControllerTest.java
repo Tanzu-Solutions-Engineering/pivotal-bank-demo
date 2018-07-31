@@ -80,10 +80,10 @@ mockMvc.perform(
 
 	}
 
-	private byte[] convertObjectToJson(Object request) throws Exception {
+	private String convertObjectToJson(Object request) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setSerializationInclusion(Include.NON_NULL);
-		return mapper.writeValueAsBytes(request);
+		return mapper.writeValueAsString(request);
 	}
 
 }

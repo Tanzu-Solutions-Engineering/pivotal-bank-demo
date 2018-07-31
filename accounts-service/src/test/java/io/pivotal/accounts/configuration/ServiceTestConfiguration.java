@@ -21,6 +21,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import io.pivotal.accounts.domain.Account;
+import io.pivotal.accounts.domain.AccountType;
 import io.pivotal.accounts.domain.Transaction;
 import io.pivotal.accounts.domain.TransactionType;
 import io.pivotal.accounts.repository.AccountRepository;
@@ -145,6 +146,8 @@ public class ServiceTestConfiguration  {
 		account.setOpenbalance(ACCOUNT_OPEN_BALANCE);
 		account.setCreationdate(ACCOUNT_DATE);
 		account.setUserid(USER_ID);
+		account.setName("SOME_NAME");
+		account.setType(AccountType.SAVINGS);
 		account.setCurrency("GBP");
 		return account;
 	}

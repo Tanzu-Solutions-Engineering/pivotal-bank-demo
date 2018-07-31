@@ -51,6 +51,7 @@ public class ServiceTestConfiguration {
 		order1.setPrice(PRICE);
 		order1.setQuantity(QUANTITY);
 		order1.setSymbol(SYMBOL);
+		order1.setCurrency("USD");
 		return order1;
 	}
 	
