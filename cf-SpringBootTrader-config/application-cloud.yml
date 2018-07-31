@@ -4,7 +4,7 @@ eureka:
 spring:
   cloud:
     services:
-      registrationMethod: route
+      registrationMethod: direct
   zipkin:
     baseUrl: http://zipkin-server/
     sender:
