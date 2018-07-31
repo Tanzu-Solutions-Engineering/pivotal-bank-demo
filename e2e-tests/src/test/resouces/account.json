@@ -1,0 +1,10 @@
+{
+  "id": 500,
+  "userid": "johndoe",
+  "name": "SOME_NAME",
+  "type": "SAVINGS",
+  "creationdate": 1329759342904,
+  "openbalance": 55.02,
+  "balance": 40.1099999999999994315658113919198513031005859375,
+  "currency": "GBP"
+}
