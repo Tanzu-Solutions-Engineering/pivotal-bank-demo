@@ -1,0 +1,4 @@
+spring:
+  cloud:
+    services:
+      registrationMethod: direct
