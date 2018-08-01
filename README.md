@@ -95,6 +95,7 @@ You can go further with the following bonus workshops.
 
 1. [Zipkin Tracing](docs/lab_zipkin.md)
 2. [Analytics](docs/lab_analytics.md)
+2. [Container to Container Networking](docs/lab_c2c_networking.md)
 
 # Features
 
