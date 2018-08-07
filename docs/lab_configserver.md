@@ -16,7 +16,7 @@ When prompted for the name of the service, insert **"config-server"** and bind i
 Add the following json for further configuration:
 
 ```json
-{"git":{"uri":"https://github.com/mid-atlantic-pa/pivotal-bank.git","searchPaths":"cf-SpringBootTrader-config","label":"master"}}
+{"git":{"uri":"https://github.com/Pivotal-Field-Engineering/pivotal-bank-demo.git","searchPaths":"cf-SpringBootTrader-config","label":"master"}}
 ```
 
 > You can pick any name of the service, however, the service is already specified in the manifest files, so it is easier to re-use that name. If you do modify the name, ensure you modify it in the manifest files as well.

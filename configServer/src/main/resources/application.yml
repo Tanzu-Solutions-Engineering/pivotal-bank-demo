@@ -16,7 +16,7 @@ spring:
 #  then comment out spring.profiles.active and spring.cloud.config.server.native
 #  and uncomment spring.cloud.config.server.git
 #        git:
-#          uri: https://github.com/mid-atlantic-pa/pivotal-bank.git
+#          uri: https://github.com/Pivotal-Field-Engineering/pivotal-bank-demo.git
 #          searchPaths: cf-SpringBootTrader-config
 management:
   context_path: /admin

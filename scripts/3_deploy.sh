@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # This script:
-#   1) Reads microservices.list
+#   1) Reads microServices.list
 #   2) Pushes each microservices to PCF
 #       
 
