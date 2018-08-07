@@ -1,8 +1,12 @@
->We welcome contributions from the community. Please feel free to fork this project, there are many committers already and I welcome many more :) Do feel free to review my development branch as we're constantly improving this project and ... just maybe we're already implementing the changes you want! Finally, do feel free to review open issues on the development branch too.
+# Pivotal Bank Demo App
 
-# cf-SpringBootTrader
+This demo app is a microservice version of the Spring Trader application.  It demonstrates
+use of Spring Cloud Services in a reasonably complex set of microservices.  
 
-Microservice version of the Spring Trader app using spring boot
+>This repository was logically forked from the original [Pivotal-Bank](https://github.com/pivotal-bank) and collapsed
+into a mono-repo for ease of rapid development by single demo-er.  Additional changes have been 
+made to the repo that further strayed from the original to address demo needs.  In time, these changes
+will be considered for inclusion in the origin pivotal-bank source.
 
 ![Spring Trader](/docs/springtrader2.png)
 
@@ -95,7 +99,8 @@ You can go further with the following bonus workshops.
 
 1. [Zipkin Tracing](docs/lab_zipkin.md)
 2. [Analytics](docs/lab_analytics.md)
-2. [Container to Container Networking](docs/lab_c2c_networking.md)
+3. [Container to Container Networking](docs/lab_c2c_networking.md)
+4. [Add Elasticsearch and Spring Cloud Data Flow](docs/labs_pivotal_bank_analytics.md)
 
 # Features
 

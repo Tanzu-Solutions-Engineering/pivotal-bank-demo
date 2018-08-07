@@ -5,7 +5,7 @@ metadata:                    #Contains metadata of this resource.
   labels:                    #Additional identifier to put on pods
     component: elasticsearch #puts component = elasticsearch
 spec:                        #Specifications of this resource
-  type: NodePort         #type of service
+  type: LoadBalancer         #type of service
   selector:                  #will distribute load on pods which
     component: elasticsearch #have label `component = elasticsearch`
   ports:                     #Port on which LoadBalancer will listen
