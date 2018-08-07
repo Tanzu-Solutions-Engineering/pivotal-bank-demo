@@ -3,7 +3,6 @@
  */
 package io.pivotal.quotes.domain;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,29 +11,36 @@ import java.util.Date;
  * @author Sufyaan Kazi
  */
 public class QuoteMapper {
-	public static QuoteMapper INSTANCE = new QuoteMapper();
+    public static QuoteMapper INSTANCE = new QuoteMapper();
 
-	private QuoteMapper(){
-		super();
-	}
+    private QuoteMapper() {
+        super();
+    }
 
-	public Quote mapFromAlphaAdvantageQuote(AlphaAdvantageQuote aaQuote){
-		if(aaQuote == null){
-			return null;
-		}
+    public Quote mapFromIexQuote(IexQuote iexQuote) {
+        if (iexQuote == null) {
+            return null;
+        }
 
-		Quote mappedQuote = new Quote();
-		mappedQuote.setLastPrice(aaQuote.getPrice());
-		mappedQuote.setStatus("SUCCESS");
-		mappedQuote.setSymbol(aaQuote.getSymbol());
-		mappedQuote.setTimestamp(aaQuote.getTimestamp());
-		if(!aaQuote.getVolume().equals("--")) {
-			mappedQuote.setVolume(Integer.parseInt(aaQuote.getVolume()));
-		} else {
-			mappedQuote.setVolume(0);
-		}
+        Quote mappedQuote = new Quote();
+        mappedQuote.setSymbol(iexQuote.getSymbol());
+        mappedQuote.setName(iexQuote.getCompanyName());
+        mappedQuote.setOpen(iexQuote.getOpen());
+        mappedQuote.setHigh(iexQuote.getHigh());
+        mappedQuote.setLow(iexQuote.getLow());
+        mappedQuote.setChange(iexQuote.getChange());
+        mappedQuote.setChangePercent(iexQuote.getChangePercent().floatValue());
+        mappedQuote.setMarketCap(iexQuote.getMarketCap().floatValue());
+        if ("Previous close".equals(iexQuote.getLatestSource())) {
+            mappedQuote.setLastPrice(iexQuote.getClose());
+            mappedQuote.setTimestamp(new Date(iexQuote.getCloseTime()));
+        } else {
+            mappedQuote.setLastPrice(iexQuote.getLatestPrice());
+            mappedQuote.setTimestamp(new Date(iexQuote.getLatestUpdate()));
+        }
+        mappedQuote.setStatus("SUCCESS");
+        mappedQuote.setVolume((int) Math.round(iexQuote.getAvgTotalVolume().doubleValue()));
 
-		return mappedQuote;
-	}
-
+        return mappedQuote;
+    }
 }

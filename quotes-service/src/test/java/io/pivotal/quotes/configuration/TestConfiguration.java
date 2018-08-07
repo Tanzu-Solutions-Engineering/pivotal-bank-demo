@@ -18,7 +18,7 @@ import java.util.Locale;
 public class TestConfiguration {
 	
 	public static final String QUOTE_SYMBOL = "IBM";
-	public static final String QUOTE_NAME = "International Business Machines";
+	public static final String QUOTE_NAME = "International Business Machines Corporation";
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss zzzXXX yyyy", Locale.ENGLISH);
 	public static final String QUOTE_DATE_STRING = "Wed May 6 00:00:00 UTC-04:00 2015";
 	public static final BigDecimal QUOTE_LAST_PRICE = new BigDecimal(26.135);
