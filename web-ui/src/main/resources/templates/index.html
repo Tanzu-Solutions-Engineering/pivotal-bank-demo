@@ -33,7 +33,7 @@
 			<div sec:authorize="hasAnyAuthority('USER')" th:if="${accounts != null}" th:include="fragments/accounts_fragment :: accounts-summary" th:remove="tag"></div>
 		</div>
     </div>
-
+    <div th:include="fragments/quote_attribution_fragment :: quote_attribution"></div>
 
 </body>
 </html>

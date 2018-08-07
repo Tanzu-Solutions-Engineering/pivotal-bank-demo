@@ -1,5 +1,5 @@
 spring:
-#  profiles.active: local
+  profiles.active: local
   application:
      name: web-service
 info:

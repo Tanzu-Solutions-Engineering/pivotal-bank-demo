@@ -3,7 +3,8 @@
 To execute test
 
 ```
-APPLICTION_URL=<URL> mvn verify
+APPLICATION_URL=<URL> mvn verify
 ```
 
-The default value of APPLICATION_URL is the local port of the pivotal bank api gateway
+The default value of APPLICATION_URL is the url of the pivotal bank api gateway
+ (e.g. https://gateway-boring-jackal.cfapps.haas-141.pez.pivotal.io).

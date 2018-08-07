@@ -35,7 +35,6 @@
 						<th>Currency</th>
 						<th>Price</th>
 						<th>Change</th>
-						<th>Change YTD</th>
 						<th>High</th>
 						<th>Low</th>
 						<th>Account</th>
@@ -48,8 +47,7 @@
 						<td th:text="${quote.symbol}"></td>
 						<td th:text="${quote.currency}"></td>
 						<td th:text="${quote.lastPrice}"></td>
-						<td th:text="${#numbers.formatDecimal(quote.change, 0, 'COMMA', 2, 'POINT')}"></td>
-						<td th:text="${quote.changeYTD}"></td>
+						<td th:classappend="${quote.change >= 0} ? text-success : text-danger" th:text="${#numbers.formatDecimal(quote.change, 0, 'COMMA', 2, 'POINT')}"></td>
 						<td th:text="${quote.high}"></td>
 						<td th:text="${quote.low}"></td>
 						<form th:id="'form'+${quoteStat.index}" action="#" th:action="@{/order}"

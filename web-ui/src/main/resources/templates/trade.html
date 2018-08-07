@@ -16,6 +16,7 @@
 			<div th:if="${portfolio!= null}" th:include="fragments/portfolio_fragment :: portfolio-listing" th:remove="tag"></div>
 			<div th:if="${portfolioRetrievalError != null}" th:include="fragments/portfolio_fragment :: portfolio-error" th:remove="tag"></div>
 		</div>
+		<div th:include="fragments/quote_attribution_fragment :: quote_attribution"></div>
 	</div>
 </body>
 </html>
