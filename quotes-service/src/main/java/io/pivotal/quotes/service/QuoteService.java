@@ -25,15 +25,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class QuoteService {
 
-	@Value("${pivotal.quotes.quotes_url}")
+	@Value("${pivotal.quotes.quote_url}")
 	protected String quote_url;
+
+	@Value("${pivotal.quotes.quotes_url}")
+	protected String quotes_url;
 
 	@Value("${pivotal.quotes.companies_url}")
 	protected String company_url;
-
-	//TODO: Remove API KEY
-	@Value("${pivotal.quotes.alpha_advantage_rest_query}")
-	protected String alpha_advantage_url = "https://www.alphavantage.co/query?function=BATCH_STOCK_QUOTES&symbols={symbols}&apikey=B1SQNYULIQ8J9X2A";
 
 	public static final String FMT = "json";
 
@@ -52,17 +51,23 @@ public class QuoteService {
 	 */
 	@HystrixCommand(fallbackMethod = "getQuoteFallback")
 	public Quote getQuote(String symbol) throws SymbolNotFoundException {
+
 		log.debug("QuoteService.getQuote: retrieving quote for: " + symbol);
+
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("symbol", symbol);
 
-		Quote quote = restTemplate.getForObject(quote_url, Quote.class, params);
-		log.debug("QuoteService.getQuote: retrieved quote: " + quote);
+		IexQuote quote = restTemplate.getForObject(quote_url, IexQuote.class, params);
 
 		if (quote.getSymbol() == null) {
 			throw new SymbolNotFoundException("Symbol not found: " + symbol);
 		}
-		return quote;
+
+		log.debug("QuoteService.getQuote: retrieved quote: " + quote);
+
+
+		return QuoteMapper.INSTANCE.mapFromIexQuote(quote);
+
 	}
 
 	@SuppressWarnings("unused")
@@ -110,17 +115,16 @@ public class QuoteService {
 	 */
 	public List<Quote> getQuotes(String symbols) {
 		log.debug("retrieving multiple quotes for: " + symbols);
-		log.debug("alpha advantage URL: " + alpha_advantage_url);
-		AlphaAdvantageResponse response = restTemplate.getForObject(alpha_advantage_url, AlphaAdvantageResponse.class, symbols);
-		AlphaAdvantageQuote n = new AlphaAdvantageQuote();
-		log.debug("Got response: " + response);
+
+		IexBatchQuote batchQuote = restTemplate.getForObject(quotes_url, IexBatchQuote.class, symbols);
+
+		log.debug("Got response: " + batchQuote);
 		final List<Quote> quotes = new ArrayList<>();
 
-		if(response.getQuotes() != null) {
-			quotes.addAll(response
-					.getQuotes()
+		if(batchQuote != null) {
+			quotes.addAll(Arrays.asList(symbols.split(","))
 					.stream()
-					.map(aaQuote -> QuoteMapper.INSTANCE.mapFromAlphaAdvantageQuote(aaQuote))
+					.map(symbol -> QuoteMapper.INSTANCE.mapFromIexQuote(batchQuote.get(symbol).get("quote")))
 					.collect(Collectors.toList()));
 		} else {
 			log.warn("Quote lookup returned a null array of quotes");

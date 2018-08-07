@@ -59,7 +59,7 @@ public class QuoteServiceTest {
     public void getQuote() throws Exception {
         Quote quote = service.getQuote(TestConfiguration.QUOTE_SYMBOL);
         assertEquals(TestConfiguration.QUOTE_SYMBOL, quote.getSymbol());
-        //assertEquals(TestConfiguration.QUOTE_NAME, quote.getName());
+        assertEquals(TestConfiguration.QUOTE_NAME, quote.getName());
     }
 
     /**
@@ -72,8 +72,6 @@ public class QuoteServiceTest {
 
     @Test
     public void getNullQuote() throws Exception {
-        //thrown.expect(com.netflix.hystrix.exception.HystrixRuntimeException.class);
-        //thrown.expectCause(isA(SymbolNotFoundException.class));
         Quote quote = service.getQuote(TestConfiguration.NULL_QUOTE_SYMBOL);
         assertEquals(quote.getStatus(), "FAILED");
     }
@@ -119,13 +117,6 @@ public class QuoteServiceTest {
         assertEquals("should have 2 quotes", quotes.size(), 2);
     }
 
-    /**
-     * test yahoo service with one quote.
-     * Yahoo does not wrap quote in json array so deserialization fails. Once this works we can
-     * make this the main quote retrieval service, and the others as fallbacks.
-     *
-     * @throws Exception
-     */
     @Test
     public void getQuotesOneQuote() throws Exception {
         List<Quote> quotes = service.getQuotes(TestConfiguration.QUOTE_SYMBOL);
