@@ -1,5 +1,5 @@
 # Manual Test of Pivotal Bank
-The following script is a manual user acceptance test of Pivotal Bank
+The following script is a manual user acceptance test of Pivotal Bank.
 
 1. Access Pivotal Bank web application root url, Login page loads
 2. Register a new user, returned back to Login page

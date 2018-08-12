@@ -1,7 +1,3 @@
 spring:
   application:
      name: analytics-service
-elasticsearch:
-  clusterName: elasticsearch
-  host: 10.193.152.236
-  port: 30141

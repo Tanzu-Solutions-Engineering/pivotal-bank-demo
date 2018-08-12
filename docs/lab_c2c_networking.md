@@ -18,6 +18,9 @@ spring.cloud.services.registrationMethod = direct
 ```
 cf add-network-policy gateway --destination-app quotes
 ```
+
+## Prerequisites
+This lab leverages the spring cloud gateway.  Setup the gateway first following the [gateway lab](lab_spring_cloud_gateway.md).
  
 ## Lab
 1. Update the registrationMethod configuration for quotes service by editing quotes-services-cloud.yml and pushing your commit
@@ -44,4 +47,4 @@ cf add-network-policy gateway --destination-app quotes
 ```
 http  <GATEWAY_URL>/quotes/v1/quotes?q=PVTL
 ```
-Now it is succesful! 
+Now it is successful! 

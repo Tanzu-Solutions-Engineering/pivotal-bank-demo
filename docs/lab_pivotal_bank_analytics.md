@@ -122,7 +122,7 @@ export ANALYTICS_SCDF_SINK_VERSION=<your_version>
 Resolve data flow shell commands.
 
 ```
-echo "app register --name analytics-scdf-sink --type sink --uri maven://io.pivotal.analtics:analytics-scdf-sink:$ANALYTICS_SCDF_SINK_VERSION"
+echo "app register --name analytics-scdf-sink --type sink --uri maven://io.pivotal.analytics:analytics-scdf-sink:$ANALYTICS_SCDF_SINK_VERSION"
 ```
 Copy the output and put in a scratch pad for use later.
 
