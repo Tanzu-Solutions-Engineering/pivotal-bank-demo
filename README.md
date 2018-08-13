@@ -98,7 +98,7 @@ In order to get familiar with Pivotal Bank, follow the [user acceptance test](do
 You can go further with the following bonus workshops.
 
 1. [Zipkin Tracing](docs/lab_zipkin.md)
-2. [Analytics](docs/lab_analytics.md)
+2. [Spring Cloud Gateway](docs/lab_spring_cloud_gateway.md)
 3. [Container to Container Networking](docs/lab_c2c_networking.md)
 4. [Add Elasticsearch and Spring Cloud Data Flow](docs/lab_pivotal_bank_analytics.md)
 

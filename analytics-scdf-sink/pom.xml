@@ -23,9 +23,8 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray</id>
-            <!--Update this to your own repository url-->
-            <url>https://api.bintray.com/maven/dpfeffer/maven-repo/analytics-scdf-sink</url>
+            <id>${distribution.management.release.id}</id>
+            <url>${distribution.management.release.url}</url>
         </repository>
     </distributionManagement>
 

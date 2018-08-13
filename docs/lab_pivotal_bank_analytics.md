@@ -87,11 +87,12 @@ cf push
 
 6. Build and deploy analytics-scdf-sink to [bintray](www.bintray.com) or alternative maven repository
 >You need to pass in the elasticsearch host and port or the tests will fail.
-
+>Also specify the properties for maven distribution management repository id and url.  For example, ...release.id=bintray 
+and ....release.url=https://api.bintray.com/maven/dpfeffer/maven-repo/analytics-scdf-sink
 ```
 ES_SINK_HOST=$ES_HOST \
 ES_SINK_PORT=$ES_PORT \
-mvn clean deploy
+mvn clean deploy -Ddistribution.management.release.id=<repository_id> -Ddistribution.management.release.url=<repository url>
 ```
 
 > Ensure that you **publish** the version that is deployed so that it is publicly accessible
