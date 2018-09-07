@@ -147,7 +147,11 @@ public class TradeController {
 		logger.debug("distinct: fetching "+ distinctsymbols.size() + " quotes for following symbols: " + distinctsymbols);
 		List<Quote> quotes;
 		if (distinctsymbols.size() > 0) {
-			quotes = marketService.getMultipleQuotes(distinctsymbols).stream().distinct().filter(quote -> quote.getName() != null && !"".equals(quote.getName())).collect(Collectors.toList());
+			quotes = marketService.getMultipleQuotes(distinctsymbols)
+					.stream()
+					.distinct()
+					.filter(quote -> quote.getName() != null && !"".equals(quote.getName()) && "SUCCESS".equals(quote.getStatus()))
+					.collect(Collectors.toList());
 		} else {
 			quotes = new ArrayList<>();
 		}

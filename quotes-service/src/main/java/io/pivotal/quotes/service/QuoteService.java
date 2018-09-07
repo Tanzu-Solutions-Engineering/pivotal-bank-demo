@@ -116,28 +116,22 @@ public class QuoteService {
 	public List<Quote> getQuotes(String symbols) {
 		log.debug("retrieving multiple quotes for: " + symbols);
 
-		IexBatchQuote batchQuote = restTemplate.getForObject(quotes_url, IexBatchQuote.class, symbols);
+		IexBatchQuote batchQuotes = restTemplate.getForObject(quotes_url, IexBatchQuote.class, symbols);
 
-		log.debug("Got response: " + batchQuote);
+		log.debug("Got response: " + batchQuotes);
 		final List<Quote> quotes = new ArrayList<>();
 
-		if(batchQuote != null) {
-			quotes.addAll(Arrays.asList(symbols.split(","))
-					.stream()
-					.map(symbol -> QuoteMapper.INSTANCE.mapFromIexQuote(batchQuote.get(symbol).get("quote")))
-					.collect(Collectors.toList()));
-		} else {
-			log.warn("Quote lookup returned a null array of quotes");
-			String[] parts = symbols.split(",");
-			Arrays.stream(parts).forEach(
-					symbol -> {
-						Quote quote = new Quote();
-						quote.setSymbol(symbol);
-						quote.setStatus("FAILED");
-						quotes.add(quote);
-					}
-			);
-		}
+		Arrays.asList(symbols.split(",")).forEach(symbol -> {
+			if(batchQuotes.containsKey(symbol)) {
+				quotes.add(QuoteMapper.INSTANCE.mapFromIexQuote(batchQuotes.get(symbol).get("quote")));
+			} else {
+				log.warn("Quote could not be found for the following symbol: " + symbol);
+				Quote quote = new Quote();
+				quote.setSymbol(symbol);
+				quote.setStatus("FAILED");
+				quotes.add(quote);
+			}
+		});
 
 		return quotes;
 	}
