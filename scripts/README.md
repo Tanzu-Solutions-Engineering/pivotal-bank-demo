@@ -10,8 +10,11 @@ If you want ultimate simplicity just run:
 
 ``` ./doItAll.sh ```
 
-This will delete previous app instances, previous service instances, re-create the services, build and push the apps (and activate certificates with Spring Cloud Services).
+This will delete previous app instances, previous service instances, re-create the services, build and push the apps (and activate certificates with Spring Cloud Services).  If you are using self-signed certs you will need to add the ```add-certs``` option:  
 
+``` ./doItAll.sh add-certs ```
+
+See the 4_addTrustCerts.sh section below for more details.
 ## Scripts to deploy in three steps
 These scripts are numbered, just run them in the logical order of numbering from script 1 all the way to the last script  :)
 
@@ -39,14 +42,14 @@ To execute simply run:
 
 ``` ./3_deploy.sh ```
 
-### 4_addTarget.sh
+### 4_addTrustCerts.sh
 This step is only necessary if you are running in a PCF environment which <a href="https://docs.pivotal.io/spring-cloud-services/service-registry/writing-client-applications.html" target="_blank">uses self-signed certificates</a>.  If you are not on such a PCF environment, don't run this step.
 
 The script is necessary to make your Microservices register with Eureka in Service Discovery, if you are using self-signed certs and do not run it, then none of your Microservices will Register in Service Discovery even though they have bound to the service. It also uses the ```microServices.list``` file.
 
 To execute simply run:
 
-``` ./4_addTarget.sh ```
+``` ./4_addTrustCerts.sh ```
 
 ## Scripts to delete the apps and services
 
