@@ -17,7 +17,7 @@ discovery server.  Spring Cloud Gateway is quite extensible and additional filte
 
 ```
 cd gateway-service
-mvn clean package
+./gradlew build
 cf push
 ```
 
