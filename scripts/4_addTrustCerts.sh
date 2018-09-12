@@ -8,7 +8,7 @@ source ./commons.sh
 addTrustCerts()
 {
   TRUST_CERTS=`cf target | grep "api endpoint" | cut -d" " -f5| xargs`
-  cf set-env $1 TRUST_CERTS TRUST_CERTS
+  cf set-env $1 TRUST_CERTS $TRUST_CERTS
   cf restage $1 &
 }
 
