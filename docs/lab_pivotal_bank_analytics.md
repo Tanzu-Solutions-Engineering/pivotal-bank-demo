@@ -80,7 +80,7 @@ cf create-user-provided-service es -p "'{\"cluster-name\":\"elasticsearch\",\"ho
 ```
 VCAP_SERVICES_ES_CREDENTIALS_HOST=$ES_HOST \
 VCAP_SERVICES_ES_CREDENTIALS_PORT=$ES_PORT \
-mvn clean package
+./gradlew build
 
 cf push
 ```
@@ -155,9 +155,9 @@ app import http://bit.ly/Darwin-SR1-stream-applications-rabbit-maven
 
 11. Register the analytics-scdf-sink
 
-Use the resolved `app registery` command from above
+Use the resolved `app register` command from above
 
-Test out that the registration was succesful.
+Test out that the registration was successful.
 
 ```
 app info sink:analytics-scdf-sink
