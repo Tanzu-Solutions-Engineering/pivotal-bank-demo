@@ -33,6 +33,9 @@ public class QuoteRemoteCallService {
 	@Value("${pivotal.quotesService.name}")
 	private String quotesService;
 
+	@Value("${pivotal.downstream-protocol:http}")
+	protected String downstreamProtocol;
+
 	@Autowired
 	@LoadBalanced
 	private RestTemplate restTemplate;
@@ -47,7 +50,7 @@ public class QuoteRemoteCallService {
 	@HystrixCommand(fallbackMethod = "getQuoteFallback")
 	public Quote getQuote(String symbol) {
 		logger.debug("Fetching quote: " + symbol);
-		Quote quote = restTemplate.getForObject("http://" + quotesService + "/quote/{symbol}", Quote.class, symbol);
+		Quote quote = restTemplate.getForObject(downstreamProtocol + "://" + quotesService + "/quote/{symbol}", Quote.class, symbol);
 		return quote;
 	}
 
@@ -77,7 +80,7 @@ public class QuoteRemoteCallService {
 	 */
 	public List<Quote> getMultipleQuotes(String symbols) {
 		logger.debug("retrieving multiple quotes: " + symbols);
-		Quote[] quotesArr = restTemplate.getForObject("http://" + quotesService + "/v1/quotes?q={symbols}", Quote[].class, symbols);
+		Quote[] quotesArr = restTemplate.getForObject(downstreamProtocol + "://" + quotesService + "/v1/quotes?q={symbols}", Quote[].class, symbols);
 		List<Quote> quotes = Arrays.asList(quotesArr);
 		logger.debug("Received quotes: {}",quotes);
 		return quotes;

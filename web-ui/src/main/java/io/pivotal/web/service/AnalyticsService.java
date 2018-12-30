@@ -25,14 +25,16 @@ public class AnalyticsService {
 	@LoadBalanced
 	private RestTemplate restTemplate;
 
+	@Value("${pivotal.downstream-protocol:http}")
+	protected String downstreamProtocol;
 
-    @Value("${pivotal.analyticsService.name}")
+	@Value("${pivotal.analyticsService.name}")
 	private String analyticsService;
 	
 	@HystrixCommand(fallbackMethod = "getAnalyticsFallback")
 	public List<Trade> getTrades(String symbol) {
 		logger.debug("Fetching trades: " + symbol);
-		Trade[] tradesArr = restTemplate.getForObject("http://" + analyticsService + "/analytics/trades/{symbol}", Trade[].class, symbol);
+		Trade[] tradesArr = restTemplate.getForObject(downstreamProtocol + "://" + analyticsService + "/analytics/trades/{symbol}", Trade[].class, symbol);
 		List<Trade> trades = Arrays.asList(tradesArr);
 		logger.debug("Found " + trades.size() + " trades");
 		return trades;

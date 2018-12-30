@@ -1,5 +1,3 @@
-ribbon:
-  IsSecure: false
 pivotal:
   quotesService:
     name: quotes-service

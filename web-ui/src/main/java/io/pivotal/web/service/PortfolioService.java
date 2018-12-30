@@ -39,12 +39,15 @@ public class PortfolioService {
     @Value("${pivotal.portfolioService.name}")
 	private String portfolioService;
 
+	@Value("${pivotal.downstream-protocol:http}")
+	protected String downstreamProtocol;
+
 	public Order sendOrder(Order order ) throws OrderNotSavedException{
 		logger.debug("send order: " + order);
 		
 		//check result of http request to ensure its ok.
 		
-		ResponseEntity<Order>  result = restTemplate.postForEntity("http://" + portfolioService + "/portfolio", order, Order.class);
+		ResponseEntity<Order>  result = restTemplate.postForEntity(downstreamProtocol + "://" + portfolioService + "/portfolio", order, Order.class);
 		if (result.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
 			throw new OrderNotSavedException("Could not save the order");
 		}
@@ -54,7 +57,7 @@ public class PortfolioService {
 	
 	@HystrixCommand(fallbackMethod = "getPortfolioFallback")
 	public Portfolio getPortfolio(String user) {
-		Portfolio folio = restTemplate.getForObject("http://" + portfolioService + "/portfolio/{accountid}", Portfolio.class, user);
+		Portfolio folio = restTemplate.getForObject(downstreamProtocol + "://" + portfolioService + "/portfolio/{accountid}", Portfolio.class, user);
 		logger.debug("Portfolio received: " + folio);
 		return folio;
 	}

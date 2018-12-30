@@ -38,6 +38,9 @@ public class PortfolioService {
 	@Autowired
 	OrderRepository repository;
 
+	@Value("${pivotal.downstream-protocol:http}")
+	protected String downstreamProtocol;
+
 	/**
 	 * The service than handles the calls to get quotes.
 	 */
@@ -169,7 +172,7 @@ public class PortfolioService {
 			
 		}
 		
-		ResponseEntity<String> result = restTemplate.postForEntity("http://"
+		ResponseEntity<String> result = restTemplate.postForEntity(downstreamProtocol + "://"
 				+ accountsService
 				+ "/accounts/transaction",
 				transaction, String.class);
@@ -183,7 +186,7 @@ public class PortfolioService {
 		} else {
 			// TODO: throw exception - not enough funds!
 			// SK - Whats the expected behaviour?
-			logger.warn("PortfolioService:addOrder - decresing balance HTTP not ok: ");
+			logger.warn("PortfolioService:addOrder - decreasing balance HTTP not ok: ");
 			return null;
 		}
 

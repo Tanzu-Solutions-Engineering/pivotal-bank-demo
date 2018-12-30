@@ -86,7 +86,7 @@ public class PortfolioServiceTest {
 		
 		
 		//when(accountService.getUri()).thenReturn(uri);
-		when(restTemplate.postForEntity(eq("http://" + service.accountsService +"/accounts/transaction"), any(), eq(String.class))).thenReturn(response);
+		when(restTemplate.postForEntity(eq(service.downstreamProtocol + "://" + service.accountsService +"/accounts/transaction"), any(), eq(String.class))).thenReturn(response);
 		when(repo.save(ServiceTestConfiguration.order())).thenReturn(returnOrder);
 		Order order = service.addOrder(ServiceTestConfiguration.order());
 		assertEquals(order, returnOrder);
@@ -101,7 +101,7 @@ public class PortfolioServiceTest {
 		
 		
 		//when(accountService.getUri()).thenReturn(uri);
-		when(restTemplate.postForEntity(eq("http://" + service.accountsService +"/accounts/transaction"), any(), eq(String.class))).thenReturn(response);
+		when(restTemplate.postForEntity(eq(service.downstreamProtocol + "://" + service.accountsService +"/accounts/transaction"), any(), eq(String.class))).thenReturn(response);
 		when(repo.save(isA(Order.class))).thenReturn(returnOrder);
 		Order requestOrder = ServiceTestConfiguration.order();
 		requestOrder.setOrderFee(null);
@@ -117,7 +117,7 @@ public class PortfolioServiceTest {
 		
 		
 		//when(accountService.getUri()).thenReturn(uri);
-		when(restTemplate.postForEntity(eq("http://" + service.accountsService +"/accounts/transaction"), any(), eq(String.class ))).thenReturn(response);
+		when(restTemplate.postForEntity(eq(service.downstreamProtocol + "://" + service.accountsService +"/accounts/transaction"), any(), eq(String.class ))).thenReturn(response);
 		when(repo.save(ServiceTestConfiguration.sellOrder())).thenReturn(returnOrder);
 		Order order = service.addOrder(ServiceTestConfiguration.sellOrder());
 		assertEquals(order, returnOrder);

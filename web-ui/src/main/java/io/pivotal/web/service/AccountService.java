@@ -29,10 +29,13 @@ public class AccountService {
 	
 	@Value("${pivotal.accountsService.name}")
 	private String accountsService;
-	
+
+	@Value("${pivotal.downstream-protocol:http}")
+	protected String downstreamProtocol;
+
 	public void createAccount(Account account) {
 		logger.debug("Creating account for userId: " + account.getUserid());
-		String status = restTemplate.postForObject("http://" + accountsService + "/accounts/", account, String.class);
+		String status = restTemplate.postForObject(downstreamProtocol + "://" + accountsService + "/accounts/", account, String.class);
 		logger.info("Status from registering account for "+ account.getUserid()+ " is " + status);
 	}
 
@@ -42,7 +45,7 @@ public class AccountService {
 	public List<Account> getAccounts(String user) {
 		logger.debug("Looking for account with userId: " + user);
 		
-	    Account[] accounts = restTemplate.getForObject("http://" + accountsService + "/accounts?name={user}", Account[].class, user);
+	    Account[] accounts = restTemplate.getForObject(downstreamProtocol + "://" + accountsService + "/accounts?name={user}", Account[].class, user);
 	    
 	    return Arrays.asList(accounts);
 	}
@@ -55,7 +58,7 @@ public class AccountService {
 	public List<Account> getAccountsByType(String user, String type) {
 		logger.debug("Looking for account with userId: " + user + " and type: " + type);
 		
-	    Account[] accounts = restTemplate.getForObject("http://" + accountsService + "/accounts?name={user},type={type}", Account[].class, user,type);
+	    Account[] accounts = restTemplate.getForObject(downstreamProtocol + "://" + accountsService + "/accounts?name={user},type={type}", Account[].class, user,type);
 
 	    return Arrays.asList(accounts);
 	}
