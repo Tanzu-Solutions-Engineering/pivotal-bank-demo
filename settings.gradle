@@ -1,0 +1,6 @@
+rootProject.name = 'pivotal-bankdemo'
+include 'quotes-service'
+include 'accounts-service'
+include 'portfolio-service'
+include 'web-ui'
+include 'user-service'

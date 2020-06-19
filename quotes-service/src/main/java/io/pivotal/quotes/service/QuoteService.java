@@ -52,21 +52,9 @@ public class QuoteService {
 	@HystrixCommand(fallbackMethod = "getQuoteFallback")
 	public Quote getQuote(String symbol) throws SymbolNotFoundException {
 
-		log.debug("QuoteService.getQuote: retrieving quote for: " + symbol);
-
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("symbol", symbol);
-
-		IexQuote quote = restTemplate.getForObject(quote_url, IexQuote.class, params);
-
-		if (quote.getSymbol() == null) {
-			throw new SymbolNotFoundException("Symbol not found: " + symbol);
-		}
-
-		log.debug("QuoteService.getQuote: retrieved quote: " + quote);
 
 
-		return QuoteMapper.INSTANCE.mapFromIexQuote(quote);
+		return getQuotes(symbol).get(0);
 
 	}
 
@@ -99,8 +87,8 @@ public class QuoteService {
 				+ name);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("name", name);
-		CompanyInfo[] companies = restTemplate.getForObject(company_url,
-				CompanyInfo[].class, params);
+		CompanyInfo companies = restTemplate.getForObject(company_url,
+				CompanyInfo.class, params);
 		log.debug("QuoteService.getCompanyInfo: retrieved info: "
 				+ companies);
 		return Arrays.asList(companies);
@@ -108,7 +96,7 @@ public class QuoteService {
 
 	/**
 	 * Retrieve multiple quotes at once.
-	 * 
+	 *
 	 * @param symbols
 	 *            comma delimeted list of symbols.
 	 * @return a list of quotes.
