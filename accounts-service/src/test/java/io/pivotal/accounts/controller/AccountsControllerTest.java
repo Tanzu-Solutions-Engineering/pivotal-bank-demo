@@ -104,6 +104,7 @@ public class AccountsControllerTest {
 
 		mockMvc.perform(
 				get("/accounts/" + ServiceTestConfiguration.ACCOUNT_ID)
+						.accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON).content(
 								convertObjectToJson(ServiceTestConfiguration
 										.account())))
@@ -140,6 +141,7 @@ public class AccountsControllerTest {
 
 		mockMvc.perform(
 				get("/accounts?name=" + ServiceTestConfiguration.USER_ID)
+						.accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON).content(
 								convertObjectToJson(ServiceTestConfiguration
 										.account())))
@@ -178,6 +180,7 @@ public class AccountsControllerTest {
 				get("/accounts")
 						.param("name",ServiceTestConfiguration.USER_ID)
 						.param("type","CURRENT")
+						.accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON).content(
 								convertObjectToJson(ServiceTestConfiguration
 										.account())))

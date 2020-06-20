@@ -113,7 +113,7 @@ public class QuoteV1ControllerTest {
         when(service.getCompanyInfo(TestConfiguration.QUOTE_NAME)).thenReturn(
                 comps);
         mockMvc.perform(
-                get("/v1/company/" + TestConfiguration.QUOTE_NAME).contentType(
+                get("/v1/company/" + TestConfiguration.QUOTE_NAME).accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$").isArray());
@@ -128,7 +128,7 @@ public class QuoteV1ControllerTest {
         when(service.getQuotes(TestConfiguration.QUOTE_SYMBOLS)).thenReturn(
                 TestConfiguration.quotes());
         mockMvc.perform(
-                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOLS).contentType(
+                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOLS).accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andDo(print());
@@ -142,7 +142,7 @@ public class QuoteV1ControllerTest {
     public void getQuotesEmpty() throws Exception {
 
         mockMvc.perform(
-                get("/v1/quotes").contentType(
+                get("/v1/quotes").accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)))
                 .andDo(print());
@@ -159,30 +159,27 @@ public class QuoteV1ControllerTest {
         when(service.getQuote(TestConfiguration.QUOTE_SYMBOL)).thenReturn(
                 TestConfiguration.quote());
         mockMvc.perform(
-                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOL).contentType(
+                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOL).accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(
                         content().contentTypeCompatibleWith(
                                 MediaType.APPLICATION_JSON))
                 .andExpect(
-                        jsonPath("$[0].Name").value(
+                        jsonPath("$[0].companyName").value(
                                 TestConfiguration.QUOTE_NAME))
                 .andExpect(
-                        jsonPath("$[0].Symbol").value(
+                        jsonPath("$[0].symbol").value(
                                 TestConfiguration.QUOTE_SYMBOL))
                 .andExpect(
-                        jsonPath("$[0].LastPrice").value(
+                        jsonPath("$[0].latestPrice").value(
                                 TestConfiguration.QUOTE_LAST_PRICE))
                 .andExpect(
-                        jsonPath("$[0].Change", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE, new BigDecimal(0.01))))
+                        jsonPath("$[0].change", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE, new BigDecimal(0.01))))
                 .andExpect(
-                        jsonPath("$[0].ChangePercent", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE_PERCENT, 0.01)))
+                        jsonPath("$[0].changePercent", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE_PERCENT, 0.01)))
                 .andExpect(
-                        jsonPath("$[0].Timestamp", notNullValue()))
-                .andExpect(
-                        jsonPath("$[0].MSDate", Matchers.closeTo(
-                                TestConfiguration.QUOTE_MSDATE, 0.01)))
+                        jsonPath("$[0].latestTime", notNullValue()))
                 .andDo(print());
     }
 }

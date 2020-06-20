@@ -1,0 +1,25 @@
+
+eureka:
+  client:
+    enabled: false
+
+dekorate:
+  kubernetes:
+    readiness-probe:
+      initial-delay-seconds: 5
+    liveness-probe:
+      initial-delay-seconds: 5
+    image-pull-policy: "IfNotPresent"
+    service-type: "NodePort"
+    version: "latest"
+    env-vars:
+      - name: "SPRING_PROFILES_ACTIVE"
+        value: "kubernetes"
+
+spring:
+  cloud:
+    kubernetes:
+      enabled: true
+      reload:
+        enabled: true
+

@@ -1,0 +1,25 @@
+pivotal:
+  accountsService:
+    name: account-service
+  portfolioService:
+    name: portfolio-service
+  quotesService:
+    name: quote-service
+  userService:
+    name: user-service
+  analyticsService:
+    name: analytics-service
+hystrix:
+  metrics:
+    enabled: false
+spring:
+  sleuth:
+    stream:
+      enabled: false
+  cloud:
+    discovery:
+      enabled: false
+    service-registry:
+      auto-registration:
+        enabled: false
+

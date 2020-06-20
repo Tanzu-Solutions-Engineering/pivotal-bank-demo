@@ -53,6 +53,7 @@ public class PortfolioControllerTest {
 
 		mockMvc.perform(
 				get("/portfolio/" + ServiceTestConfiguration.USER_ID)
+						.accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andDo(print())
@@ -71,12 +72,12 @@ public class PortfolioControllerTest {
 		when(service.addOrder(ServiceTestConfiguration.order()))
 		.thenReturn(ServiceTestConfiguration.order2());
 
-mockMvc.perform(
-		post("/portfolio")
-		.contentType(MediaType.APPLICATION_JSON)
-				.content(
-						convertObjectToJson(ServiceTestConfiguration.order())))
-						.andExpect(status().isCreated()).andDo(print());
+		mockMvc.perform(
+				post("/portfolio")
+				.contentType(MediaType.APPLICATION_JSON)
+						.content(
+								convertObjectToJson(ServiceTestConfiguration.order())))
+								.andExpect(status().isCreated()).andDo(print());
 
 	}
 

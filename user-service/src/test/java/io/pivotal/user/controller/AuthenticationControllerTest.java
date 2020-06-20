@@ -64,7 +64,7 @@ public class AuthenticationControllerTest {
 		request.setPassword(ServiceTestConfiguration.PASSWORD);
 		request.setUsername(ServiceTestConfiguration.USER_ID);
 		
-		mockMvc.perform(post("/login").contentType(MediaType.APPLICATION_JSON).content(convertObjectToJson(request)))
+		mockMvc.perform(post("/login").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(convertObjectToJson(request)))
 		.andExpect(status().isCreated())
 		.andExpect(jsonPath("$.authToken").value(ServiceTestConfiguration.AUTH_TOKEN))
 		.andExpect(jsonPath("$.accountid").value(ServiceTestConfiguration.PROFILE_ID.intValue()))

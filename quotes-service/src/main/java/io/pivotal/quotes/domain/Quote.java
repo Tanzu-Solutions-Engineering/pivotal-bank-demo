@@ -36,37 +36,37 @@ public class Quote {
  */
 	@JsonProperty("Status")
 	private String status;
-	@JsonProperty("Name")
+	@JsonProperty("companyName")
 	private String name;
 
-	@JsonProperty("Symbol")
+	@JsonProperty("symbol")
 	private String symbol;
-	@JsonProperty("LastPrice")
+	@JsonProperty("latestPrice")
 	private BigDecimal lastPrice;
-	@JsonProperty("Change")
+	@JsonProperty("change")
 	private BigDecimal change;
-	@JsonProperty("ChangePercent")
+	@JsonProperty("changePercent")
 	private Float changePercent;
-	@JsonProperty("Timestamp")
+	@JsonProperty("latestTime")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="EEE MMM dd HH:mm:ss zzzXXX yyyy", locale="ENGLISH")
 	private Date timestamp;
 	@JsonProperty("MSDate")
 	private Float mSDate;
-	@JsonProperty("MarketCap")
+	@JsonProperty("marketCap")
 	private Float marketCap;
-	@JsonProperty("Volume")
+	@JsonProperty("volume")
 	private Integer volume;
-	@JsonProperty("ChangeYTD")
+	@JsonProperty("ytdChange")
 	private Float changeYTD;
-	@JsonProperty("ChangePercentYTD")
+	@JsonProperty("changPercent")
 	private Float changePercentYTD;
 	@JsonProperty("High")
 	private BigDecimal high;
-	@JsonProperty("Low")
+	@JsonProperty("low")
 	private BigDecimal low;
-	@JsonProperty("Open")
+	@JsonProperty("open")
 	private BigDecimal open;
-	@JsonProperty("Currency")
+	@JsonProperty("currency")
 	private String currency = "USD";
 	
 	public BigDecimal getChange() {
