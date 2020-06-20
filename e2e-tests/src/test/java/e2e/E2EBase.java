@@ -1,4 +1,4 @@
-package e2e;
+    package e2e;
 
 import com.github.javafaker.Faker;
 import com.jayway.restassured.RestAssured;
