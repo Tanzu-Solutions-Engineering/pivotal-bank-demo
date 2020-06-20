@@ -1,0 +1,28 @@
+
+#spring.datasource.url=jdbc:mysql://localhost:3306/test
+#spring.datasource.username=dbuser
+#spring.datasource.password=dbpass
+#spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+spring:
+  application:
+    jpa:
+      hibernate:
+        ddl-auto: update
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    org:
+      apache:
+        http: info
+
+hystrix:
+  metrics:
+    enabled: false
+

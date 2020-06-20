@@ -10,7 +10,7 @@ dekorate:
     liveness-probe:
       initial-delay-seconds: 5
     image-pull-policy: "IfNotPresent"
-    service-type: "NodePort"
+    service-type: "ClusterIP"
     version: "latest"
     env-vars:
       - name: "SPRING_PROFILES_ACTIVE"
