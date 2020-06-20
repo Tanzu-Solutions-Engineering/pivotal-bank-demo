@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: kubernetes
   application:
      name: quotes-service
 

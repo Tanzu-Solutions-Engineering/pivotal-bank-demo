@@ -3,7 +3,7 @@ spring:
      name: quotes-service
 pivotal:
   quotes:
-    quote_url: https://api.iextrading.com/1.0/stock/{symbol}/quote
-    quotes_url: https://api.iextrading.com/1.0/stock/market/batch?symbols={symbols}&types=quote
-    companies_url: http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input={name}
+    quote_url: https://sandbox.iexapis.com/stable/stock/{symbol}/batch?token=Tsk_64ae9801557b4deca53e380fdaee9510
+    quotes_url: https://sandbox.iexapis.com/stable/stock/market/batch?symbols={symbols}&types=quote&token=Tsk_64ae9801557b4deca53e380fdaee9510
+    companies_url: https://sandbox.iexapis.com/stable/stock/{name}/company?token=Tsk_64ae9801557b4deca53e380fdaee9510
 

@@ -1,23 +1,25 @@
-pivotal:
-  quotes:
-    quote_url: https://sandbox.iexapis.com/stable/stock/{symbol}/batch?token=Tsk_64ae9801557b4deca53e380fdaee9510
-    quotes_url: https://sandbox.iexapis.com/stable/stock/market/batch?symbols={symbols}&types=quote&token=Tsk_64ae9801557b4deca53e380fdaee9510
-    companies_url: https://sandbox.iexapis.com/stable/stock/{name}/company?token=Tsk_64ae9801557b4deca53e380fdaee9510
-logging:
-  level:
-    org:
-      apache:
-        http: debug
-hystrix:
-  metrics:
+
+eureka:
+  client:
     enabled: false
+
+dekorate:
+  kubernetes:
+    readiness-probe:
+      initial-delay-seconds: 5
+    liveness-probe:
+      initial-delay-seconds: 5
+    image-pull-policy: "IfNotPresent"
+    service-type: "NodePort"
+    version: "latest"
+    env-vars:
+      - name: "SPRING_PROFILES_ACTIVE"
+        value: "kubernetes"
+
 spring:
-  sleuth:
-    stream:
-      enabled: false
   cloud:
-    discovery:
-      enabled: false
-    service-registry:
-      auto-registration:
-        enabled: false
+    kubernetes:
+      enabled: true
+      reload:
+        enabled: true
+

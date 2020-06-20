@@ -3,12 +3,14 @@ plugins {
     id 'org.springframework.boot' version '2.3.1.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+
 }
 
 group = 'io.pivotal.bankdemo'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 description = "Micro-service to retrieve up to date quotes"
+
 
 configurations {
     compileOnly {
@@ -20,11 +22,20 @@ repositories {
     mavenCentral()
 }
 
+
+
 ext {
     set('springCloudVersion', "Hoxton.SR5")
+    dekorateVersion = System.getProperty("dekorateVersion", "0.11.9")
+    user = "$System.env.USER"
+}
+
+bootBuildImage {
+    imageName = "${user}/$project.name"
 }
 
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -33,16 +44,31 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
     implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-all'
+
+    implementation("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
+    implementation("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+    annotationProcessor("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+    annotationProcessor("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
+    annotationProcessor('org.springframework.boot:spring-boot-starter-actuator') //We need `dekorate` to see the actuator classes
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+
+
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.springframework.security:spring-security-test'
-    testCompile "junit:junit:4+"
+    testImplementation("io.dekorate:kubernetes-junit:${dekorateVersion}")
+    testImplementation("junit:junit:4.13")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
+    testImplementation("io.dekorate:kubernetes-junit:${dekorateVersion}")
 }
+
 
 dependencyManagement {
     imports {
