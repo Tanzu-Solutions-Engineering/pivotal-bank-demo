@@ -11,6 +11,8 @@ spring:
     stream:
       enabled: false
   cloud:
+    kubernetes:
+      enabled: false
     discovery:
       enabled: false
     service-registry:

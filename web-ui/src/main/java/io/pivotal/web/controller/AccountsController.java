@@ -74,7 +74,7 @@ public class AccountsController {
 	
 	@RequestMapping(value = "/openaccount", method = RequestMethod.POST)
 	public String saveAccount(Model model,@ModelAttribute(value="newaccount") Account account) {
-		logger.debug("saveAccounts: creating account: " + account);
+		logger.info("saveAccounts: creating account: " + account);
 		String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName(); 
 		account.setUserid(currentUserName);
 		account.setBalance(account.getOpenbalance());

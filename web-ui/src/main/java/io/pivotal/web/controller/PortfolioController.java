@@ -39,7 +39,7 @@ public class PortfolioController {
 	
 	@RequestMapping(value = "/portfolio", method = RequestMethod.GET)
 	public String portfolio(Model model) {
-		logger.debug("/portfolio");
+		logger.info("/portfolio");
 		model.addAttribute("marketSummary", summaryService.getMarketSummary());
 		
 		//check if user is logged in!

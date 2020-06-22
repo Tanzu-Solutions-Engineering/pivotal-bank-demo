@@ -1,0 +1,27 @@
+pivotal:
+  accountsService:
+    name: accounts-service
+  portfolioService:
+    name: portfolio-service
+  quotesService:
+    name: quotes-service
+  userService:
+    name: user-service
+  analyticsService:
+    name: analytics-service
+  summary:
+    quotes: 3
+    symbols:
+      it: VMW,ORCL,IBM,INTC,AMD,HPQ,CSCO,AAPL
+      fs: MET,JPM,C,MS,BAC,GS,WFC,BK
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+hystrix:
+  metrics:
+    enabled: false

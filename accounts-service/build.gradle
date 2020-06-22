@@ -20,12 +20,12 @@ configurations {
 
 repositories {
     mavenCentral()
-    maven { url 'https://repo.spring.io/snapshot' }
+    maven { url 'https://repo.spring.io/libs-milestone-local' }
 }
 
 ext {
     set('springCloudVersion', "Hoxton.SR5")
-    set('wavefrontVersion', "2.0.0-SNAPSHOT")
+    set('wavefrontVersion', "2.0.0-RC1")
     dekorateVersion = System.getProperty("dekorateVersion", "0.11.9")
     user = "$System.env.USER"
 }
@@ -39,7 +39,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
 
     implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-all'

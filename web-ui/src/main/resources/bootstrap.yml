@@ -1,9 +1,5 @@
 spring:
+  profiles:
+    active: kubernetes
   application:
-     name: web-service
-info:
-  build:
-    group: ${group}
-    name: ${name}
-    description: ${description}
-    version: ${version}
+     name: web-ui

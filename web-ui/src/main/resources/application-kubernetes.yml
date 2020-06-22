@@ -1,25 +1,28 @@
-pivotal:
-  accountsService:
-    name: account-service
-  portfolioService:
-    name: portfolio-service
-  quotesService:
-    name: quote-service
-  userService:
-    name: user-service
-  analyticsService:
-    name: analytics-service
-hystrix:
-  metrics:
+
+eureka:
+  client:
     enabled: false
+
+dekorate:
+  kubernetes:
+    readiness-probe:
+      initial-delay-seconds: 20
+      http-action-path: "/actuator/health/readiness"
+    liveness-probe:
+      initial-delay-seconds: 10
+      http-action-path: "/actuator/health/liveness"
+    image-pull-policy: "IfNotPresent"
+    service-type: "ClusterIP"
+    version: "latest"
+
+    env-vars:
+    - name: "SPRING_PROFILES_ACTIVE"
+      value: "kubernetes"
+
 spring:
-  sleuth:
-    stream:
-      enabled: false
   cloud:
-    discovery:
-      enabled: false
-    service-registry:
-      auto-registration:
-        enabled: false
+    kubernetes:
+      enabled: true
+      reload:
+        enabled: true
 

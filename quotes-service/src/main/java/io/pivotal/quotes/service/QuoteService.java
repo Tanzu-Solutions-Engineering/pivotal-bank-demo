@@ -51,9 +51,6 @@ public class QuoteService {
 	 */
 	@HystrixCommand(fallbackMethod = "getQuoteFallback")
 	public Quote getQuote(String symbol) throws SymbolNotFoundException {
-
-
-
 		return getQuotes(symbol).get(0);
 
 	}
@@ -61,7 +58,7 @@ public class QuoteService {
 	@SuppressWarnings("unused")
 	private Quote getQuoteFallback(String symbol)
 			throws SymbolNotFoundException {
-		log.debug("QuoteService.getQuoteFallback: circuit opened for symbol: "
+		log.info("QuoteService.getQuoteFallback: circuit opened for symbol: "
 				+ symbol);
 		Quote quote = new Quote();
 		quote.setSymbol(symbol);
@@ -83,13 +80,13 @@ public class QuoteService {
 		      @HystrixProperty(name="execution.timeout.enabled", value="false")
 		    })
 	public List<CompanyInfo> getCompanyInfo(String name) {
-		log.debug("QuoteService.getCompanyInfo: retrieving info for: "
+		log.info("QuoteService.getCompanyInfo: retrieving info for: "
 				+ name);
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("name", name);
 		CompanyInfo companies = restTemplate.getForObject(company_url,
 				CompanyInfo.class, params);
-		log.debug("QuoteService.getCompanyInfo: retrieved info: "
+		log.info("QuoteService.getCompanyInfo: retrieved info: "
 				+ companies);
 		return Arrays.asList(companies);
 	}
@@ -102,11 +99,11 @@ public class QuoteService {
 	 * @return a list of quotes.
 	 */
 	public List<Quote> getQuotes(String symbols) {
-		log.debug("retrieving multiple quotes for: " + symbols);
+		log.info("retrieving multiple quotes for: " + symbols);
 
 		IexBatchQuote batchQuotes = restTemplate.getForObject(quotes_url, IexBatchQuote.class, symbols);
 
-		log.debug("Got response: " + batchQuotes);
+		log.info("Got response: " + batchQuotes);
 		final List<Quote> quotes = new ArrayList<>();
 
 		Arrays.asList(symbols.split(",")).forEach(symbol -> {
@@ -120,7 +117,7 @@ public class QuoteService {
 				quotes.add(quote);
 			}
 		});
-
+		log.info("Quotes Mapped: {}",  quotes);
 		return quotes;
 	}
 
@@ -128,7 +125,7 @@ public class QuoteService {
 	@SuppressWarnings("unused")
 	private List<CompanyInfo> getCompanyInfoFallback(String symbol)
 			throws SymbolNotFoundException {
-		log.debug("QuoteService.getCompanyInfoFallback: circuit opened for symbol: "
+		log.info("QuoteService.getCompanyInfoFallback: circuit opened for symbol: "
 				+ symbol);
 		List<CompanyInfo> companies = new ArrayList<>();
 		return companies;

@@ -49,7 +49,7 @@ public class TradeController {
 	
 	@RequestMapping(value = "/trade", method = RequestMethod.GET)
 	public String showTrade(Model model) {
-		logger.debug("/trade.GET");
+		logger.info	("/trade.GET");
 		//model.addAttribute("marketSummary", marketService.getMarketSummary());
 		
 		model.addAttribute("search", new Search());
@@ -72,7 +72,7 @@ public class TradeController {
 	}
 	@RequestMapping(value = "/trade", method = RequestMethod.POST)
 	public String showTrade(Model model, @ModelAttribute("search") Search search) {
-		logger.debug("/trade.POST - symbol: " + search.getName());
+		logger.info("/trade.POST - symbol: " + search.getName());
 		
 		//model.addAttribute("marketSummary", marketService.getMarketSummary());
 		model.addAttribute("search", search);
@@ -87,7 +87,7 @@ public class TradeController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
-		    logger.debug("User logged in: " + currentUserName);
+		    logger.info("User logged in: " + currentUserName);
 		    model.addAttribute("order", new Order());
 		    
 		    
@@ -132,29 +132,12 @@ public class TradeController {
 	}
 	
 	
-	private List<Quote> getQuotes(String companyName) {
-		logger.debug("Fetching quotes for companies that have: " + companyName + " in name or symbol");
-		List<CompanyInfo> companies = marketService.getCompanies(companyName);
-		
-		/*
-		 * Sleuth currently doesn't work with parallelStreams
-		 */
-		//get distinct companyinfos and get their respective quotes in parallel.
+	private List<Quote> getQuotes(String symbol) {
 
-		List<String> symbols = companies.stream().map(company -> company.getSymbol()).collect(Collectors.toList());
-		logger.debug("symbols: fetching "+ symbols.size() + " quotes for following symbols: " + symbols);
-		List<String> distinctsymbols = symbols.stream().distinct().collect(Collectors.toList());
-		logger.debug("distinct: fetching "+ distinctsymbols.size() + " quotes for following symbols: " + distinctsymbols);
-		List<Quote> quotes;
-		if (distinctsymbols.size() > 0) {
-			quotes = marketService.getMultipleQuotes(distinctsymbols)
-					.stream()
-					.distinct()
-					.filter(quote -> quote.getName() != null && !"".equals(quote.getName()) && "SUCCESS".equals(quote.getStatus()))
-					.collect(Collectors.toList());
-		} else {
-			quotes = new ArrayList<>();
-		}
+		List<Quote> quotes = marketService.getMultipleQuotes(symbol);
+
+		logger.info("Got Quotes: {}", quotes);
+
 		return quotes;
 	}
 	

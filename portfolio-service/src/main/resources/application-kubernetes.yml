@@ -6,7 +6,7 @@ eureka:
 dekorate:
   kubernetes:
     readiness-probe:
-      initial-delay-seconds: 10
+      initial-delay-seconds: 20
       http-action-path: "/actuator/health/readiness"
     liveness-probe:
       initial-delay-seconds: 10

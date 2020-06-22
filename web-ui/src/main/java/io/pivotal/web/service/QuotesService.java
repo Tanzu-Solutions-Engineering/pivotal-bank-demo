@@ -44,18 +44,18 @@ public class QuotesService {
 	
 	@HystrixCommand(fallbackMethod = "getQuoteFallback")
 	public Quote getQuote(String symbol) {
-		logger.debug("Fetching quote: " + symbol);
+		logger.info("Fetching quote: " + symbol);
 		List<Quote> quotes = getMultipleQuotes(symbol);
 		if (quotes.size() == 1 ) {
 			logger.debug("Fetched quote: " + quotes.get(0));
 			return quotes.get(0);
 		}
-		logger.debug("exception: should only be 1 quote and got multiple or zero: " + quotes.size());
+		logger.info("exception: should only be 1 quote and got multiple or zero: " + quotes.size());
 		return new Quote();
 	}
 	
 	private Quote getQuoteFallback(String symbol) {
-		logger.debug("Fetching fallback quote for: " + symbol);
+		logger.info("Fetching fallback quote for: " + symbol);
 		Quote quote = new Quote();
 		quote.setSymbol(symbol);
 		quote.setStatus("FAILED");
@@ -63,7 +63,7 @@ public class QuotesService {
 	}
 	@HystrixCommand(fallbackMethod = "getCompaniesFallback")
 	public List<CompanyInfo> getCompanies(String name) {
-		logger.debug("Fetching companies with name or symbol matching: " + name);
+		logger.info("Fetching companies with name or symbol matching: " + name);
 		CompanyInfo[] infos = restTemplate.getForObject(downstreamProtocol + "://" + quotesService + "/v1/company/{name}", CompanyInfo[].class, name);
 		return Arrays.asList(infos);
 	}
@@ -78,10 +78,10 @@ public class QuotesService {
 	 * @return
 	 */
 	public List<Quote> getMultipleQuotes(String symbols) {
-		logger.debug("retrieving multiple quotes: " + symbols);
+		logger.info("retrieving multiple quotes: " + symbols);
 		Quote[] quotesArr = restTemplate.getForObject(downstreamProtocol + "://" + quotesService + "/v1/quotes?q={symbols}", Quote[].class, symbols);
 		List<Quote> quotes = Arrays.asList(quotesArr);
-		logger.debug("Received quotes: {}",quotes);
+		logger.info("Received quotes: {}",quotes);
 		return quotes;
 		
 	}
@@ -92,7 +92,7 @@ public class QuotesService {
 	 * @return
 	 */
 	public List<Quote> getMultipleQuotes(String[] symbols) {
-		logger.debug("Fetching multiple quotes array: {} ",Arrays.asList(symbols));
+		logger.info("Fetching multiple quotes array: {} ",Arrays.asList(symbols));
 		
 		return getMultipleQuotes(Arrays.asList(symbols));
 	}
@@ -103,7 +103,7 @@ public class QuotesService {
 	 * @return
 	 */
 	public List<Quote> getMultipleQuotes(Collection<String> symbols) {
-		logger.debug("Fetching multiple quotes array: {} ",symbols);
+		logger.info("Fetching multiple quotes array: {} ",symbols);
 		StringBuilder builder = new StringBuilder();
 		for (Iterator<String> i = symbols.iterator(); i.hasNext();) {
 			builder.append(i.next());
