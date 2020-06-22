@@ -1,4 +1,14 @@
-
+pivotal:
+  accountsService:
+    name: accounts-service:8080
+  portfolioService:
+    name: portfolio-service:8080
+  quotesService:
+    name: quotes-service:8080
+  userService:
+    name: user-service:8080
+  analyticsService:
+    name: analytics-service:8080
 eureka:
   client:
     enabled: false

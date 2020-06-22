@@ -1,4 +1,8 @@
-
+pivotal:
+  quotesService:
+    name: quotes-service:8080
+  accountsService:
+    name: accounts-service:8080
 eureka:
   client:
     enabled: false

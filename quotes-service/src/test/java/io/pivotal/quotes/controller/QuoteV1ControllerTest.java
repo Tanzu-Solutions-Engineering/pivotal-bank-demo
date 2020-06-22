@@ -1,5 +1,6 @@
 package io.pivotal.quotes.controller;
 
+import com.google.common.collect.Lists;
 import io.pivotal.quotes.configuration.TestConfiguration;
 import io.pivotal.quotes.domain.CompanyInfo;
 import io.pivotal.quotes.domain.Quote;
@@ -156,8 +157,8 @@ public class QuoteV1ControllerTest {
     public void getQuotesOneQuote() throws Exception {
         List<Quote> quotes = new ArrayList<>();
         quotes.add(TestConfiguration.quote());
-        when(service.getQuote(TestConfiguration.QUOTE_SYMBOL)).thenReturn(
-                TestConfiguration.quote());
+        when(service.getQuotes(TestConfiguration.QUOTE_SYMBOL)).thenReturn(
+                Lists.newArrayList(TestConfiguration.quote()));
         mockMvc.perform(
                 get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOL).accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
@@ -166,20 +167,20 @@ public class QuoteV1ControllerTest {
                         content().contentTypeCompatibleWith(
                                 MediaType.APPLICATION_JSON))
                 .andExpect(
-                        jsonPath("$[0].companyName").value(
+                        jsonPath("$[0].Name").value(
                                 TestConfiguration.QUOTE_NAME))
                 .andExpect(
-                        jsonPath("$[0].symbol").value(
+                        jsonPath("$[0].Symbol").value(
                                 TestConfiguration.QUOTE_SYMBOL))
                 .andExpect(
-                        jsonPath("$[0].latestPrice").value(
+                        jsonPath("$[0].LastPrice").value(
                                 TestConfiguration.QUOTE_LAST_PRICE))
                 .andExpect(
-                        jsonPath("$[0].change", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE, new BigDecimal(0.01))))
+                        jsonPath("$[0].Change", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE, new BigDecimal(0.01))))
                 .andExpect(
-                        jsonPath("$[0].changePercent", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE_PERCENT, 0.01)))
+                        jsonPath("$[0].ChangePercent", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE_PERCENT, 0.01)))
                 .andExpect(
-                        jsonPath("$[0].latestTime", notNullValue()))
+                        jsonPath("$[0].Timestamp", notNullValue()))
                 .andDo(print());
     }
 }

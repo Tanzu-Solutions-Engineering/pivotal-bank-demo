@@ -31,7 +31,7 @@ public class QuoteMapper {
         mappedQuote.setChange(iexQuote.getChange());
         mappedQuote.setChangePercent(iexQuote.getChangePercent().floatValue());
         mappedQuote.setMarketCap(iexQuote.getMarketCap().floatValue());
-        if ("Previous close".equals(iexQuote.getLatestSource())) {
+        if ("Close".equalsIgnoreCase(iexQuote.getLatestSource())) {
             mappedQuote.setLastPrice(iexQuote.getClose());
             mappedQuote.setTimestamp(new Date(iexQuote.getCloseTime()));
         } else {
@@ -41,6 +41,9 @@ public class QuoteMapper {
         mappedQuote.setStatus("SUCCESS");
         mappedQuote.setVolume((int) Math.round(iexQuote.getAvgTotalVolume().doubleValue()));
 
+        mappedQuote.setMarketCap(iexQuote.getMarketCap().floatValue());
+        mappedQuote.setChangeYTD(iexQuote.getYtdChange().floatValue());
+        mappedQuote.setCurrency("USD");
         return mappedQuote;
     }
 }

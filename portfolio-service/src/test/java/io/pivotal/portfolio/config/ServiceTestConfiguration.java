@@ -95,7 +95,7 @@ public class ServiceTestConfiguration {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		quote.setmSDate(QUOTE_MSDATE);
+
 		quote.setMarketCap(50755764235.00f);
 		quote.setVolume(15159291);
 		quote.setChangeYTD(29.74f);

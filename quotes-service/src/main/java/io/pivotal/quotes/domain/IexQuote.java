@@ -27,5 +27,6 @@ public class IexQuote {
     private BigDecimal changePercent;
     private BigDecimal avgTotalVolume;
     private BigDecimal marketCap;
+    private BigDecimal ytdChange;
 
 }
