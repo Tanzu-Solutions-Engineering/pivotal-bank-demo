@@ -49,7 +49,7 @@ spec:
               fieldPath: "metadata.namespace"
         - name: "SPRING_PROFILES_ACTIVE"
           value: "kubernetes"
-        image: "arau/quotes-service:latest"
+        image: "abhinavrau/quotes-service:latest"
         imagePullPolicy: "IfNotPresent"
         livenessProbe:
           failureThreshold: 3

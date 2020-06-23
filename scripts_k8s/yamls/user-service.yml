@@ -57,7 +57,7 @@ spec:
               key: "mysql-root-password"
               name: "acme-mysql"
               optional: false
-        image: "arau/user-service:latest"
+        image: "abhinavrau/user-service:latest"
         imagePullPolicy: "IfNotPresent"
         livenessProbe:
           failureThreshold: 3
