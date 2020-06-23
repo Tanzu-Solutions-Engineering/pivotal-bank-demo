@@ -13,7 +13,7 @@ abort()
     else
       echo >&2 '
       ***************
-      *** ABORTED ***
+      *** STOPPING ***
       ***************
       '
       echo "An error occurred on line $1. Exiting..." >&2
@@ -25,8 +25,7 @@ delete()
 {
   set +e
   echo_msg "Deleting $1"
-  cd $BASE_DIR/$1
-  kubectl delete -f build/classes/java/main/META-INF/dekorate/kubernetes.yml
+  kubectl delete -f yamls/$1.yml
   if [ $? -eq 0 ]
   then
     echo "Successfully deleted $1"
@@ -36,12 +35,25 @@ delete()
   set -e
 }
 
+copyYaml()
+{
+
+  echo_msg "Copying $1"
+  cp $BASE_DIR/$1/build/classes/java/main/META-INF/dekorate/kubernetes.yml yamls/$1.yml
+  if [ $? -eq 0 ]
+  then
+    echo "Successfully copied $1 yml"
+  else
+    echo "Could not copy $1 yml " >&2
+    exit 1
+  fi
+}
+
 deploy()
 {
 
   echo_msg "Deploying $1"
-  cd $BASE_DIR/$1
-  kubectl apply -f build/classes/java/main/META-INF/dekorate/kubernetes.yml
+  kubectl apply -f yamls/$1.yml
   kubectl wait --for=condition=available deployments/$1 --timeout=60s
   if [ $? -eq 0 ]
   then
@@ -52,17 +64,6 @@ deploy()
   fi
 }
 
-#summaryOfServices()
-#{
-#  echo_msg "Current Services in CF_SPACE"
-#  cf services | tail -n +4
-#}
-#
-#summaryOfApps()
-#{
-#  echo_msg "Current Apps in CF_SPACE"
-#  cf apps | tail -n +4
-#}
 
 echo_msg()
 {

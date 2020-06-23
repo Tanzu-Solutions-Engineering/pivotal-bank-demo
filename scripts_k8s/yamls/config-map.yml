@@ -1,0 +1,23 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: portfolio-service
+data:
+  pivotal.quotesService.name: "quotes-service:8080"
+  pivotal.accountsService.name: "accounts-service:8080"
+  pivotal.portfolioService.name: "portfolio-service:8080"
+  pivotal.userService.name: "user-service:8080"
+  pivotal.analyticsService.name: "analytics-service:8080"
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: web-ui
+data:
+  pivotal.quotesService.name: "quotes-service:8080"
+  pivotal.accountsService.name: "accounts-service:8080"
+  pivotal.portfolioService.name: "portfolio-service:8080"
+  pivotal.userService.name: "user-service:8080"
+  pivotal.analyticsService.name: "analytics-service:8080"

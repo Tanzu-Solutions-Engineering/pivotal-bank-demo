@@ -26,14 +26,14 @@ public class QuoteMapper {
         mappedQuote.setSymbol(iexQuote.getSymbol());
         mappedQuote.setName(iexQuote.getCompanyName());
         mappedQuote.setOpen(iexQuote.getOpen());
-        mappedQuote.setHigh(iexQuote.getHigh());
-        mappedQuote.setLow(iexQuote.getLow());
+        mappedQuote.setHigh(iexQuote.getWeek52High());
+        mappedQuote.setLow(iexQuote.getWeek52Low());
         mappedQuote.setChange(iexQuote.getChange());
         mappedQuote.setChangePercent(iexQuote.getChangePercent().floatValue());
         mappedQuote.setMarketCap(iexQuote.getMarketCap().floatValue());
         if ("Close".equalsIgnoreCase(iexQuote.getLatestSource())) {
             mappedQuote.setLastPrice(iexQuote.getClose());
-            mappedQuote.setTimestamp(new Date(iexQuote.getCloseTime()));
+
         } else {
             mappedQuote.setLastPrice(iexQuote.getLatestPrice());
             mappedQuote.setTimestamp(new Date(iexQuote.getLatestUpdate()));

@@ -1,0 +1,78 @@
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  labels:
+    app.kubernetes.io/name: "quotes-service"
+    app.kubernetes.io/version: "latest"
+  name: "quotes-service"
+spec:
+  ports:
+  - name: "http"
+    port: 8080
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: "quotes-service"
+    app.kubernetes.io/version: "latest"
+  type: "ClusterIP"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  annotations:
+    app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
+    app.dekorate.io/commit-id: "7bfd463a689dada96b4ae0d195a292a54c53c45d"
+  labels:
+    app.kubernetes.io/name: "quotes-service"
+    app.kubernetes.io/version: "latest"
+  name: "quotes-service"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "quotes-service"
+      app.kubernetes.io/version: "latest"
+  template:
+    metadata:
+      annotations:
+        app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
+        app.dekorate.io/commit-id: "7bfd463a689dada96b4ae0d195a292a54c53c45d"
+      labels:
+        app.kubernetes.io/name: "quotes-service"
+        app.kubernetes.io/version: "latest"
+    spec:
+      containers:
+      - env:
+        - name: "KUBERNETES_NAMESPACE"
+          valueFrom:
+            fieldRef:
+              fieldPath: "metadata.namespace"
+        - name: "SPRING_PROFILES_ACTIVE"
+          value: "kubernetes"
+        image: "arau/quotes-service:latest"
+        imagePullPolicy: "IfNotPresent"
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: "/actuator/health/liveness"
+            port: 8080
+            scheme: "HTTP"
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: "quotes-service"
+        ports:
+        - containerPort: 8080
+          name: "http"
+          protocol: "TCP"
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: "/actuator/health/readiness"
+            port: 8080
+            scheme: "HTTP"
+          initialDelaySeconds: 20
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 10

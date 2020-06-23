@@ -1,6 +1,10 @@
 group 'io.pivotal.bankdemo'
 version '0.0.1-SNAPSHOT'
 
+ext{
+    set('demoName', "tanzu-bank-demo")
+}
+
 subprojects
 {
 

@@ -12,8 +12,8 @@ pivotal:
   summary:
     quotes: 3
     symbols:
-      it: VMW,ORCL,IBM,INTC,AMD,HPQ,CSCO,AAPL
-      fs: MET,JPM,C,MS,BAC,GS,WFC,BK
+      it: VMW,DELL,INTC
+      fs: MET,JPM,C
 
 
 management:

@@ -28,6 +28,7 @@ dekorate:
         value: "mysql-root-password"
         secret: "acme-mysql"
 
+
 spring:
   datasource:
       url: jdbc:mysql://acme-mysql:3306/my_database

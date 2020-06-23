@@ -2,12 +2,12 @@
 
 # This script:
 #   1) Reads microServices.list
-#   2) Pushes each microservices to PCF
+#   2) Applies yml from the yaml directory
 #       
 
 source ./commons.sh
 
-
+kubectl apply -f yamls/config-map.yml
 
 main()
 {
@@ -21,9 +21,6 @@ main()
     fi
   done < "$file"
   wait
-  
-#  summaryOfApps
-#  summaryOfServices
 }
 
 main
