@@ -25,5 +25,7 @@ main()
 
 main
 
+kubectl apply -f yamls/spring-cloud-k8s
+
 printf "\nExecuted $SCRIPTNAME in $SECONDS seconds.\n"
 exit 0

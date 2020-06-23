@@ -20,8 +20,8 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   annotations:
+    app.dekorate.io/commit-id: "fe7711eb3b3987f6a736e73da772a59a50913cae"
     app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
-    app.dekorate.io/commit-id: "7bfd463a689dada96b4ae0d195a292a54c53c45d"
   labels:
     app.kubernetes.io/name: "quotes-service"
     app.kubernetes.io/version: "latest"
@@ -35,8 +35,8 @@ spec:
   template:
     metadata:
       annotations:
+        app.dekorate.io/commit-id: "fe7711eb3b3987f6a736e73da772a59a50913cae"
         app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
-        app.dekorate.io/commit-id: "7bfd463a689dada96b4ae0d195a292a54c53c45d"
       labels:
         app.kubernetes.io/name: "quotes-service"
         app.kubernetes.io/version: "latest"

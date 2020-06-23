@@ -42,7 +42,7 @@ dependencies {
     compile "org.thymeleaf.extras:thymeleaf-extras-springsecurity5"
 
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
-    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes'
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-all'
 
     implementation("com.google.guava:guava:29.0-jre")
 

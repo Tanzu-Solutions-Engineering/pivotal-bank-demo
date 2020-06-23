@@ -27,6 +27,8 @@ main()
 }
 
 main
+kubectl delete -f config-map.yml
+kubectl delete -f yamls/spring-cloud-k8s
 
 printf "\nExecuted $SCRIPTNAME in $SECONDS seconds.\n"
 exit 0
