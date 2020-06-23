@@ -22,7 +22,7 @@ dekorate:
       initial-delay-seconds: 10
       http-action-path: "/actuator/health/liveness"
     image-pull-policy: "IfNotPresent"
-    service-type: "ClusterIP"
+    service-type: "LoadBalancer"
     version: "latest"
 
     env-vars:
