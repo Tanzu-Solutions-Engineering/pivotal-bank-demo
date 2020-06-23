@@ -14,7 +14,7 @@ spec:
   selector:
     app.kubernetes.io/name: "web-ui"
     app.kubernetes.io/version: "latest"
-  type: "ClusterIP"
+  type: "LoadBalancer"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"

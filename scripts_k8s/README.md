@@ -7,7 +7,8 @@ TLDR - Use the scripts in this directory to deploy the microservices to K8s used
 ```shell script
 1_installl-data-services.sh
 ```
-Right now it installs MySQL from TAC demo repo. 
+Right now it installs MySQL from TAC demo repo which installs a master/worker
+To get the mysql password you can run `$(kubectl get secret --namespace default acme-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode)`
 ## Build
 
 ```shell script
