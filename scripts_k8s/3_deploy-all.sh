@@ -7,7 +7,10 @@
 
 source ./commons.sh
 
+# Apply config for app that we can change
 kubectl apply -f yamls/config-map.yml
+# RoleBinding yaml for spring-cloud-kubernetes to talk to the K8s API to watch for config changes
+kubectl apply -f yamls/spring-cloud-k8s
 
 main()
 {
@@ -25,7 +28,7 @@ main()
 
 main
 
-kubectl apply -f yamls/spring-cloud-k8s
+
 
 printf "\nExecuted $SCRIPTNAME in $SECONDS seconds.\n"
 exit 0

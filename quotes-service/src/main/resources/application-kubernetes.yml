@@ -11,7 +11,7 @@ dekorate:
     liveness-probe:
       initial-delay-seconds: 10
       http-action-path: "/actuator/health/liveness"
-    image-pull-policy: "IfNotPresent"
+    image-pull-policy: "Always"
     service-type: "ClusterIP"
     version: "latest"
 

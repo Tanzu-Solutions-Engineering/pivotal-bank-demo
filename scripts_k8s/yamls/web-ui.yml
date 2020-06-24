@@ -14,7 +14,7 @@ spec:
   selector:
     app.kubernetes.io/name: "web-ui"
     app.kubernetes.io/version: "latest"
-  type: "LoadBalancer"
+  type: "ClusterIP"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
@@ -41,6 +41,7 @@ spec:
         app.kubernetes.io/name: "web-ui"
         app.kubernetes.io/version: "latest"
     spec:
+      serviceAccountName: config-reader
       containers:
       - env:
         - name: "KUBERNETES_NAMESPACE"
@@ -50,7 +51,7 @@ spec:
         - name: "SPRING_PROFILES_ACTIVE"
           value: "kubernetes"
         image: "abhinavrau/web-ui:latest"
-        imagePullPolicy: "IfNotPresent"
+        imagePullPolicy: "Always"
         livenessProbe:
           failureThreshold: 3
           httpGet:

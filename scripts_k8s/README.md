@@ -24,3 +24,21 @@ Verify your K8s context is set to the right cluster
 3_deploy-all.sh
 ```
 Applies the yamls from `yaml` directory 
+
+
+## TSM
+
+### Enabling ISTIO
+
+Command to run enabling Istio after Cluster on-boarding to TSM
+
+```shell script
+kubectl label namespace default istio-injection=enabled
+```
+
+### Creating the Gateway
+
+```shell script
+kubectl apply -f yamls/tsm/gateway-acme-bank.yaml
+```
+

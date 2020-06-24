@@ -41,6 +41,7 @@ spec:
         app.kubernetes.io/name: "portfolio-service"
         app.kubernetes.io/version: "latest"
     spec:
+      serviceAccountName: config-reader
       containers:
       - env:
         - name: "KUBERNETES_NAMESPACE"
@@ -58,7 +59,7 @@ spec:
               name: "acme-mysql"
               optional: false
         image: "abhinavrau/portfolio-service:latest"
-        imagePullPolicy: "IfNotPresent"
+        imagePullPolicy: "Always"
         livenessProbe:
           failureThreshold: 3
           httpGet:
