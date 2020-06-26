@@ -1,0 +1,10 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: quotes-service
+data:
+  management.metrics.export.wavefront.uri: "https://vmware.wavefront.com"
+  wavefront.application.name: acme-bank
+  wavefront.application.service: quotes-service
+  management.metrics.export.wavefront.api-token: "cb16b9eb-ccf4-4386-a24f-81e9f3181faf"
+

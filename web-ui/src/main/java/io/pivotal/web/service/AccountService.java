@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.ParameterizedTypeReference;
@@ -22,11 +23,11 @@ import org.springframework.web.client.RestTemplate;
 public class AccountService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(AccountService.class);
-	
+
 	@Autowired
 	@LoadBalanced
 	private RestTemplate restTemplate;
-	
+
 	@Value("${pivotal.accountsService.name}")
 	private String accountsService;
 
@@ -34,6 +35,7 @@ public class AccountService {
 	protected String downstreamProtocol;
 
 	public void createAccount(Account account) {
+
 		logger.debug("Creating account for userId: " + account.getUserid());
 		String status = restTemplate.postForObject(downstreamProtocol + "://" + accountsService + "/accounts/", account, String.class);
 		logger.info("Status from registering account for "+ account.getUserid()+ " is " + status);

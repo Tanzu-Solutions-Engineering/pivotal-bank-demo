@@ -1,5 +1,6 @@
 package io.pivotal.quotes.controller;
 
+import com.google.common.collect.Lists;
 import io.pivotal.quotes.configuration.TestConfiguration;
 import io.pivotal.quotes.domain.CompanyInfo;
 import io.pivotal.quotes.domain.Quote;
@@ -113,7 +114,7 @@ public class QuoteV1ControllerTest {
         when(service.getCompanyInfo(TestConfiguration.QUOTE_NAME)).thenReturn(
                 comps);
         mockMvc.perform(
-                get("/v1/company/" + TestConfiguration.QUOTE_NAME).contentType(
+                get("/v1/company/" + TestConfiguration.QUOTE_NAME).accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(jsonPath("$").isArray());
@@ -128,7 +129,7 @@ public class QuoteV1ControllerTest {
         when(service.getQuotes(TestConfiguration.QUOTE_SYMBOLS)).thenReturn(
                 TestConfiguration.quotes());
         mockMvc.perform(
-                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOLS).contentType(
+                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOLS).accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andDo(print());
@@ -142,7 +143,7 @@ public class QuoteV1ControllerTest {
     public void getQuotesEmpty() throws Exception {
 
         mockMvc.perform(
-                get("/v1/quotes").contentType(
+                get("/v1/quotes").accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)))
                 .andDo(print());
@@ -156,10 +157,10 @@ public class QuoteV1ControllerTest {
     public void getQuotesOneQuote() throws Exception {
         List<Quote> quotes = new ArrayList<>();
         quotes.add(TestConfiguration.quote());
-        when(service.getQuote(TestConfiguration.QUOTE_SYMBOL)).thenReturn(
-                TestConfiguration.quote());
+        when(service.getQuotes(TestConfiguration.QUOTE_SYMBOL)).thenReturn(
+                Lists.newArrayList(TestConfiguration.quote()));
         mockMvc.perform(
-                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOL).contentType(
+                get("/v1/quotes?q=" + TestConfiguration.QUOTE_SYMBOL).accept(MediaType.APPLICATION_JSON).contentType(
                         MediaType.APPLICATION_JSON)).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(
@@ -180,9 +181,6 @@ public class QuoteV1ControllerTest {
                         jsonPath("$[0].ChangePercent", Matchers.closeTo(TestConfiguration.QUOTE_CHANGE_PERCENT, 0.01)))
                 .andExpect(
                         jsonPath("$[0].Timestamp", notNullValue()))
-                .andExpect(
-                        jsonPath("$[0].MSDate", Matchers.closeTo(
-                                TestConfiguration.QUOTE_MSDATE, 0.01)))
                 .andDo(print());
     }
 }

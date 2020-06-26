@@ -1,0 +1,29 @@
+
+eureka:
+  client:
+    enabled: false
+
+dekorate:
+  kubernetes:
+    service-account: "config-reader"
+    readiness-probe:
+      initial-delay-seconds: 20
+      http-action-path: "/actuator/health/readiness"
+    liveness-probe:
+      initial-delay-seconds: 10
+      http-action-path: "/actuator/health/liveness"
+    image-pull-policy: "IfNotPresent"
+    service-type: "ClusterIP"
+    version: "latest"
+
+    env-vars:
+      - name: "SPRING_PROFILES_ACTIVE"
+        value: "kubernetes"
+
+spring:
+  cloud:
+    kubernetes:
+      enabled: true
+      reload:
+        enabled: true
+

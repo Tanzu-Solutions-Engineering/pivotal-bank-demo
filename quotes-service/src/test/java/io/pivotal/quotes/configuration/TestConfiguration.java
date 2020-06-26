@@ -18,13 +18,13 @@ import java.util.Locale;
 public class TestConfiguration {
 	
 	public static final String QUOTE_SYMBOL = "IBM";
-	public static final String QUOTE_NAME = "International Business Machines Corporation";
+	public static final String QUOTE_NAME = "International Business Machines Corp.";
 	public static final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM d HH:mm:ss zzzXXX yyyy", Locale.ENGLISH);
 	public static final String QUOTE_DATE_STRING = "Wed May 6 00:00:00 UTC-04:00 2015";
 	public static final BigDecimal QUOTE_LAST_PRICE = new BigDecimal(26.135);
 	public static final BigDecimal QUOTE_CHANGE = new BigDecimal(0.00500000000000256d);
 	public static final Float QUOTE_CHANGE_PERCENT = 0.0191350937619692f;
-	public static final Float QUOTE_MSDATE = 42130f;
+
 	
 	public static final String COMPANY_EXCHANGE = "NASDAQ";
 	public static final String NULL_QUOTE_SYMBOL = "LALALALA";
@@ -50,11 +50,11 @@ public class TestConfiguration {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		quote.setmSDate(QUOTE_MSDATE);
+
 		quote.setMarketCap(50755764235.00f);
 		quote.setVolume(15159291);
 		quote.setChangeYTD(29.74f);
-		quote.setChangePercentYTD(-12.1217215870881f);
+
 		quote.setHigh(new BigDecimal(0.0));
 		quote.setLow(new BigDecimal(0.0));
 		quote.setOpen(new BigDecimal(26.52));
@@ -74,11 +74,11 @@ public class TestConfiguration {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		quote.setmSDate(QUOTE_MSDATE);
+
 		quote.setMarketCap(50755764235.00f);
 		quote.setVolume(15159291);
 		quote.setChangeYTD(29.74f);
-		quote.setChangePercentYTD(-12.1217215870881f);
+
 		quote.setHigh(new BigDecimal(0.0));
 		quote.setLow(new BigDecimal(0.0));
 		quote.setOpen(new BigDecimal(26.52));

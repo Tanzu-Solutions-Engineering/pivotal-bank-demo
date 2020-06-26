@@ -1,0 +1,38 @@
+pivotal:
+  accountsService:
+    name: accounts-service:8080
+  portfolioService:
+    name: portfolio-service:8080
+  quotesService:
+    name: quotes-service:8080
+  userService:
+    name: user-service:8080
+  analyticsService:
+    name: analytics-service:8080
+eureka:
+  client:
+    enabled: false
+
+dekorate:
+  kubernetes:
+    service-account: "config-reader"
+    readiness-probe:
+      initial-delay-seconds: 20
+      http-action-path: "/actuator/health/readiness"
+    liveness-probe:
+      initial-delay-seconds: 10
+      http-action-path: "/actuator/health/liveness"
+    image-pull-policy: "IfNotPresent"
+    service-type: "LoadBalancer"
+    version: "latest"
+
+    env-vars:
+    - name: "SPRING_PROFILES_ACTIVE"
+      value: "kubernetes"
+
+spring:
+  cloud:
+    kubernetes:
+      enabled: true
+      reload:
+        enabled: true

@@ -28,7 +28,7 @@ import java.util.Set;
  */
 @Service
 @RefreshScope
-public class PortfolioService {
+public class 	PortfolioService {
 	private static final Logger logger = LoggerFactory
 			.getLogger(PortfolioService.class);
 

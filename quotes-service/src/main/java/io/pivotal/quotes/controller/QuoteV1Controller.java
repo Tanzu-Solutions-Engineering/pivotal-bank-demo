@@ -57,19 +57,13 @@ public class QuoteV1Controller {
 	 */
 	@RequestMapping(value = "/quotes", method = RequestMethod.GET)
 	public ResponseEntity<List<Quote>> getQuotes(@RequestParam(value="q", required=false) String query) throws SymbolNotFoundException{
-		logger.debug("received Quote query for: "+ query);
+		logger.info("received Quote query for: "+ query);
 		if (query == null) {
 			//return empty list.
 			return new ResponseEntity<List<Quote>>(new ArrayList<Quote>(), getNoCacheHeaders(), HttpStatus.OK);
 		}
-		List<Quote> quotes;
-		String[] splitQuery = query.split(",");
-		if (splitQuery.length > 1) {
-			quotes = service.getQuotes(query);
-		} else {
-			quotes = new ArrayList<>();
-			quotes.add(service.getQuote(splitQuery[0]));
-		}
+		List<Quote> quotes = service.getQuotes(query);
+
 		logger.info(String.format("Retrieved symbols: %s with quotes {}", query, quotes));
 		return new ResponseEntity<List<Quote>>(quotes, getNoCacheHeaders(), HttpStatus.OK);
 	}
@@ -83,7 +77,7 @@ public class QuoteV1Controller {
 	 */
 	@RequestMapping(value = "/company/{name}", method = RequestMethod.GET)
 	public ResponseEntity<List<CompanyInfo>> getCompanies(@PathVariable("name") final String name) {
-		logger.debug("QuoteController.getCompanies: retrieving companies for: " + name);
+		logger.info("QuoteController.getCompanies: retrieving companies for: " + name);
 		List<CompanyInfo> companies = service.getCompanyInfo(name);
 		logger.info(String.format("Retrieved companies with search parameter: %s - list: {}", name), companies);
 		return new ResponseEntity<List<CompanyInfo>>(companies, HttpStatus.OK);

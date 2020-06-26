@@ -101,7 +101,7 @@
 								<input type="hidden" th:value="${#numbers.formatDecimal(entry.value.currentValue, 0, 'COMMA', 2, 'POINT')}"
 									id="price" name="price" /> 
 								<input type="hidden" th:value="SELL" id="orderType" name="orderType" /> 
-								<input type="number" id="quantity-input" class="form-control"
+								<input type="number" id="quantity-input" class="form-control" size="5"
 									min="1" th:attr="max=${entry.value.quantity}" th:field="*{quantity}" />
 								</td>
 								<td><a id="buyBtn"

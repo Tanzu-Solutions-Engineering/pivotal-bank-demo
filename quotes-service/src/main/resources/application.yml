@@ -1,0 +1,25 @@
+pivotal:
+  quotes:
+    quote_url: https://cloud.iexapis.com/stable/stock/{symbol}/batch?token=pk_9ef71db7f6e74437a4a2d4a86a4ed1f2
+    quotes_url: https://cloud.iexapis.com/stable/stock/market/batch?symbols={symbols}&types=quote&token=pk_9ef71db7f6e74437a4a2d4a86a4ed1f2
+    companies_url: https://cloud.iexapis.com/stable/stock/{name}/company?token=pk_9ef71db7f6e74437a4a2d4a86a4ed1f2
+logging:
+  level:
+    org:
+      apache:
+        http: info
+
+
+hystrix:
+  metrics:
+    enabled: false
+spring:
+  sleuth:
+    stream:
+      enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+

@@ -103,6 +103,7 @@ public class UserControllerTest {
 
 		mockMvc.perform(
 				get("/users/" + ServiceTestConfiguration.USER_ID)
+						.accept(MediaType.APPLICATION_JSON)
 						.contentType(MediaType.APPLICATION_JSON).content(
 								convertObjectToJson(ServiceTestConfiguration
 										.user())))

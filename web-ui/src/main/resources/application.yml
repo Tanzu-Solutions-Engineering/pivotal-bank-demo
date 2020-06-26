@@ -1,0 +1,27 @@
+pivotal:
+  accountsService:
+    name: accounts-service
+  portfolioService:
+    name: portfolio-service
+  quotesService:
+    name: quotes-service
+  userService:
+    name: user-service
+  analyticsService:
+    name: analytics-service
+  summary:
+    quotes: 3
+    symbols:
+      it: VMW,DELL,INTC
+      fs: MET,JPM,C
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+hystrix:
+  metrics:
+    enabled: false

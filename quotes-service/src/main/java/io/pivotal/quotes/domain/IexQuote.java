@@ -18,8 +18,8 @@ public class IexQuote {
     private BigDecimal open;
     private BigDecimal close;
     private Long closeTime;
-    private BigDecimal high;
-    private BigDecimal low;
+    private BigDecimal week52High;
+    private BigDecimal week52Low;
     private BigDecimal latestPrice;
     private Long latestUpdate;
     private String latestSource;
@@ -27,5 +27,6 @@ public class IexQuote {
     private BigDecimal changePercent;
     private BigDecimal avgTotalVolume;
     private BigDecimal marketCap;
+    private BigDecimal ytdChange;
 
 }

@@ -1,10 +1,5 @@
 spring:
-#  profiles.active: local
+  profiles:
+    active: kubernetes
   application:
      name: portfolio-service
-info:
-  build:
-    group: ${group}
-    name: ${name}
-    description: ${description}
-    version: ${version}

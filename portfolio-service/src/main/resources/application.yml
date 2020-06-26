@@ -1,0 +1,26 @@
+pivotal:
+  quotesService:
+    name: quotes-service
+  accountsService:
+    name: accounts-service
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+logging:
+  level:
+    org:
+      apache:
+        http: info
+
+hystrix:
+  metrics:
+    enabled: false
+

@@ -1,62 +1,79 @@
-buildscript {
-    ext {
-        springBootVersion = '2.0.3.RELEASE'
-    }
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
+
+
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-bootJar {
-    baseName = 'accounts'
-    version = "" // omit the version from the war file name
-}
-
+group = 'io.pivotal.bankdemo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 description = "Micro-service to deal with accounts and user logins"
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
 
 repositories {
     mavenCentral()
+    maven { url 'https://repo.spring.io/libs-milestone-local' }
 }
 
 ext {
-    springCloudServicesVersion = '2.0.1.RELEASE'
-    springCloudVersion = 'Finchley.RELEASE'
+    set('springCloudVersion', "Hoxton.SR5")
+    set('wavefrontVersion', "2.0.0-RC1")
+    dekorateVersion = System.getProperty("dekorateVersion", "0.11.9")
+    user = "$System.env.USER"
+}
+
+bootBuildImage {
+    imageName = "${user}/$project.name"
 }
 
 dependencies {
-
-    compile "org.springframework.boot:spring-boot-starter-web"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
 
-    compile "org.springframework.cloud:spring-cloud-starter-zipkin"
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-all'
 
-    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
-    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
-    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
+    implementation 'com.wavefront:wavefront-spring-boot-starter'
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 
-    runtime "org.hsqldb:hsqldb"
+    implementation("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
+    implementation("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+    annotationProcessor("io.dekorate:kubernetes-annotations:${dekorateVersion}")
+    annotationProcessor("io.dekorate:dekorate-spring-boot:${dekorateVersion}")
+    annotationProcessor('org.springframework.boot:spring-boot-starter-actuator') //We need `dekorate` to see the actuator classes
 
-    testCompile "org.springframework.boot:spring-boot-starter-test"
-    testCompile "junit:junit"
-    testRuntime "com.jayway.jsonpath:json-path"
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    
+    testRuntimeOnly "org.hsqldb:hsqldb"
+    runtimeOnly 'mysql:mysql-connector-java'
 
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation("io.dekorate:kubernetes-junit:${dekorateVersion}")
+    testImplementation("junit:junit:4.13")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.2")
+    testImplementation("io.dekorate:kubernetes-junit:${dekorateVersion}")
 }
 
 dependencyManagement {
     imports {
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
+        //mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:${springCloudServicesVersion}"
+        mavenBom "com.wavefront:wavefront-spring-boot-bom:${wavefrontVersion}"
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
-

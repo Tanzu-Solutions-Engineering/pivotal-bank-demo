@@ -1,9 +1,5 @@
 spring:
+  profiles:
+    active: kubernetes
   application:
      name: accounts-service
-info:
-  build:
-    group: ${group}
-    name: ${name}
-    description: ${description}
-    version: ${version}
