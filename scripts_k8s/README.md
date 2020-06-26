@@ -30,13 +30,13 @@ Applies the yamls from `yaml` directory
 
 ### Enabling ISTIO
 
-Command to run enabling Istio after Cluster on-boarding to TSM
+Command to run enabling Istioo on each Cluster after Cluster has been on-boarding to TSM
 
 ```shell script
 kubectl label namespace default istio-injection=enabled
 ```
 
-### Creating the Gateway
+### Creating the Gateway on the 
 
 ```shell script
 kubectl apply -f yamls/tsm/gateway-acme-bank.yaml

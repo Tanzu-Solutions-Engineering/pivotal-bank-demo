@@ -14,14 +14,14 @@ spec:
   selector:
     app.kubernetes.io/name: "web-ui"
     app.kubernetes.io/version: "latest"
-  type: "ClusterIP"
+  type: "LoadBalancer"
 ---
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   annotations:
+    app.dekorate.io/commit-id: "3b6d652787bd90ce081396c432807e28310b8313"
     app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
-    app.dekorate.io/commit-id: "fe7711eb3b3987f6a736e73da772a59a50913cae"
   labels:
     app.kubernetes.io/name: "web-ui"
     app.kubernetes.io/version: "latest"
@@ -35,13 +35,12 @@ spec:
   template:
     metadata:
       annotations:
+        app.dekorate.io/commit-id: "3b6d652787bd90ce081396c432807e28310b8313"
         app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
-        app.dekorate.io/commit-id: "fe7711eb3b3987f6a736e73da772a59a50913cae"
       labels:
         app.kubernetes.io/name: "web-ui"
         app.kubernetes.io/version: "latest"
     spec:
-      serviceAccountName: config-reader
       containers:
       - env:
         - name: "KUBERNETES_NAMESPACE"
@@ -50,8 +49,8 @@ spec:
               fieldPath: "metadata.namespace"
         - name: "SPRING_PROFILES_ACTIVE"
           value: "kubernetes"
-        image: "abhinavrau/web-ui:latest"
-        imagePullPolicy: "Always"
+        image: "arau/web-ui:latest"
+        imagePullPolicy: "IfNotPresent"
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -77,3 +76,4 @@ spec:
           periodSeconds: 30
           successThreshold: 1
           timeoutSeconds: 10
+      serviceAccount: "config-reader"

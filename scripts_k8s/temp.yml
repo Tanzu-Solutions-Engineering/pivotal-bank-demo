@@ -1,23 +1,10 @@
+kind: ConfigMap
 apiVersion: v1
-kind: Service
 metadata:
-  annotations:
-    kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"web-ui","app.kubernetes.io/version":"latest"},"name":"web-ui","namespace":"default"},"spec":{"ports":[{"name":"http","port":8080,"targetPort":8080}],"selector":{"app.kubernetes.io/name":"web-ui","app.kubernetes.io/version":"latest"},"type":"LoadBalancer"}}
-  creationTimestamp: "2020-06-23T20:08:47Z"
-  labels:
-    app.kubernetes.io/name: web-ui
-    app.kubernetes.io/version: latest
-  name: web-ui
-  namespace: default
-spec:
-  ports:
-  - name: http
-    port: 8080
-    targetPort: 8080
-  selector:
-    app.kubernetes.io/name: web-ui
-    app.kubernetes.io/version: latest
-  sessionAffinity: None
-  type: ClusterIP
+  name: quotes-service
+data:
+  management.metrics.export.wavefront.uri: "https://vmware.wavefront.com"
+  wavefront.application.name: acme-bank
+  wavefront.application.service: quotes-service
+  management.metrics.export.wavefront.api-token: "cb16b9eb-ccf4-4386-a24f-81e9f3181faf"
 

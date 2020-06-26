@@ -9,13 +9,14 @@ eureka:
 
 dekorate:
   kubernetes:
+    service-account: "config-reader"
     readiness-probe:
       initial-delay-seconds: 20
       http-action-path: "/actuator/health/readiness"
     liveness-probe:
       initial-delay-seconds: 10
       http-action-path: "/actuator/health/liveness"
-    image-pull-policy: "Always"
+    image-pull-policy: "IfNotPresent"
     service-type: "ClusterIP"
     version: "latest"
 

@@ -20,8 +20,8 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   annotations:
-    app.dekorate.io/commit-id: "fe7711eb3b3987f6a736e73da772a59a50913cae"
     app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
+    app.dekorate.io/commit-id: "3b6d652787bd90ce081396c432807e28310b8313"
   labels:
     app.kubernetes.io/name: "user-service"
     app.kubernetes.io/version: "latest"
@@ -35,8 +35,8 @@ spec:
   template:
     metadata:
       annotations:
-        app.dekorate.io/commit-id: "fe7711eb3b3987f6a736e73da772a59a50913cae"
         app.dekorate.io/vcs-url: "https://github.com/abhinavrau/pivotal-bank-demo.git"
+        app.dekorate.io/commit-id: "3b6d652787bd90ce081396c432807e28310b8313"
       labels:
         app.kubernetes.io/name: "user-service"
         app.kubernetes.io/version: "latest"
@@ -57,7 +57,7 @@ spec:
               key: "mysql-root-password"
               name: "acme-mysql"
               optional: false
-        image: "abhinavrau/user-service:latest"
+        image: "arau/user-service:latest"
         imagePullPolicy: "IfNotPresent"
         livenessProbe:
           failureThreshold: 3
@@ -84,3 +84,4 @@ spec:
           periodSeconds: 30
           successThreshold: 1
           timeoutSeconds: 10
+      serviceAccount: "config-reader"

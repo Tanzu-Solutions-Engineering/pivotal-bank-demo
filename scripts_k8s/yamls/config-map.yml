@@ -1,19 +1,6 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: portfolio-service
-data:
-  pivotal.quotesService.name: "quotes-service:8080"
-  pivotal.accountsService.name: "accounts-service:8080"
-  pivotal.portfolioService.name: "portfolio-service:8080"
-  pivotal.userService.name: "user-service:8080"
-  pivotal.analyticsService.name: "analytics-service:8080"
-
----
-
-kind: ConfigMap
-apiVersion: v1
-metadata:
   name: web-ui
 data:
   pivotal.quotesService.name: "quotes-service:8080"
@@ -21,3 +8,55 @@ data:
   pivotal.portfolioService.name: "portfolio-service:8080"
   pivotal.userService.name: "user-service:8080"
   pivotal.analyticsService.name: "analytics-service:8080"
+  management.metrics.export.wavefront.api-token: "45376be8-7854-42b6-989b-57f1b5a5d413"
+  wavefront.application.name: tanzu-bank-arau
+  wavefront.application.service: web-ui
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: portfolio-service
+data:
+  pivotal.quotesService.name: "quotes-service:8080"
+  pivotal.accountsService.name: "accounts-service:8080"
+  wavefront.application.name: tanzu-bank-arau
+  wavefront.application.service: portfolio-service
+  management.metrics.export.wavefront.api-token: "45376be8-7854-42b6-989b-57f1b5a5d413"
+# management.metrics.export.wavefront.api-token:
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: accounts-service
+data:
+  wavefront.application.name: tanzu-bank-arau
+  wavefront.application.service: accounts-service
+  management.metrics.export.wavefront.api-token: "45376be8-7854-42b6-989b-57f1b5a5d413"
+  # management.metrics.export.wavefront.api-token:
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: quotes-service
+data:
+  wavefront.application.name: tanzu-bank-arau
+  wavefront.application.service: quotes-service
+  management.metrics.export.wavefront.api-token: "45376be8-7854-42b6-989b-57f1b5a5d413"
+ # management.metrics.export.wavefront.api-token:
+
+---
+
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: user-service
+data:
+  wavefront.application.name: tanzu-bank-arau
+  wavefront.application.service: user-service
+  management.metrics.export.wavefront.api-token: "45376be8-7854-42b6-989b-57f1b5a5d413"
+  # management.metrics.export.wavefront.api-token:
